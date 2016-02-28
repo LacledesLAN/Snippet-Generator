@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html class="nojs" lang="en">
+
+<head>
+    <title>Snippet Generator | Laclede's LAN</title>
+
+    <!-- Metas -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--JavaScripts-->
+    <script src="./assets/js/jquery2-edge.min.js"></script>
+    <script src="./assets/js/bootstrap3.min.js"></script>
+    <script src="./assets/js/underscore.min.js"></script>
+    <script src="./assets/js/workshopCollections.js"></script>
+    <script src="./assets/js/snippetGenerator.js"></script>
+    <script src="./assets/js/global.js"></script>
+
+    <!--Styling-->
+    <link rel="stylesheet" href="./assets/stylesheets/bootstrap3.theme.flatly.min.css">
+    <link rel="stylesheet" href="./assets/stylesheets/font-awesome4.5.min.css">
+    <link rel="shortcut icon" href="./assets/images/snippetGen_favicon.ico">
+    <link rel="icon" href="./assets/images/snippetGen_favicon_animated.gif" type="image/gif">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>Snippet Generator <small>Laclede's LAN 16</small></h1>
+        </div>
+
+        <div role="tabpanel">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
+                <li role="presentation"><a title="CS:GO Freeplay" href="#tab-csgo-freeplay" role="tab" data-toggle="tab">CS:GO Freeplay</a></li>
+                <li role="presentation"><a title="CS:GO Tournament" href="#tab-csgo-tournament" role="tab" data-toggle="tab">CS:GO Tournament</a></li>
+                <li role="presentation"><a title="Half-Life 2: Deathmatch" href="#tab-hl2dm" role="tab" data-toggle="tab">Half-Life 2: Deathmatch</a></li>
+                <li role="presentation"><a title="TF2" href="#tab-tf2" role="tab" data-toggle="tab">TF2</a></li>
+                <li role="presentation"><a title="Tools" href="#tab-tools" role="tab" data-toggle="tab">Tools</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="home">
+                    <br />
+                    <h3>Activity Log</h3>
+                    <p>This log will only display messages from this session; data is not kepy between page loads or refreshes.</p>
+                    <table class="table table-striped table-bordered table-hover" id="snippetGeneratorLogTable">
+                        <thead>
+                            <tr>
+                                <td><strong>When</strong></td>
+                                <td colspan="2"><strong>What</strong></td>
+                                <td><strong>Details</strong></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- CS:GO Tournament-->
+                <div role="tabpanel" class="tab-pane" id="tab-csgo-tournament">
+                    <div class="row">
+                        <br />
+                        <h3>Launch Server</h3>
+                        <form class="form-inline" autocomplete="off">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Bracket #</div>
+                                    <input type="text" class="form-control" name="bracketID" placeholder="##">
+                                </div>
+
+                                <div class="input-group">
+                                    <div class="input-group-addon">Counter-Terrorists</div>
+                                    <input type="text" class="form-control" name="teamCounterTerrorists" placeholder="Team Name">
+                                </div>
+
+                                <div class="input-group">
+                                    <div class="input-group-addon">Terrorists</div>
+                                    <input type="text" class="form-control" name="teamTerrorists" placeholder="Team Name">
+                                </div>
+
+                                <div class="input-group">
+                                    <div class="input-group-addon">Map</div>
+                                    <select name="map" class="form-control csgo-tournament-maps">
+                                        <option value="de_dust2">de_dust2</option>
+                                        <option value="de_inferno">de_inferno</option>
+                                        <option value="de_cache">de_cache</option>
+                                        <option value="de_mirage">de_mirage</option>
+                                        <option value="de_overpass">de_overpass</option>
+                                        <option value="de_train">de_train</option>
+                                        <option value="de_cobblestone">de_cobblestone</option>
+                                    </select>
+                                </div>
+
+                                <div class="input-group">
+                                    <div class="input-group-addon">Server</div>
+                                    <select name="serverIP" class="form-control csgo-tournament-serverIP">
+                                        <option selected value="">Select Server Binding</option>
+                                        <option value="172.30.5.11">Faulk (172.30.5.11 cpu 4)</option>
+                                        <option value="172.30.5.12">Faulk (172.30.5.12 cpu 3)</option>
+                                        <option value="172.30.5.13">Faulk (172.30.5.13 cpu 5)</option>
+                                        <option value="172.30.5.14">Faulk (172.30.5.14 cpu 2)</option>
+                                        <option value="172.30.5.15">Faulk (172.30.5.15 cpu 6)</option>
+                                        <option value="172.30.5.16">Faulk (172.30.5.16 cpu 1)</option>
+                                        <option value="172.30.5.17">Faulk (172.30.5.17 cpu 7)</option>
+                                        <option value="172.30.5.18">Faulk (172.30.5.18 cpu 0)</option>
+                                        <option value="172.30.5.21">Federko (172.30.5.21 cpu 4)</option>
+                                        <option value="172.30.5.22">Federko (172.30.5.22 cpu 3)</option>
+                                        <option value="172.30.5.23">Federko (172.30.5.23 cpu 5)</option>
+                                        <option value="172.30.5.24">Federko (172.30.5.24 cpu 2)</option>
+                                        <option value="172.30.5.25">Federko (172.30.5.25 cpu 6)</option>
+                                        <option value="172.30.5.26">Federko (172.30.5.26 cpu 1)</option>
+                                        <option value="172.30.5.27">Federko (172.30.5.27 cpu 7)</option>
+                                        <option value="172.30.5.28">Federko (172.30.5.28 cpu 0)</option>
+                                        <option value="172.30.5.31">Shanahan (172.30.5.31 cpu 4)</option>
+                                        <option value="172.30.5.32">Shanahan (172.30.5.32 cpu 3)</option>
+                                        <option value="172.30.5.33">Shanahan (172.30.5.33 cpu 5)</option>
+                                        <option value="172.30.5.34">Shanahan (172.30.5.34 cpu 2)</option>
+                                        <option value="172.30.5.35">Shanahan (172.30.5.35 cpu 6)</option>
+                                        <option value="172.30.5.36">Shanahan (172.30.5.36 cpu 1)</option>
+                                        <option value="172.30.5.37">Shanahan (172.30.5.37 cpu 7)</option>
+                                        <option value="172.30.5.38">Shanahan (172.30.5.38 cpu 0)</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <button type="button" class="btn btn-default" onclick="Launch_CSGO_Tournament(
+                                            $('#tab-csgo-tournament input[name=bracketID]').val(),
+                                            $('#tab-csgo-tournament input[name=teamCounterTerrorists]').val(),
+                                            $('#tab-csgo-tournament input[name=teamTerrorists]').val(),
+                                            $('#tab-csgo-tournament select[name=map]').val(),
+                                            $('#tab-csgo-tournament select[name=serverIP]').val()
+                                            );">Generate</button>
+                        </form>
+                        <h3>Execute Overtime</h3>
+                        <br />
+                        <blockquote>
+                            <div class="well">
+                                Launch String: <strong>+exec overtime.cfg</strong>
+                            </div>
+                        </blockquote>
+                    </div>
+                </div>
+                <!-- End CS:GO Tourney-->
+
+
+                <!-- CS:GO PUG-->
+                <div role="tabpanel" class="tab-pane" id="tab-csgo-freeplay">
+                    <div class="row">
+                        <br />
+                        <h3>Launch Arms Race Server</h3>
+                        <form class="form-inline" autocomplete="off">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Server Name</div>
+                                    <input type="text" class="form-control" name="armsHostname" placeholder="LL Arms Race Server">
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">Map</div>
+                                    <select name="armsMap" class="form-control csgo-arms-maps"></select>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-default" onclick="Launch_CSGO_ArmsRace(
+                                            $('#tab-csgo-freeplay input[name=armsHostname]').val(),
+                                            $('#tab-csgo-freeplay select[name=armsMap]').val() 	);">Generate</button>
+                        </form>
+                        <br />
+                        <h3>Launch Classic Server</h3>
+                        <form class="form-inline" autocomplete="off">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Server Name</div>
+                                    <input type="text" class="form-control" name="classicHostname" placeholder="LL PUG: Arms Race">
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">Map</div>
+                                    <select name="classicMap" class="form-control csgo-classic-maps"></select>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-default" onclick="Launch_CSGO_Classic(
+                                            $('#tab-csgo-freeplay input[name=classicHostname]').val(),
+                                            $('#tab-csgo-freeplay select[name=classicMap]').val() 	);">Generate</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- End CS:GO PUG-->
+
+                <!-- HL2DM PUG-->
+                <div role="tabpanel" class="tab-pane" id="tab-hl2dm">
+                    <div class="row">
+                        <br />
+                        <h3>Launch HL2DM Server</h3>
+                        <form class="form-inline" autocomplete="off">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Server Name</div>
+                                    <input type="text" class="form-control" name="hl2dmHostname" placeholder="LL Half-Life 2 Deathmatch Server">
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">Map</div>
+                                    <select name="hl2dmMap" class="form-control hl2dm-maps">
+                                        <option selected value="dm_underpass">dm_underpass</option>
+                                        <option value="dm_steamlab">dm_steamlab</option>
+                                        <option value="dm_runoff">dm_runoff</option>
+                                        <option value="dm_resistance">dm_resistance</option>
+                                        <option value="dm_powerhouse">dm_powerhouse</option>
+                                        <option value="dm_lockdown">dm_lockdown</option>
+                                        <option value="dm_overwatch">dm_overwatch</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-default" onclick="Launch_HL2DM_Freeplay(
+                                            $('#tab-hl2dm input[name=hl2dmHostname]').val(),
+                                            $('#tab-hl2dm select[name=hl2dmMap]').val() 	);">Generate</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- End HL2DM PUG-->
+
+                <!-- TF2 PUG-->
+                <div role="tabpanel" class="tab-pane" id="tab-tf2">
+                    <div class="row">
+
+                        <br />
+                        <h3>Launch Team Fortress 2</h3>
+                        <form class="form-inline" autocomplete="off">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Server Name</div>
+                                    <input type="text" class="form-control" name="tf2Hostname" placeholder="LL Team Fortress 2">
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">Mapcycle</div>
+                                    <select name="tf2Mapcycle" class="form-control">
+                                        <option selected value="mapcycle.txt">mapcycle.txt</option>
+                                        <option value="mapcycle_beta_asteroid.txt">mapcycle_beta_asteroid.txt</option>
+                                        <option value="mapcycle_beta_cactus_canyon.txt">mapcycle_beta_cactus_canyon.txt</option>
+                                        <option value="mapcycle_beta_mannpower.txt">mapcycle_beta_mannpower.txt</option>
+                                        <option value="mapcycle_default.txt">mapcycle_default.txt</option>
+                                        <option value="mapcycle_doomsday_event_247.txt">mapcycle_doomsday_event_247.txt</option>
+                                        <option value="mapcycle_halloween.txt">mapcycle_halloween.txt</option>
+                                        <option value="mapcycle_hightower_event_247.txt">mapcycle_hightower_event_247.txt</option>
+                                        <option value="mapcycle_lakeside_event_247.txt">mapcycle_lakeside_event_247.txt</option>
+                                        <option value="mapcycle_quickplay_arena.txt">mapcycle_quickplay_arena.txt</option>
+                                        <option value="mapcycle_quickplay_attackdefense.txt">mapcycle_quickplay_attackdefense.txt</option>
+                                        <option value="mapcycle_quickplay_cp.txt">mapcycle_quickplay_cp.txt</option>
+                                        <option value="mapcycle_quickplay_ctf_sd.txt">mapcycle_quickplay_ctf_sd.txt</option>
+                                        <option value="mapcycle_quickplay_koth.txt">mapcycle_quickplay_koth.txt</option>
+                                        <option value="mapcycle_quickplay_payload.txt">mapcycle_quickplay_payload.txt</option>
+                                        <option value="mapcycle_quickplay_payloadrace.txt">mapcycle_quickplay_payloadrace.txt</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-default" onclick="Launch_TF2_Freeplay(
+										$('#tab-tf2 input[name=tf2Hostname]').val(),
+										$('#tab-tf2 select[name=tf2Mapcycle]').val() 	);">Generate</button>
+                        </form>
+
+                        <br />
+                        <h3>Launch Team Fortress 2 - Blind Frag</h3>
+                        <form class="form-inline" autocomplete="off">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Server Name</div>
+                                    <input type="text" class="form-control" name="blindFragHostname" placeholder="LL TF2 Blind Frag">
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">Map</div>
+                                    <select name="blindFragMap" class="form-control blindFrag-maps">
+                                        <option selected value="koth_harvest_final">koth_harvest_final</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-default" onclick="Launch_TF2_BlindFrag(
+										$('#tab-tf2 input[name=blindFragHostname]').val(),
+                                        $('#tab-tf2 select[name=blindFragMap]').val() 	);">Generate</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- END TF2 PUG-->
+
+
+                <!-- Log -->
+                <div role="tabpanel" class="tab-pane" id="tab-tools">
+                    <div class="row">
+                        <br />
+                        <div class="col-lg-10">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" onclick="UI_GeneratePassword();"><i class="fa fa-key"></i> Generate a Password</button>
+                                    </span>
+                                <div class="form-control" id="generatePassword"><i class="fa fa-long-arrow-left"></i> Click to generate a password</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Log -->
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal fade" id="modalString" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    Password: <strong id="serverPassword">N/A</strong>
+                    <br/>
+                    <br/> Server Launch: <strong id="serverLaunchString">test</strong>
+                    <br/>
+                    <br/> Client Connect: <strong id="clientConnectString">N/A</strong>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
