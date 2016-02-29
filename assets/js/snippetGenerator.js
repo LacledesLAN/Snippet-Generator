@@ -85,7 +85,7 @@ function generatePasswordArray(strength) {
 
 
 function isWholeNumber(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
+    return !isNaN(parseFloat(n)) && isFinite(n) && Math.round(n) === Number(n) && n >= 0;
 }
 
 
