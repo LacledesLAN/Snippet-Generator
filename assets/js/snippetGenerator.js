@@ -58,7 +58,7 @@ function generatePasswordArray(strength) {
             
             // Randomly UpperCase / LowerCase letters
             for (var i = 0; i < tempPass.length; i++) {
-                var str = '';
+                var str;
                 for (var i2 = 0; i2 < tempPass[i].length; i2++) {
                     if (Math.random() >= 0.5) {
                         str += tempPass[i].charAt(i2).toUpperCase();
