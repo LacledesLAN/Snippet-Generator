@@ -144,14 +144,14 @@ function Launch_CSGO_ArmsRace(hostname, map) {
         serverLaunchString += '-console ';
         serverLaunchString += '+game_type 1 ';
         serverLaunchString += '+game_mode 0 ';
+        serverLaunchString += '-usercon ';
         serverLaunchString += '-tickrate 128 ';
-        serverLaunchString += '+host_workshop_collection 328590824 ';
-        serverLaunchString += '+workshop_start_map ' + map + ' ';
-        serverLaunchString += '-authkey F6FF6A83A58FEC94D64A759D7489A40E ';
+        serverLaunchString += '+mapgroup mg_ll_arms ';
+        serverLaunchString += '+map ar_shoots ';
         serverLaunchString += '-maxplayers_override 16 ';
-        serverLaunchString += '+hostname "' + hostname + '"';
+        serverLaunchString += '+hostname "' + hostname + '" ';
+        serverLaunchString += '+sv_lan 1 ';
         serverLaunchString += '+rcon_password "' + RCON_PASS + '" ';
-        
 
         $('#modalString .modal-title').html(hostname);
         $('#modalString .modal-body #serverPassword').html('N/A');
@@ -184,12 +184,13 @@ function Launch_CSGO_Classic(hostname, map) {
         serverLaunchString += '-console ';
         serverLaunchString += '+game_type 0 ';
         serverLaunchString += '+game_mode 0 ';
-        serverLaunchString += '+host_workshop_collection 340520718 ';
-        serverLaunchString += '+workshop_start_map ' + map + ' ';
-        serverLaunchString += '-authkey F6FF6A83A58FEC94D64A759D7489A40E ';
+        serverLaunchString += '-usercon ';
         serverLaunchString += '-tickrate 128 ';
+        serverLaunchString += '+mapgroup mg_ll_classic ';
+        serverLaunchString += '+map de_dust2 ';
         serverLaunchString += '-maxplayers_override 16 ';
-        serverLaunchString += '+hostname "' + hostname + '"';
+        serverLaunchString += '+hostname "' + hostname + '" ';
+        serverLaunchString += '+sv_lan 1 ';
         serverLaunchString += '+rcon_password "' + RCON_PASS + '" ';
 
         $('#modalString .modal-title').html(hostname);
