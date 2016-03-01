@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html class="nojs" lang="en">
-
 <head>
     <title>Snippet Generator | Laclede's LAN</title>
 
@@ -17,7 +16,7 @@
     <script src="./assets/js/snippetGenerator.js"></script>
     <script src="./assets/js/global.js"></script>
 
-    <!--Styling-->
+    <!--Stylesheets-->
     <link rel="stylesheet" href="./assets/stylesheets/bootstrap3.theme.flatly.min.css">
     <link rel="stylesheet" href="./assets/stylesheets/font-awesome4.5.min.css">
     <link rel="shortcut icon" href="./assets/images/snippetGen_favicon.ico">
@@ -256,8 +255,8 @@
                                 </div>
                             </div>
                             <button type="button" class="btn btn-default" onclick="Launch_TF2_Freeplay(
-										$('#tab-tf2 input[name=tf2Hostname]').val(),
-										$('#tab-tf2 select[name=tf2Mapcycle]').val() 	);">Generate</button>
+                                        $('#tab-tf2 input[name=tf2Hostname]').val(),
+                                        $('#tab-tf2 select[name=tf2Mapcycle]').val() 	);">Generate</button>
                         </form>
 
                         <br />
@@ -276,8 +275,9 @@
                                 </div>
                             </div>
                             <button type="button" class="btn btn-default" onclick="Launch_TF2_BlindFrag(
-										$('#tab-tf2 input[name=blindFragHostname]').val(),
-                                        $('#tab-tf2 select[name=blindFragMap]').val() 	);">Generate</button>
+                                        $('#tab-tf2 input[name=blindFragHostname]').val(),
+                                        $('#tab-tf2 select[name=blindFragMap]').val()
+                                    );">Generate</button>
                         </form>
                     </div>
                 </div>
@@ -288,19 +288,26 @@
                 <div role="tabpanel" class="tab-pane" id="tab-tools">
                     <div class="row">
                         <br />
-                        <div class="col-lg-10">
-                            <div class="input-group">
-                                <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button" onclick="UI_GeneratePassword();"><i class="fa fa-key"></i> Generate a Password</button>
-                                    </span>
-                                <div class="form-control" id="generatePassword"><i class="fa fa-long-arrow-left"></i> Click to generate a password</div>
-                            </div>
+                            <form class="form-inline" id="tools_generatePassword">
+                                <h3>Password Generator</h3>
+                                <div class="form-group">
+                                    <button class="btn btn-default" type="button" onclick="UI_GeneratePassword(
+                                            $('#tab-tools select[name=tools_generatePasswordStrength]').val()
+                                        );"><i class="fa fa-key"></i> Generate a Password</button>
+                                    <div class="form-control" id="generatePassword" style="width: 280px;"><i class="fa fa-long-arrow-left"></i> Click to generate a password</div>
+                                    <select name="tools_generatePasswordStrength" class="form-control">
+                                        <option value="1">Strength: 1</option>
+                                        <option value="2" selected>Strength: 2 (recommended)</option>
+                                        <option value="3">Strength: 3</option>
+                                        <option value="4">Strength: 4</option>
+                                    </select>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
                 <!-- End Log -->
 
-            </div>
         </div>
     </div>
 
@@ -326,6 +333,44 @@
         </div>
     </div>
 
-</body>
+    <script type="text/javascript">
+        function UI_GeneratePassword(strength) {
+            $('#tab-tools #generatePassword').html(prettyPrintArray(generatePasswordArray(strength)));
+        }
+        
+        // Prompt user for a rcon password
+        $(document).ready(function() {
+            try {
+                var tmp1, tmp2;
 
+                do {
+                    do {
+                        tmp1 = prompt("Enter RCon password to be used in launch strings:").toLowerCase().trim();
+                    } while (tmp1.length < 1);
+
+                    do {
+                        tmp2 = prompt("Confirm RCon password:").toLowerCase().trim();
+                    } while (tmp2.length < 1);
+
+                    if (tmp1 !== tmp2) {
+                        alert("Passwords must match!");
+                        tmp1 = '';
+                        tmp2 = '';
+                    }
+                } while (tmp1.length < 1);
+
+                RCON_PASS = tmp1;
+                addLogMessage('RCon Password', 'The user has provided a RCon password that will be used whenever generating a server launch string.', 'fa fa-key');
+            } catch (err) {
+                
+                var tempPass = generatePasswordArray(3);
+
+                RCON_PASS = tempPass.join('');
+                
+                addLogMessage('RCon Password', 'Generated password is: ' + prettyPrintArray(tempPass), 'fa fa-key');
+            }
+        });
+    </script>
+
+</body>
 </html>
