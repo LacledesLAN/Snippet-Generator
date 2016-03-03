@@ -447,6 +447,9 @@ function Launch_TF2_Freeplay(hostname, mapcycle) {
         }
 
         switch (String(mapcycle).toLowerCase().trim()) {
+        case 'mapcycle.txt':
+            map = 'ctf_2fort';
+            break;
         case 'mapcycle_beta_asteroid.txt':
             map = 'rd_asteroid';
             break;
@@ -454,43 +457,61 @@ function Launch_TF2_Freeplay(hostname, mapcycle) {
             map = 'pl_cactuscanyon';
             break;
         case 'mapcycle_beta_mannpower.txt':
-            map = 'ctf_gorge';
+            map = 'ctf_thundermountain';
             break;
         case 'mapcycle_default.txt':
-            map = 'pl_badwater';
+            map = 'ctf_2fort';
             break;
         case 'mapcycle_doomsday_event_247.txt':
             map = 'sd_doomsday_event';
             break;
+        case 'mapcycle_featured_maps.txt':
+            map = 'koth_highpass';
+            break;
         case 'mapcycle_halloween.txt':
-            map = 'koth_lakeside_event';
+            map = 'koth_harvest_event';
+            break;
+        case 'mapcycle_halloween_event_247.txt':
+            map = 'koth_moonshine_event';
             break;
         case 'mapcycle_hightower_event_247.txt':
             map = 'plr_hightower_event';
             break;
+        case 'mapcycle_invasion_maps.txt':
+            map = 'ctf_2fort_invasion';
+            break;
+        case 'mapcycle_ladder.txt':
+            map = 'cp_granary';
+            break;
         case 'mapcycle_lakeside_event_247.txt':
             map = 'koth_lakeside_event';
             break;
+        case 'mapcycle_mannpower.txt':
+            map = 'ctf_thundermountain';
+            break;
         case 'mapcycle_quickplay_arena.txt':
-            map = 'arena_sawmill';
+            map = 'arena_lumberyard';
             break;
         case 'mapcycle_quickplay_attackdefense.txt':
-            map = 'cp_junction_final';
+            map = 'cp_gravelpit';
             break;
         case 'mapcycle_quickplay_cp.txt':
-            map = 'cp_coldfront';
+            map = 'cp_badlands';
             break;
         case 'mapcycle_quickplay_ctf_sd.txt':
-            map = 'sd_doomsday';
+            map = 'ctf_2fort';
             break;
         case 'mapcycle_quickplay_koth.txt':
-            map = 'koth_viaduct';
+            map = 'koth_badlands';
+            break;
+        case 'mapcycle_quickplay_passtime.txt':
+            map = 'pass_warehouse';
             break;
         case 'mapcycle_quickplay_payload.txt':
-            map = 'pl_thundermountain';
+            map = 'pl_badwater';
             break;
         case 'mapcycle_quickplay_payloadrace.txt':
-            map = 'plr_pipeline';
+            map = 'plr_hightower';
             break;
         default:
             map = 'ctf_2fort';
@@ -502,8 +523,8 @@ function Launch_TF2_Freeplay(hostname, mapcycle) {
         serverLaunchString += '-console ';
         serverLaunchString += '-usercon ';
         serverLaunchString += '-replay ';
-        serverLaunchString += '+map ' + map + ' ';
         serverLaunchString += '+mapcyclefile ' + mapcycle + ' ';
+        serverLaunchString += '+map ' + map + ' ';
         serverLaunchString += '+hostname "' + hostname + '" ';
         serverLaunchString += '+rcon_password "' + RCON_PASS + '" ';
 
