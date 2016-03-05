@@ -314,7 +314,9 @@ function Launch_CSGO_Tournament(bracketID, team1, team2, map, ip) {
 
         // Docker Specific
         serverLaunchString = 'docker run -d ';
-        serverLaunchString += cpuFlag + ' ';
+        if (cpuFlag.trim().length > 0) {
+            serverLaunchString += cpuFlag + ' ';    
+        }
         serverLaunchString += '--name ' + dockerContainerName + ' ';
         serverLaunchString += '-p ' + ip + ':1200:1200/udp ';
         serverLaunchString += '-p ' + ip + ':4379-4380:4379-4380/udp ';
