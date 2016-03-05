@@ -321,6 +321,9 @@ function Launch_CSGO_Tournament(bracketID, team1, team2, map, ip) {
         serverLaunchString += '-p ' + ip + ':26900-26915:26900-26915/udp ';
         serverLaunchString += '-p ' + ip + ':27015-27020:27015-27020/udp ';
         serverLaunchString += '-p ' + ip + ':27015-27020:27015-27020/tcp ';
+        serverLaunchString += '-v /home/sysoper/logs/gamesvr-csgo-tourney:/gamesvr/csgo/logs ';
+        serverLaunchString += '-v /home/sysoper/logs/gamesvr-csgo-tourney/warmod:/gamesvr/csgo/warmodlogs ';
+        
         serverLaunchString += 'll/gamesvr-csgo-tourney ';
 
         // CS:GO Tournament Server Specific
