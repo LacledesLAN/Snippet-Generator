@@ -387,12 +387,13 @@ function Launch_CSGO_Tournament(bracketID, team1, team2, map, ip) {
 
 
 function Launch_HL2DM_Freeplay(hostname, map) {
-    var serverLaunchString = '';
+    var clientConnectString = 'N/A',
+        serverLaunchString = '';
 
     do {
         hostname = (hostname)
             ? String(hostname)
-            : 'LL Half-Life 2: Deathmatch';
+            : 'LL HL2DM Freeplay';
         hostname = hostname.split(' ').join('_');
 
         if (!map) {
@@ -411,6 +412,7 @@ function Launch_HL2DM_Freeplay(hostname, map) {
         $('#modalString .modal-title').html(hostname);
         $('#modalString .modal-body #serverPassword').html('N/A');
         $('#modalString .modal-body #serverLaunchString').html(serverLaunchString);
+        $('#modalString .modal-body #clientConnectString').html(clientConnectString);
         $('#modalString').modal('show');
         
         addLogMessage('HL2DM Freeplay', serverLaunchString);
@@ -418,7 +420,8 @@ function Launch_HL2DM_Freeplay(hostname, map) {
 }
 
 function Launch_TF2_BlindFrag(hostname, map) {
-    var password = generatePasswordArray(),
+    var clientConnectString = 'N/A',
+        password = generatePasswordArray(),
         serverLaunchString = '';
 
     do {
@@ -449,7 +452,7 @@ function Launch_TF2_BlindFrag(hostname, map) {
         $('#modalString .modal-title').html(hostname);
         $('#modalString .modal-body #serverPassword').html(prettyPrintArray(password));
         $('#modalString .modal-body #serverLaunchString').html(serverLaunchString);
-        $('#modalString .modal-body #clientConnectString').html('N/A');
+        $('#modalString .modal-body #clientConnectString').html(clientConnectString);
         $('#modalString').modal('show');
         
         addLogMessage('TF2 BlindFrag', serverLaunchString);
