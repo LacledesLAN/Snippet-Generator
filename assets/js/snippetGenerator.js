@@ -318,11 +318,16 @@ function Launch_CSGO_Tournament(bracketID, team1, team2, map, ip) {
             serverLaunchString += cpuFlag + ' ';    
         }
         serverLaunchString += '--name ' + dockerContainerName + ' ';
-        serverLaunchString += '-p ' + ip + ':1200:1200/udp ';
-        serverLaunchString += '-p ' + ip + ':4379-4380:4379-4380/udp ';
-        serverLaunchString += '-p ' + ip + ':26900-26915:26900-26915/udp ';
-        serverLaunchString += '-p ' + ip + ':27015-27020:27015-27020/udp ';
-        serverLaunchString += '-p ' + ip + ':27015-27020:27015-27020/tcp ';
+        serverLaunchString += '-p=' + ip + ':1200:1200/udp ';
+        serverLaunchString += '-p=' + ip + ':1500:1500/udp ';
+        serverLaunchString += '-p=' + ip + ':3005:3005/udp ';
+        serverLaunchString += '-p=' + ip + ':3101:3101/udp ';
+        serverLaunchString += '-p=' + ip + ':28960:28960/udp ';
+        serverLaunchString += '-p=' + ip + ':3478-3479:3478-3479/udp ';
+        serverLaunchString += '-p=' + ip + ':4379-4380:4379-4380/udp ';
+        serverLaunchString += '-p=' + ip + ':26900-26915:26900-26915/udp ';
+        serverLaunchString += '-p=' + ip + ':27000-27030:27000-27030/udp ';
+        serverLaunchString += '-p=' + ip + ':27014-27050:27014-27050/tcp ';
         serverLaunchString += '-v /home/sysoper/logs/gamesvr-csgo-tourney:/gamesvr/csgo/csgo/logs ';
         serverLaunchString += '-v /home/sysoper/logs/gamesvr-csgo-tourney/warmod:/gamesvr/csgo/csgo/warmodlogs ';
         
@@ -333,20 +338,19 @@ function Launch_CSGO_Tournament(bracketID, team1, team2, map, ip) {
         serverLaunchString += '-game csgo ';
         serverLaunchString += '+game_type 0 ';
         serverLaunchString += '+game_mode 1 ';
+        serverLaunchString += '-tickrate 128 ';
         serverLaunchString += '-console ';
         serverLaunchString += '-usercon ';
         serverLaunchString += '+mapgroup mg_active ';
         serverLaunchString += '+map ' + map + ' ';
         serverLaunchString += '+hostname "' + hostname + '" ';
         serverLaunchString += '+sv_password "' + password.join('') + '" ';
-        serverLaunchString += '-tickrate 128 ';
         serverLaunchString += '+sv_lan 1 ';
-        serverLaunchString += '+ip 0.0.0.0 ';
-        serverLaunchString += '-port 27015 ';
         serverLaunchString += '+mp_teamname_1 "' + team1 + '" ';
         serverLaunchString += '+mp_teamname_2 "' + team2 + '" ';
         serverLaunchString += '+rcon_password "' + RCON_PASS + '" ';
-        serverLaunchString += '+tv_name "LL_TV_CSGO_BRACKET_' + bracketID + '" ';
+        serverLaunchString += '+tv_name "zLLTV_CSGO_BRACKET_' + bracketID + '" ';
+        serverLaunchString += '+tv_password "brianprefersmustard567" ';
         serverLaunchString += '+tv_relaypassword "brianprefersmustard567" ';
 
         clientConnectString = 'connect ';
