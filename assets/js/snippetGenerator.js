@@ -32,8 +32,8 @@ function generatePasswordArray(strength) {
     if (isWholeNumber(strength) && strength !== NaN) {
         if (strength < 1) {
             strength = 1;
-        } else if (strength > 4) {
-            strength = 4;
+        } else if (strength > 5) {
+            strength = 5;
         }
     } else {
         strength = 2;
@@ -64,20 +64,38 @@ function generatePasswordArray(strength) {
             
             // Randomly UpperCase / LowerCase letters
             for (var i = 0; i < tempPass.length; i++) {
-                var str = '';
-                for (var i2 = 0; i2 < tempPass[i].length; i2++) {
-                    if (Math.random() >= 0.5) {
-                        str += tempPass[i].charAt(i2).toUpperCase();
-                    } else {
-                        str += tempPass[i].charAt(i2).toLowerCase();
-                    }
-                }
-
-                tempPass[i] = str;
+                tempPass[i] = _randomCasing(tempPass[i]);
             }
 
             return tempPass;
+        } else if (strength === 5) {
+            return [_randomString(settingMaxPasswordLength)];
         }
+    }
+    
+    function _randomCasing(word) {
+        var str = '';
+
+        for (var i = 0; i < word.length; i++) {
+            if (Math.random() >= 0.5) {
+                str += word.charAt(i).toUpperCase();
+            } else {
+                str += word.charAt(i).toLowerCase();
+            }
+        }
+
+        return str;
+    }
+
+    function _randomString(length) {
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=";
+        var value = '';
+        
+        for (var i = 0; i < length; i++) {
+            value += possible.charAt(Math.floor(Math.random() * possible.length));
+        }
+        
+        return _randomCasing(value);
     }
 
     var valueArray;
