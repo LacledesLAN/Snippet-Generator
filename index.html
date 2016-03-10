@@ -163,11 +163,11 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon">Server Name</div>
-                                    <input type="text" class="form-control" name="armsHostname" placeholder="LL Arms Race" autocomplete="off">
+                                    <input type="text" class="form-control" name="csgoArmsraceHostname" placeholder="LL Arms Race" autocomplete="off">
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-addon">Map</div>
-                                    <select name="armsMap" class="form-control csgo-arms-maps">
+                                    <select name="csgoArmsraceMap" class="form-control csgo-arms-maps">
                                         <option>ar_baggage</option>
                                         <option>ar_monastery</option>
                                         <option>ar_shoots</option>
@@ -175,8 +175,8 @@
                                 </div>
                             </div>
                             <button type="button" class="btn btn-default" onclick="Launch_CSGO_ArmsRace(
-                                            $('#tab-csgo-freeplay input[name=armsHostname]').val(),
-                                            $('#tab-csgo-freeplay select[name=armsMap]').val() 	);">Generate</button>
+                                            $('#tab-csgo-freeplay input[name=csgoArmsraceHostname]').val(),
+                                            $('#tab-csgo-freeplay select[name=csgoArmsraceMap]').val() 	);">Generate</button>
                         </form>
                         <br />
                         <h3>Launch Classic Server</h3>
@@ -184,11 +184,11 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon">Server Name</div>
-                                    <input type="text" class="form-control" name="classicHostname" placeholder="LL Freeplay Classic" autocomplete="off">
+                                    <input type="text" class="form-control" name="csgoClassicHostname" placeholder="LL Freeplay Classic" autocomplete="off">
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-addon">Map</div>
-                                    <select name="classicMap" class="form-control csgo-classic-maps">
+                                    <select name="csgoClassicMap" class="form-control">
                                         <option>cs_agency</option>
                                         <option>cs_assault</option>
                                         <option>cs_backalley</option>
@@ -245,9 +245,52 @@
                                 </div>
                             </div>
                             <button type="button" class="btn btn-default" onclick="Launch_CSGO_Classic(
-                                            $('#tab-csgo-freeplay input[name=classicHostname]').val(),
-                                            $('#tab-csgo-freeplay select[name=classicMap]').val() 	);">Generate</button>
+                                            $('#tab-csgo-freeplay input[name=csgoClassicHostname]').val(),
+                                            $('#tab-csgo-freeplay select[name=csgoClassicMap]').val() 	);">Generate</button>
                         </form>
+
+                        <br />
+                        <h3>Launch Deathmatch Server</h3>
+                        <form class="form-inline" autocomplete="off">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Server Name</div>
+                                    <input type="text" class="form-control" name="csgoDeathmatchHostname" placeholder="LL CS:GO Deathmatch" autocomplete="off">
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">Map</div>
+                                    <select name="csgoDeathmatchMap" class="form-control">
+                                        <option>cs_assault</option>
+                                        <option>cs_italy</option>
+                                        <option>cs_militia</option>
+                                        <option>cs_office</option>
+                                        <option>de_aztec</option>
+                                        <option>de_bank</option>
+                                        <option>de_cbble</option>
+                                        <option>de_dust</option>
+                                        <option>de_dust2</option>
+                                        <option>de_inferno</option>
+                                        <option>de_lake</option>
+                                        <option>de_mirage</option>
+                                        <option>de_nuke</option>
+                                        <option>de_overpass</option>
+                                        <option>de_safehouse</option>
+                                        <option>de_shortdust</option>
+                                        <option>de_shorttrain</option>
+                                        <option>de_stmarc</option>
+                                        <option>de_sugarcane</option>
+                                        <option>de_vertigo</option>
+                                        <option>ar_monastery</option>
+                                        <option>ar_shoots</option>
+                                        <option>ar_baggage</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-default" onclick="Launch_CSGO_Deathmatch(
+                                            $('#tab-csgo-freeplay input[name=csgoDeathmatchHostname]').val(),
+                                            $('#tab-csgo-freeplay select[name=csgoDeathmatchMap]').val() 	);">Generate</button>
+                        </form>
+
                     </div>
                 </div>
                 <!-- End CS:GO PUG-->

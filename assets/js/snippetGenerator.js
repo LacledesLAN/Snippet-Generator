@@ -164,8 +164,8 @@ function Launch_CSGO_ArmsRace(hostname, map) {
         serverLaunchString += '+game_mode 0 ';
         serverLaunchString += '-usercon ';
         serverLaunchString += '-tickrate 128 ';
-        serverLaunchString += '+mapgroup mg_ll_arms ';
-        serverLaunchString += '+map ar_shoots ';
+        serverLaunchString += '+mapgroup mg_armsrace ';
+        serverLaunchString += '+map ' + map + ' ';
         serverLaunchString += '-maxplayers_override 16 ';
         serverLaunchString += '+hostname "' + hostname + '" ';
         serverLaunchString += '+sv_lan 1 ';
@@ -204,8 +204,47 @@ function Launch_CSGO_Classic(hostname, map) {
         serverLaunchString += '+game_mode 0 ';
         serverLaunchString += '-usercon ';
         serverLaunchString += '-tickrate 128 ';
-        serverLaunchString += '+mapgroup mg_ll_classic ';
-        serverLaunchString += '+map de_dust2 ';
+        serverLaunchString += '+mapgroup mg_active ';
+        serverLaunchString += '+map ' + map + ' ';
+        serverLaunchString += '-maxplayers_override 16 ';
+        serverLaunchString += '+hostname "' + hostname + '" ';
+        serverLaunchString += '+sv_lan 1 ';
+        serverLaunchString += '+rcon_password "' + RCON_PASS + '" ';
+
+        $('#modalString .modal-title').html(hostname);
+        $('#modalString .modal-body #serverPassword').html('N/A');
+        $('#modalString .modal-body #serverLaunchString').html(serverLaunchString);
+        $('#modalString .modal-body #clientConnectString').html('N/A');
+        $('#modalString').modal('show');
+        
+        addLogMessage('CSGO Classic', serverLaunchString);
+    } while (false);
+}
+
+
+function Launch_CSGO_Deathmatch(hostname, map) {
+    var serverLaunchString = '';
+
+    do {
+        hostname = (hostname)
+            ? String(hostname)
+            : 'LL Deathmatch Server';
+        hostname = hostname.split(' ').join('_');
+
+        if (!map) {
+            alert('ERROR - NO MAP WAS SPECIFIED!');
+            break;
+        }
+
+        serverLaunchString += './srcds_run ';
+        serverLaunchString += '-game csgo ';
+        serverLaunchString += '-console ';
+        serverLaunchString += '+game_type 1 ';
+        serverLaunchString += '+game_mode 2 ';
+        serverLaunchString += '-usercon ';
+        serverLaunchString += '-tickrate 128 ';
+        serverLaunchString += '+mapgroup mg_deathmatch ';
+        serverLaunchString += '+map ' + map + ' ';
         serverLaunchString += '-maxplayers_override 16 ';
         serverLaunchString += '+hostname "' + hostname + '" ';
         serverLaunchString += '+sv_lan 1 ';
