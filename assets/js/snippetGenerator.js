@@ -24,10 +24,10 @@ function addLogMessage(what, details, icon) {
     $('#snippetGeneratorLogTable').append('<tr><td>' + timestamp + '</td><td><i class="' + icon + '"></i></td><td>' + what + '</td><td>' + details + '</td></tr>');
 }
 
-function generatePasswordArray(strength) {
-    var settingMaxPasswordLength = 20;
-
+function generatePasswordArray(strength, maxLength) {
     strength = Number(strength);
+    
+    var maxPasswordLength = 24; // Default value
     
     if (isWholeNumber(strength) && strength !== NaN) {
         if (strength < 1) {
@@ -38,6 +38,16 @@ function generatePasswordArray(strength) {
     } else {
         strength = 2;
     }
+    
+    if (isWholeNumber(maxLength) && maxLength !== NaN) {
+        if (maxLength < 6) {
+            maxPasswordLength = 6;
+        } else {
+            maxPasswordLength = maxLength;
+        }
+    } else {
+        maxPasswordLength = 24;
+    }
 
     function _genPass(strength) {
 
@@ -46,7 +56,11 @@ function generatePasswordArray(strength) {
             word2 = ["adventure", "advice", "afternoons", "aircraft", "airplanes", "airports", "airsoft", "alarms", "almonds", "apples", "archery", "art", "aspirin", "august", "autmn", "bagels", "balloons", "bamboo", "bananas", "banks", "barns", "baseball", "basketball", "baskets", "batteries", "battleships", "bbq", "beads", "beans", "beards", "beds", "bedtime", "benches", "bicycles", "bikes", "biology", "birthdays", "biscuits", "blankets", "blenders", "blizzards", "blogs", "boats", "books", "boots", "bottles", "bowling", "bowls", "boxes", "brazil", "bread", "breakfast", "bricks", "bridges", "broccoli", "brownies", "bubbles", "buffets", "buildings", "butter", "butterscotch", "buttons", "cabbages", "cabinets", "cabins", "cables", "cafes", "cake", "calendars", "cameras", "camping", "candles", "candy", "cannonballs", "cans", "canyons", "cards", "carpet", "carpets", "carrots", "cars", "caves", "ceilings", "celery", "cereal", "chairs", "checkers", "cheddar", "cheese", "cherries", "chess", "chestnuts", "chicago", "chili", "chips", "chocolate", "chores", "chrome", "circles", "cities", "clocks", "clones", "clothes", "clothing", "clouds", "coaches", "coaching", "coal", "coats", "coconuts", "coffee", "coins", "cola", "cold", "college", "colorado", "colors", "combat", "comics", "computers", "concrete", "confetti", "conflict", "cookies", "cooking", "corn", "couches", "coupons", "creeks", "cuba", "cupcakes", "cups", "curtains", "cushions", "dallas", "dancing", "danger", "dark", "daytime", "december", "democracy", "denver", "desks", "detroit", "diamonds", "diary", "dirt", "dishes", "dodgeball", "donuts", "doom", "doorbells", "doors", "doorways", "dreams", "driveways", "driving", "drones", "drums", "drumsticks", "dust", "earrings", "earthquakes", "eating", "eggs", "egypt", "electricity", "electronics", "elevators", "email", "emergencies", "everything", "fall", "falling", "fallout", "fame", "fans", "farms", "feet", "fences", "fields", "fighting", "films", "finland", "fire", "firewalls", "fireworks", "flags", "floors", "flowers", "flutes", "flying", "foam", "folders", "food", "football", "forests", "forks", "forts", "friday", "frosting", "fruit", "fudge", "games", "gaming", "garages", "gardens", "garlic", "germany", "glass", "glasses", "gloves", "glue", "gold", "golf", "gps", "grain", "grapefruit", "grapes", "gravity", "greed", "green", "guitars", "gum", "hair", "haircuts", "halloween", "halo", "hamburgers", "hammers", "hats", "headaches", "heat", "hiking", "hills", "hiphop", "history", "hobbies", "hockey", "holidays", "honey", "hospitals", "hotsauce", "houses", "houston", "hunting", "ice", "icecream", "indoors", "industry", "iron", "islands", "jackets", "japan", "jars", "jazz", "jeans", "jello", "jokes", "journals", "juggling", "jukeboxes", "july", "jumping", "june", "jungles", "kansas", "karate", "ketchup", "keyboards", "keys", "kickboxing", "kindness", "kitchens", "kites", "knives", "ladders", "lakes", "lamps", "laptops", "lasers", "laughter", "lava", "lawns", "lawschool", "lemons", "letters", "lettuce", "libaries", "libraries", "light", "lightbulbs", "lipstick", "locks", "london", "lotteries", "lumber", "lunch", "machines", "magazines", "mail", "makeup", "mario", "markets", "marshes", "math", "meat", "medicine", "melons", "memphis", "metal", "miami", "milk", "minecraft", "mirrors", "mistakes", "monday", "money", "mountains", "movies", "mud", "museums", "mushrooms", "music", "musicals", "mustard", "myths", "nachos", "napkins", "networks", "newspapers", "night", "nintendo", "noises", "noodles", "notebooks", "november", "numbers", "nutmeg", "oatmeal", "oceans", "october", "offices", "ohio", "oil", "olives", "onions", "opera", "oragnes", "oranges", "orlando", "outdoors", "ovens", "packages", "paint", "paintball", "paintings", "pancakes", "paper", "parking", "parks", "passports", "passwords", "pasta", "pastries", "pavement", "peanuts", "pearls", "pears", "pencils", "pens", "pepper", "phones", "photos", "physics", "pianos", "pickles", "pie", "pillows", "pinball", "pineapples", "pizza", "plants", "plastic", "plates", "playstation", "playtime", "plums", "poker", "politics", "ponds", "popcorn", "portal", "portland", "postcards", "posters", "potatoes", "pretzels", "printers", "promises", "propane", "pudding", "pumpkins", "punkrock", "purple", "purses", "puzzles", "pyramids", "quake", "quicksand", "quilts", "racing", "radios", "railroad", "rain", "ramps", "reading", "reality", "rectangles", "recycling", "red", "revenge", "rice", "rings", "rivers", "roads", "roadtrips", "rocks", "rollercoasters", "rope", "rowboats", "rubber", "rugby", "running", "runways", "russia", "safety", "salad", "salsa", "salt", "sand", "sandals", "Saturday", "schedules", "school", "science", "scissors", "seafood", "seattle", "shampoo", "shelves", "shirts", "shoes", "shopping", "shows", "sidewalks", "silver", "singing", "sinks", "skating", "sleeping", "sneakers", "snow", "soap", "soccer", "socks", "soda", "sofas", "softball", "software", "sonic", "soup", "soybeans", "spaghetti", "spatulas", "speakers", "speaking", "spheres", "spices", "spinach", "sponges", "spoons", "sports", "spring", "sprinkles", "squares", "stairs", "starcraft", "steaks", "steam", "steel", "stereos", "stickers", "stones", "stores", "storms", "stoves", "strangers", "studying", "submarines", "subways", "sugar", "suitcases", "sunday", "sunflowers", "sunlight", "sunshine", "supermarkets", "surfing", "surprises", "swamps", "sweaters", "swimming", "tables", "tablets", "tacos", "talking", "taxes", "teaching", "tech", "television", "tennis", "tents", "tetris", "texas", "thursday", "tickets", "time", "tires", "toast", "today", "togas", "tomatoes", "toothpaste", "tornados", "towels", "towers", "towns", "toys", "traffic", "trails", "trains", "trash", "trees", "triangles", "trivia", "trophies", "trucks", "trumpets", "tuesday", "tunnels", "uniforms", "unrest", "utah", "vacations", "vacuums", "valve", "vanilla", "vegtables", "villages", "vinegar", "voicemail", "volleyball", "waffles", "wagons", "walking", "wallets", "walls", "war", "warcraft", "waste", "watches", "water", "waterfalls", "wax", "weather", "websites", "wednesday", "wheat", "wheels", "wind", "windows", "winter", "wires", "wood", "work", "working", "wrestling", "xbox", "yearbooks", "yellow", "yesterday", "yoga", "yogurt", "zelda", "zippers"];
 
         if (strength === 1) {
-            return [Math.floor(Math.random()*99).toString(), word1[Math.floor(Math.random() * word1.length)].toLowerCase()];
+            if (Math.random()<.5) {
+                return [Math.floor(Math.random()*99).toString(), word1[Math.floor(Math.random() * word1.length)].toLowerCase()];
+            } else {
+                return [word2[Math.floor(Math.random() * word2.length)].toLowerCase(), Math.floor(Math.random()*99).toString()];
+            }
         } else if (strength === 2) {
             return [word1[Math.floor(Math.random() * word1.length)].toLowerCase(), glue[Math.floor(Math.random() * glue.length)].toLowerCase(), word2[Math.floor(Math.random() * word2.length)].toLowerCase()];
         } else if (strength === 3) {
@@ -69,10 +83,10 @@ function generatePasswordArray(strength) {
 
             return tempPass;
         } else if (strength === 5) {
-            return [_randomString(settingMaxPasswordLength)];
+            return [_randomString(maxPasswordLength)];
         }
     }
-    
+
     function _randomCasing(word) {
         var str = '';
 
@@ -88,7 +102,7 @@ function generatePasswordArray(strength) {
     }
 
     function _randomString(length) {
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=+";
         var value = '';
         
         for (var i = 0; i < length; i++) {
@@ -98,11 +112,24 @@ function generatePasswordArray(strength) {
         return _randomCasing(value);
     }
 
-    var valueArray;
+    var loopCount = 0,
+        valueArray;
 
     do {
-        valueArray = _genPass(strength);
-    } while (valueArray.length >= settingMaxPasswordLength);
+        loopCount++;
+        
+        if (loopCount > 15) {
+            if (strength > 1) {
+                strength--;
+            }
+            else {
+                return [_randomString(maxPasswordLength)];
+            }
+        } else {
+            valueArray = _genPass(strength);
+        }
+
+    } while (valueArray.toString().replace(',', '').length >= maxPasswordLength);
 
     return valueArray;
 }
