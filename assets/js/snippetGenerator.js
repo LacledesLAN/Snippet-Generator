@@ -169,8 +169,9 @@ function zeroPad(number, width) {
     return number.length >= width ? number : new Array(width - number.length + 1).join('0') + number;
 }
 
+var Docker = Docker || {};
 
-function Docker_SRCDS_NetString(ip) {
+Docker.NetString_SRCDS = function(ip) {
     var portsUDP = ['1200', '1500', '3005', '3101', '28960', '3478-3479', '4379-4380', '26900-26915', '27000-27030'];
     var portsTCP = ['27014-27050'];
 
@@ -363,53 +364,53 @@ function Launch_CSGO_Tournament(bracketID, team1, team2, map, ip) {
 
         // Generate Docker Container Name
         dockerContainerName = 'CSGOTourn_' + bracketID + '_';
-
         dockerContainerName += ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][currentDate.getDay()];
         dockerContainerName += zeroPad(currentDate.getHours(), 2) + 'h';
         dockerContainerName += zeroPad(currentDate.getMinutes(), 2) + 'm';
         dockerContainerName += zeroPad(currentDate.getSeconds(), 2) + 's';
         
-        // Determine Docker CPU Flag
-        switch (ip.substr(ip.length - 1, 1)) {
-            case '1':
-                cpuFlag = '--cpuset-cpus="4"';
-                break;
-            case '2':
-                cpuFlag = '--cpuset-cpus="3"';
-                break;
-            case '3':
-                cpuFlag = '--cpuset-cpus="5"';
-                break;
-            case '4':
-                cpuFlag = '--cpuset-cpus="2"';
-                break;
-            case '5':
-                cpuFlag = '--cpuset-cpus="6"';
-                break;
-            case '6':
-                cpuFlag = '--cpuset-cpus="1"';
-                break;
-            case '7':
-                cpuFlag = '--cpuset-cpus="7"';
-                break;
-            case '8':
-                cpuFlag = '--cpuset-cpus="0"';
-                break;
-            default:
-                cpuFlag = "";
-                break;
+        if (ip) {
+            // Determine Docker CPU Flag
+            switch (ip.substr(ip.length - 1, 1)) {
+                case '1':
+                    cpuFlag = '--cpuset-cpus="4"';
+                    break;
+                case '2':
+                    cpuFlag = '--cpuset-cpus="3"';
+                    break;
+                case '3':
+                    cpuFlag = '--cpuset-cpus="5"';
+                    break;
+                case '4':
+                    cpuFlag = '--cpuset-cpus="2"';
+                    break;
+                case '5':
+                    cpuFlag = '--cpuset-cpus="6"';
+                    break;
+                case '6':
+                    cpuFlag = '--cpuset-cpus="1"';
+                    break;
+                case '7':
+                    cpuFlag = '--cpuset-cpus="7"';
+                    break;
+                case '8':
+                    cpuFlag = '--cpuset-cpus="0"';
+                    break;
+                default:
+                    cpuFlag = "";
+                    break;
+            }
         }
 
-        // Docker Specific
+        // Docker Launch String
         serverLaunchString = 'docker run -d ';
         if (cpuFlag.trim().length > 0) {
             serverLaunchString += cpuFlag + ' ';    
         }
         serverLaunchString += '--name ' + dockerContainerName + ' ';
-        serverLaunchString += Docker_SRCDS_NetString(ip);
+        serverLaunchString += Docker.NetString_SRCDS(ip);
         serverLaunchString += '-v /home/sysoper/logs/gamesvr-csgo-tourney:/gamesvr/csgo/csgo/logs ';
         serverLaunchString += '-v /home/sysoper/logs/gamesvr-csgo-tourney/warmod:/gamesvr/csgo/csgo/warmodlogs ';
-        
         serverLaunchString += 'll/gamesvr-csgo-tourney ';
 
         // CS:GO Tournament Server Specific
