@@ -33,6 +33,7 @@
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
                 <li role="presentation"><a title="CS:GO Freeplay" href="#tab-csgo-freeplay" role="tab" data-toggle="tab">CS:GO Freeplay</a></li>
+                <li role="presentation"><a title="CS:GO Test" href="#tab-csgo-test" role="tab" data-toggle="tab">CS:GO TEST</a></li>
                 <li role="presentation"><a title="CS:GO Tournament" href="#tab-csgo-tournament" role="tab" data-toggle="tab">CS:GO Tournament</a></li>
                 <li role="presentation"><a title="Half-Life 2: Deathmatch" href="#tab-hl2dm" role="tab" data-toggle="tab">Half-Life 2: Deathmatch</a></li>
                 <li role="presentation"><a title="TF2" href="#tab-tf2" role="tab" data-toggle="tab">TF2</a></li>
@@ -58,11 +59,129 @@
                     </table>
                 </div>
 
+
+                <!-- CS:GO Test-->
+                <div role="tabpanel" class="tab-pane" id="tab-csgo-test">
+                    <div class="row">
+                        <br />
+                        <h3>Launch Test CSGO Server</h3>
+                        <form class="form-inline" autocomplete="off">
+                            <div class="form-group">
+
+                                <div class="input-group">
+                                    <div class="input-group-addon">Map</div>
+                                    <select name="map" class="form-control csgo-tournament-maps">
+                                        <option value="de_cache">de_orange</option>
+                                        <option value="de_cache">fy_pool_day</option>
+                                        <option value="de_cache">gg_ctm_csgo</option>
+                                        <option value="de_cache">orangebox_warmup_day</option>
+                                    </select>
+                                </div>
+
+                                <div class="input-group">
+                                    <div class="input-group-addon">Server</div>
+                                    <select name="serverIP" class="form-control csgo-tournament-serverIP">
+                                        <option selected value="">Select Server Binding</option>
+                                        <!-- Faulk -->
+                                        <option value="172.30.5.11">Faulk (172.30.5.11 cpu 4)</option>
+                                        <option value="172.30.5.12">Faulk (172.30.5.12 cpu 3)</option>
+                                        <option value="172.30.5.13">Faulk (172.30.5.13 cpu 5)</option>
+                                        <option value="172.30.5.14">Faulk (172.30.5.14 cpu 2)</option>
+                                        <option value="172.30.5.15">Faulk (172.30.5.15 cpu 6)</option>
+                                        <option value="172.30.5.16">Faulk (172.30.5.16 cpu 1)</option>
+                                        <option value="172.30.5.17">Faulk (172.30.5.17 cpu 7)</option>
+                                        <option value="172.30.5.18">Faulk (172.30.5.18 cpu 0)</option>
+                                        <!-- Federko -->
+                                        <option value="172.30.5.21">Federko (172.30.5.21 cpu 4)</option>
+                                        <option value="172.30.5.22">Federko (172.30.5.22 cpu 3)</option>
+                                        <option value="172.30.5.23">Federko (172.30.5.23 cpu 5)</option>
+                                        <option value="172.30.5.24">Federko (172.30.5.24 cpu 2)</option>
+                                        <option value="172.30.5.25">Federko (172.30.5.25 cpu 6)</option>
+                                        <option value="172.30.5.26">Federko (172.30.5.26 cpu 1)</option>
+                                        <option value="172.30.5.27">Federko (172.30.5.27 cpu 7)</option>
+                                        <option value="172.30.5.28">Federko (172.30.5.28 cpu 0)</option>
+                                        <!-- Kelly -->
+                                        <option value="172.30.5.51">Kelly (172.30.5.51 cpu 4)</option>
+                                        <option value="172.30.5.52">Kelly (172.30.5.52 cpu 3)</option>
+                                        <option value="172.30.5.53">Kelly (172.30.5.53 cpu 5)</option>
+                                        <option value="172.30.5.54">Kelly (172.30.5.54 cpu 2)</option>
+                                        <option value="172.30.5.55">Kelly (172.30.5.55 cpu 6)</option>
+                                        <option value="172.30.5.56">Kelly (172.30.5.56 cpu 1)</option>
+                                        <option value="172.30.5.57">Kelly (172.30.5.57 cpu 7)</option>
+                                        <option value="172.30.5.58">Kelly (172.30.5.58 cpu 0)</option>
+                                        <!-- Macinnis -->
+                                        <option value="172.30.5.61">Macinnis (172.30.5.61 cpu 4)</option>
+                                        <option value="172.30.5.62">Macinnis (172.30.5.62 cpu 3)</option>
+                                        <option value="172.30.5.63">Macinnis (172.30.5.63 cpu 5)</option>
+                                        <option value="172.30.5.64">Macinnis (172.30.5.64 cpu 2)</option>
+                                        <option value="172.30.5.65">Macinnis (172.30.5.65 cpu 6)</option>
+                                        <option value="172.30.5.66">Macinnis (172.30.5.66 cpu 1)</option>
+                                        <option value="172.30.5.67">Macinnis (172.30.5.67 cpu 7)</option>
+                                        <option value="172.30.5.68">Macinnis (172.30.5.68 cpu 0)</option>
+                                        <!-- Shanahan -->
+                                        <option value="172.30.5.31">Shanahan (172.30.5.31 cpu 4)</option>
+                                        <option value="172.30.5.32">Shanahan (172.30.5.32 cpu 3)</option>
+                                        <option value="172.30.5.33">Shanahan (172.30.5.33 cpu 5)</option>
+                                        <option value="172.30.5.34">Shanahan (172.30.5.34 cpu 2)</option>
+                                        <option value="172.30.5.35">Shanahan (172.30.5.35 cpu 6)</option>
+                                        <option value="172.30.5.36">Shanahan (172.30.5.36 cpu 1)</option>
+                                        <option value="172.30.5.37">Shanahan (172.30.5.37 cpu 7)</option>
+                                        <option value="172.30.5.38">Shanahan (172.30.5.38 cpu 0)</option>
+                                        <!-- Vermiel -->
+                                        <option value="172.30.5.41">Vermiel (172.30.5.41 cpu 4)</option>
+                                        <option value="172.30.5.42">Vermiel (172.30.5.42 cpu 3)</option>
+                                        <option value="172.30.5.43">Vermiel (172.30.5.43 cpu 5)</option>
+                                        <option value="172.30.5.44">Vermiel (172.30.5.44 cpu 2)</option>
+                                        <option value="172.30.5.45">Vermiel (172.30.5.45 cpu 6)</option>
+                                        <option value="172.30.5.46">Vermiel (172.30.5.46 cpu 1)</option>
+                                        <option value="172.30.5.47">Vermiel (172.30.5.47 cpu 7)</option>
+                                        <option value="172.30.5.48">Vermiel (172.30.5.48 cpu 0)</option>
+                                        <!-- Fuhr -->
+                                        <option value="172.30.5.81">BEAN TEST Fuhr (172.30.5.81 cpu 4)</option>
+                                        <option value="172.30.5.82">BEAN TEST Fuhr (172.30.5.82 cpu 3)</option>
+                                        <option value="172.30.5.83">BEAN TEST Fuhr (172.30.5.83 cpu 5)</option>
+                                        <option value="172.30.5.84">BEAN TEST Fuhr (172.30.5.84 cpu 2)</option>
+                                        <option value="172.30.5.85">BEAN TEST Fuhr (172.30.5.85 cpu 6)</option>
+                                        <option value="172.30.5.86">BEAN TEST Fuhr (172.30.5.86 cpu 1)</option>
+                                        <option value="172.30.5.87">BEAN TEST Fuhr (172.30.5.87 cpu 7)</option>
+                                        <option value="172.30.5.88">BEAN TEST Fuhr (172.30.5.88 cpu 0)</option>                                        
+                                        <!-- WARNING MESSAGE -->
+                                        <option disabled="disabled">[===============]</option>
+                                        <option disabled="disabled"> !!! WARNING !!! </option>
+                                        <option disabled="disabled">   TESTING ONLY  </option>
+                                        <option disabled="disabled"> !!! WARNING !!! </option>
+                                        <option disabled="disabled">[===============]</option>
+                                        <!-- Ozzie -->
+                                        <option value="172.30.1.22">DUDLEY TEST Ozzie (172.30.1.26 cpu 1)</option>
+                                        <option value="172.30.1.23">DUDLEY TEST Ozzie (172.30.1.28 cpu 0)</option>
+                                        <!-- 0.0.0.0 -->
+                                        <option value="">localhost (0.0.0.0)</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <button type="button" class="btn btn-default" onclick="Launch_CSGO_Test(
+                                            $('#tab-csgo-tournament select[name=map]').val(),
+                                            $('#tab-csgo-tournament select[name=serverIP]').val()
+                                            );">Generate</button>
+                        </form>
+                        <h3>Execute Overtime</h3>
+                        <br />
+                        <blockquote>
+                            <div class="well">
+                                Launch String: <strong>+exec overtime.cfg</strong>
+                            </div>
+                        </blockquote>
+                    </div>
+                </div>
+                <!-- End CS:GO Test-->
+
+
                 <!-- CS:GO Tournament-->
                 <div role="tabpanel" class="tab-pane" id="tab-csgo-tournament">
                     <div class="row">
                         <br />
-                        <h3>Launch Server</h3>
+                        <h3>Launch Tourney Server</h3>
                         <form class="form-inline" autocomplete="off">
                             <div class="form-group">
                                 <div class="input-group">
