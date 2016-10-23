@@ -338,7 +338,7 @@ function Launch_CSGO_Test(map, ip) {
         if (team1 !== undefined || team2 !== undefined) {
             team1 = String(team1 || 'Unknown');
             team2 = String(team2 || 'Unknown');
-            hostname = 'CSGO Test ' + ' ' + team1 + ' v ' + team2;
+            hostname = 'CSGO Test' + ' ' + team1 + ' v ' + team2;
         }
 
         hostname = hostname.split(' ').join('_');
