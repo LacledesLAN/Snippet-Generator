@@ -81,7 +81,7 @@
                                 <div class="input-group">
                                     <div class="input-group-addon">Server</div>
                                     <select name="serverIP" class="form-control csgo-tournament-serverIP">
-                                        <option selected value="">Select Server Binding</option>
+                                        <option selected disabled="disabled" value="">Select Server Binding</option>
                                         <!-- Faulk -->
                                         <option value="172.30.5.11">Faulk (172.30.5.11 cpu 4)</option>
                                         <option value="172.30.5.12">Faulk (172.30.5.12 cpu 3)</option>
@@ -161,8 +161,8 @@
 
                             </div>
                             <button type="button" class="btn btn-default" onclick="Launch_CSGO_Test(
-                                            $('#tab-csgo-tournament select[name=map]').val(),
-                                            $('#tab-csgo-tournament select[name=serverIP]').val()
+                                            $('#tab-csgo-test select[name=map]').val(),
+                                            $('#tab-csgo-test select[name=serverIP]').val()
                                             );">Generate</button>
                         </form>
                         <h3>Execute Overtime</h3>
@@ -215,7 +215,7 @@
                                 <div class="input-group">
                                     <div class="input-group-addon">Server</div>
                                     <select name="serverIP" class="form-control csgo-tournament-serverIP">
-                                        <option selected value="">Select Server Binding</option>
+                                        <option selected value="" disabled="disabled">Select Server Binding</option>
                                         <!-- Faulk -->
                                         <option value="172.30.5.11">Faulk (172.30.5.11 cpu 4)</option>
                                         <option value="172.30.5.12">Faulk (172.30.5.12 cpu 3)</option>

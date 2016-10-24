@@ -338,7 +338,7 @@ function Launch_CSGO_Test(map, ip) {
         currentDate = new Date(),
         cpuFlag = '',
         dockerContainerName = '',
-        hostname = "",
+        hostname = "CSGO Client Test Server",
         password = generatePasswordArray(),
         serverLaunchString = '',
         team1 = "Isotopes".trim(),
@@ -353,13 +353,6 @@ function Launch_CSGO_Test(map, ip) {
         }
 
         ip = ip.trim();
-
-        // Generate hostname
-        if (team1 !== undefined || team2 !== undefined) {
-            team1 = String(team1 || 'Unknown');
-            team2 = String(team2 || 'Unknown');
-            hostname = 'CSGO Test' + ' ' + team1 + ' v ' + team2;
-        }
 
         hostname = hostname.split(' ').join('_');
 
@@ -420,7 +413,7 @@ function Launch_CSGO_Test(map, ip) {
         serverLaunchString += '-tickrate 128 ';
         serverLaunchString += '-console ';
         serverLaunchString += '-usercon ';
-        serverLaunchString += '+mapgroup mg_active ';
+        serverLaunchString += '+mapgroup ll_orange ';
         serverLaunchString += '+map ' + map + ' ';
         serverLaunchString += '+hostname "' + hostname + '" ';
         serverLaunchString += '+sv_password "' + password.join('') + '" ';
