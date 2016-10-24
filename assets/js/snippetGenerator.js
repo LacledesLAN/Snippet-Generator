@@ -416,7 +416,6 @@ function Launch_CSGO_Test(map, ip) {
         serverLaunchString += '+mapgroup ll_orange ';
         serverLaunchString += '+map ' + map + ' ';
         serverLaunchString += '+hostname "' + hostname + '" ';
-        serverLaunchString += '+sv_password "' + password.join('') + '" ';
         serverLaunchString += '+sv_lan 1 ';
         serverLaunchString += '+mp_teamname_1 "' + team1 + '" ';
         serverLaunchString += '+mp_teamname_2 "' + team2 + '" ';
