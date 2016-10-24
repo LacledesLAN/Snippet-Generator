@@ -421,6 +421,7 @@ function Launch_CSGO_Test(map, ip) {
         serverLaunchString += '+mp_teamname_1 "' + team1 + '" ';
         serverLaunchString += '+mp_teamname_2 "' + team2 + '" ';
         serverLaunchString += '+rcon_password "' + RCON_PASS + '" ';
+        serverLaunchString += '-maxplayers_override 16 ';
 
         clientConnectString = 'connect ';
         clientConnectString += ip + ':27015; ';
