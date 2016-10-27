@@ -193,7 +193,8 @@ var Docker = Docker || {};
 
 Docker.NetString_SRCDS = function(ip) {
     var portsUDP = ['1200', '1500', '3005', '3101', '28960', '3478-3479', '4379-4380', '26900-26915', '27000-27030'];
-    var portsTCP = ['27014-27050'];
+    var portsTCP = ['27000-27050'];
+
 
     var netString = '';
 
@@ -308,7 +309,9 @@ function Launch_CSGO_Deathmatch(hostname, map) {
             break;
         }
 
+
         serverLaunchString += './srcds_run ';
+        serverLaunchString += '-port 27015 ';
         serverLaunchString += '-game csgo ';
         serverLaunchString += '-console ';
         serverLaunchString += '+game_type 1 ';
@@ -407,6 +410,7 @@ function Launch_CSGO_Test(map, ip) {
 
         // CS:GO Tournament Server Specific
         serverLaunchString += './srcds_run ';
+        serverLaunchString += '-port 27015 ';
         serverLaunchString += '-game csgo ';
         serverLaunchString += '+game_type 0 ';
         serverLaunchString += '+game_mode 1 ';
@@ -587,6 +591,7 @@ function Launch_HL2DM_Freeplay(hostname, map) {
         }
 
         serverLaunchString += './srcds_run ';
+        serverLaunchString += '-port 27015 ';
         serverLaunchString += '-game hl2mp ';
         serverLaunchString += '+sv_pure 1 ';
         serverLaunchString += '+maxplayers 24 ';
@@ -621,6 +626,7 @@ function Launch_TF2_BlindFrag(hostname, map) {
         }
 
         serverLaunchString += './srcds_run ';
+        serverLaunchString += '-port 27015 ';
         serverLaunchString += '-game tf ';
         serverLaunchString += '+maxplayers 24 ';
         serverLaunchString += '-console ';
@@ -733,6 +739,7 @@ function Launch_TF2_Freeplay(hostname, mapcycle) {
         }
 
         serverLaunchString += './srcds_run -game tf ';
+        serverLaunchString += '-port 27015 ';
         serverLaunchString += '+sv_pure 0 ';
         serverLaunchString += '+maxplayers 24 ';
         serverLaunchString += '-console ';
