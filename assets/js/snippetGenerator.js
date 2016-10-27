@@ -545,7 +545,6 @@ function Launch_CSGO_Tournament(bracketID, team1, team2, map, ip) {
         serverLaunchString += '-tickrate 128 ';
         serverLaunchString += '-console ';
         serverLaunchString += '-usercon ';
-        serverLaunchString += '+mapgroup mg_active ';
         serverLaunchString += '+map ' + map + ' ';
         serverLaunchString += '+hostname "' + hostname + '" ';
         serverLaunchString += '+sv_password "' + password.join('') + '" ';
