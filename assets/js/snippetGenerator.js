@@ -209,7 +209,7 @@ Docker.NetString_SRCDS = function(ip) {
     }
 
     for (var i in portsTCP) {
-        netString += '-p=' + ip + portsUDP[i] + ':' + portsUDP[i] + '/tcp ';
+        netString += '-p=' + ip + portsTCP[i] + ':' + portsTCP[i] + '/tcp ';
     }
 
     return netString;
