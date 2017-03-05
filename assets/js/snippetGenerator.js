@@ -406,7 +406,7 @@ function Launch_CSGO_Test(map, ip) {
         }
         serverLaunchString += '--name ' + dockerContainerName + ' ';
         serverLaunchString += Docker.NetString_SRCDS(ip);
-        serverLaunchString += 'lacledeslan/gamesvr-srcds-csgo-test ';
+        serverLaunchString += 'lacledeslan/gamesvr-srcds-csgo-test:linux ';
 
         // CS:GO Tournament Server Specific
         serverLaunchString += './srcds_run ';
