@@ -406,7 +406,7 @@ function Launch_CSGO_Test(map, ip) {
         }
         serverLaunchString += '--name ' + dockerContainerName + ' ';
         serverLaunchString += Docker.NetString_SRCDS(ip);
-        serverLaunchString += 'll/gamesvr-csgo-test ';
+        serverLaunchString += 'lacledeslan/gamesvr-csgo-test ';
 
         // CS:GO Tournament Server Specific
         serverLaunchString += './srcds_run ';
@@ -539,7 +539,7 @@ function Launch_CSGO_Tournament(bracketID, team1, team2, map, ip) {
         serverLaunchString += Docker.NetString_SRCDS(ip);
         serverLaunchString += '-v /home/sysoper/logs/gamesvr-csgo-tourney:/gamesvr/csgo/csgo/logs ';
         serverLaunchString += '-v /home/sysoper/logs/gamesvr-csgo-tourney/warmod:/gamesvr/csgo/csgo/warmodlogs ';
-        serverLaunchString += 'll/gamesvr-csgo-tourney ';
+        serverLaunchString += 'lacledeslan/gamesvr-csgo-tourney ';
 
         // CS:GO Tournament Server Specific
         serverLaunchString += './srcds_run ';
