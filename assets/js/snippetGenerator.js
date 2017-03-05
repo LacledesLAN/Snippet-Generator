@@ -537,8 +537,8 @@ function Launch_CSGO_Tournament(bracketID, team1, team2, map, ip) {
         }
         serverLaunchString += '--name ' + dockerContainerName + ' ';
         serverLaunchString += Docker.NetString_SRCDS(ip);
-        serverLaunchString += '-v /home/sysoper/logs/gamesvr-csgo-tourney:/gamesvr/csgo/csgo/logs ';
-        serverLaunchString += '-v /home/sysoper/logs/gamesvr-csgo-tourney/warmod:/gamesvr/csgo/csgo/warmodlogs ';
+        serverLaunchString += '-v /home/sysoper/logs/gamesvr-csgo-tourney:/app/bin/csgo/logs ';
+        serverLaunchString += '-v /home/sysoper/logs/gamesvr-csgo-tourney/warmod:/app/bin/csgo/addons/sourcemod/logs ';
         serverLaunchString += 'lacledeslan/gamesvr-csgo-tourney ';
 
         // CS:GO Tournament Server Specific
