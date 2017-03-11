@@ -212,7 +212,31 @@ Docker.NetString_SRCDS = function(ip) {
         netString += '-p=' + ip + portsTCP[i] + ':' + portsTCP[i] + '/tcp ';
     }
 
-    return netString;
+    return netString.trim();
+}
+
+
+function modalFormatCommands(command, args, nestedCommand = []) {
+
+    function nest(command, args, nestedCommand = []) {
+        var rString = '<span>';
+        rString += '<command>' + command + '</command>';
+        rString += '<arguments>' + args + '</arguments>';
+        
+        if (nestedCommand.length > 0) {
+            rString += nest(nestedCommand[0], nestedCommand[1], nestedCommand[2]);
+        }
+
+        rString += '<span>';
+
+        return rString;
+    }
+
+    var returnStr = '<div class="nestedCommands">';
+    returnStr += nest(command, args, nestedCommand);
+    returnStr += '</div>';
+
+    return returnStr;
 }
 
 
@@ -309,7 +333,6 @@ function Launch_CSGO_Deathmatch(hostname, map) {
             break;
         }
 
-
         serverLaunchString += './srcds_run ';
         serverLaunchString += '-port 27015 ';
         serverLaunchString += '-game csgo ';
@@ -355,7 +378,7 @@ function Launch_CSGO_Test(map, ip) {
             break;
         }
 
-        ip = ip.trim();
+        ip = "" + ip.trim();
 
         hostname = hostname.split(' ').join('_');
 
@@ -399,32 +422,37 @@ function Launch_CSGO_Test(map, ip) {
             }
         }
 
-        // Docker Launch String
-        serverLaunchString = 'docker run -d ';
-        if (cpuFlag.trim().length > 0) {
-            serverLaunchString += cpuFlag + ' ';    
-        }
-        serverLaunchString += '--name ' + dockerContainerName + ' ';
-        serverLaunchString += Docker.NetString_SRCDS(ip);
-        serverLaunchString += 'lacledeslan/gamesvr-srcds-csgo-test:linux ';
+        
+        // Docker Command
+        var dockerCommand = 'docker run -d ';
+        var dockerArgs = '';
 
-        // CS:GO Tournament Server Specific
-        serverLaunchString += './srcds_run ';
-        serverLaunchString += '-port 27015 ';
-        serverLaunchString += '-game csgo ';
-        serverLaunchString += '+game_type 0 ';
-        serverLaunchString += '+game_mode 1 ';
-        serverLaunchString += '-tickrate 128 ';
-        serverLaunchString += '-console ';
-        serverLaunchString += '-usercon ';
-        serverLaunchString += '+mapgroup ll_orange ';
-        serverLaunchString += '+map ' + map + ' ';
-        serverLaunchString += '+hostname "' + hostname + '" ';
-        serverLaunchString += '+sv_lan 1 ';
-        serverLaunchString += '+mp_teamname_1 "' + team1 + '" ';
-        serverLaunchString += '+mp_teamname_2 "' + team2 + '" ';
-        serverLaunchString += '+rcon_password "' + RCON_PASS + '" ';
-        serverLaunchString += '-maxplayers_override 16 ';
+        if (cpuFlag.trim().length > 0) {
+            dockerArgs += cpuFlag + ' ';    
+        }
+        dockerArgs  = '--name ' + dockerContainerName + ' ';
+        dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
+        dockerArgs += 'lacledeslan/gamesvr-srcds-csgo-test:linux ';
+
+        // SRCDS Command
+        var srcdsCommand = './srcds_run ';
+        var srcdsArgs = '-port 27015 ';
+        srcdsArgs += '-game csgo ';
+        srcdsArgs += '+game_type 0 ';
+        srcdsArgs += '+game_mode 1 ';
+        srcdsArgs += '-tickrate 128 ';
+        srcdsArgs += '-console ';
+        srcdsArgs += '-usercon ';
+        srcdsArgs += '+mapgroup ll_orange ';
+        srcdsArgs += '+map ' + map + ' ';
+        srcdsArgs += '+hostname "' + hostname + '" ';
+        srcdsArgs += '+sv_lan 1 ';
+        srcdsArgs += '+mp_teamname_1 "' + team1 + '" ';
+        srcdsArgs += '+mp_teamname_2 "' + team2 + '" ';
+        srcdsArgs += '+rcon_password "' + RCON_PASS + '" ';
+        srcdsArgs += '-maxplayers_override 16 ';
+
+        var serverLaunchString = modalFormatCommands(dockerCommand, dockerArgs, [srcdsCommand, srcdsArgs])
 
         clientConnectString = 'connect ';
         clientConnectString += ip + ':27015; ';
@@ -531,34 +559,39 @@ function Launch_CSGO_Tournament(bracketID, team1, team2, map, ip) {
         }
 
         // Docker Launch String
-        serverLaunchString = 'docker run -d ';
+        var dockerComand = 'docker run -d ';
+        var dockerArgs = '';
+
         if (cpuFlag.trim().length > 0) {
-            serverLaunchString += cpuFlag + ' ';    
+            dockerArgs += cpuFlag + ' ';
         }
-        serverLaunchString += '--name ' + dockerContainerName + ' ';
-        serverLaunchString += Docker.NetString_SRCDS(ip);
-        serverLaunchString += '-v /home/sysoper/logs/' + dockerContainerName + ':/app/bin/csgo/logs ';
-        serverLaunchString += '-v /home/sysoper/logs/' + dockerContainerName + '/warmod:/app/bin/csgo/addons/sourcemod/logs ';
-        serverLaunchString += 'lacledeslan/gamesvr-srcds-csgo-tourney:linux ';
+        dockerArgs += '--name ' + dockerContainerName + ' ';
+        dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
+        dockerArgs += '-v /home/sysoper/logs/' + dockerContainerName + ':/app/bin/csgo/logs ';
+        dockerArgs += '-v /home/sysoper/logs/' + dockerContainerName + '/warmod:/app/bin/csgo/addons/sourcemod/logs ';
+        dockerArgs += 'lacledeslan/gamesvr-srcds-csgo-tourney:linux ';
 
         // CS:GO Tournament Server Specific
-        serverLaunchString += './srcds_run ';
-        serverLaunchString += '-game csgo ';
-        serverLaunchString += '+game_type 0 ';
-        serverLaunchString += '+game_mode 1 ';
-        serverLaunchString += '-tickrate 128 ';
-        serverLaunchString += '-console ';
-        serverLaunchString += '-usercon ';
-        serverLaunchString += '+map ' + map + ' ';
-        serverLaunchString += '+hostname "' + hostname + '" ';
-        serverLaunchString += '+sv_password "' + password.join('') + '" ';
-        serverLaunchString += '+sv_lan 1 ';
-        serverLaunchString += '+mp_teamname_1 "' + team1 + '" ';
-        serverLaunchString += '+mp_teamname_2 "' + team2 + '" ';
-        serverLaunchString += '+rcon_password "' + RCON_PASS + '" ';
-        serverLaunchString += '+tv_name "zLLTV_CSGO_BRACKET_' + bracketID + '" ';
-        serverLaunchString += '+tv_password "brianprefersmustard567" ';
-        serverLaunchString += '+tv_relaypassword "brianprefersmustard567" ';
+        var srcdsCommand = './srcds_run ';
+        var srcdsArgs = '-game csgo ';
+
+        srcdsArgs += '+game_type 0 ';
+        srcdsArgs += '+game_mode 1 ';
+        srcdsArgs += '-tickrate 128 ';
+        srcdsArgs += '-console ';
+        srcdsArgs += '-usercon ';
+        srcdsArgs += '+map ' + map + ' ';
+        srcdsArgs += '+hostname "' + hostname + '" ';
+        srcdsArgs += '+sv_password "' + password.join('') + '" ';
+        srcdsArgs += '+sv_lan 1 ';
+        srcdsArgs += '+mp_teamname_1 "' + team1 + '" ';
+        srcdsArgs += '+mp_teamname_2 "' + team2 + '" ';
+        srcdsArgs += '+rcon_password "' + RCON_PASS + '" ';
+        srcdsArgs += '+tv_name "zLLTV_CSGO_BRACKET_' + bracketID + '" ';
+        srcdsArgs += '+tv_password "brianprefersmustard567" ';
+        srcdsArgs += '+tv_relaypassword "brianprefersmustard567" ';
+
+        serverLaunchString = modalFormatCommands(dockerComand, dockerArgs, [srcdsCommand, srcdsArgs]);
 
         clientConnectString = 'connect ';
         clientConnectString += ip + ':27015; ';
