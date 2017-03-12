@@ -24,6 +24,10 @@ function addLogMessage(what, details, icon) {
     $('#snippetGeneratorLogTable').append('<tr><td>' + timestamp + '</td><td><i class="' + icon + '"></i></td><td>' + what + '</td><td>' + details + '</td></tr>');
 }
 
+function cleanSpaces(s) {
+    return s.replace(/\s+/g, ' ');
+}
+
 function generatePasswordArray(strength, maxLength) {
     strength = Number(strength);
     
