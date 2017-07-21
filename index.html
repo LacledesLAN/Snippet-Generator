@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="./assets/stylesheets/nestedCommands.css">
     <link rel="shortcut icon" href="./assets/images/snippetGen_favicon.ico">
     <link rel="icon" href="./assets/images/snippetGen_favicon_animated.gif" type="image/gif">
-
 </head>
 
 <body>
@@ -402,10 +401,6 @@
                         <form class="form-inline" autocomplete="off">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <div class="input-group-addon">Server Name</div>
-                                    <input type="text" class="form-control" name="csgoArmsraceHostname" placeholder="LL Arms Race" autocomplete="off">
-                                </div>
-                                <div class="input-group">
                                     <div class="input-group-addon">Map</div>
                                     <select name="csgoArmsraceMap" class="form-control csgo-arms-maps">
                                         <option>ar_baggage</option>
@@ -417,17 +412,13 @@
                                 </div>
                             </div>
                             <button type="button" class="btn btn-default" onclick="Launch_CSGO_ArmsRace(
-                                            $('#tab-csgo-freeplay input[name=csgoArmsraceHostname]').val(),
+                                            'Laclede\'s LAN CS:GO Arms Race',
                                             $('#tab-csgo-freeplay select[name=csgoArmsraceMap]').val() 	);">Generate</button>
                         </form>
                         <br />
                         <h3>Launch Classic Server</h3>
                         <form class="form-inline" autocomplete="off">
                             <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Server Name</div>
-                                    <input type="text" class="form-control" name="csgoClassicHostname" placeholder="LL Freeplay Classic" autocomplete="off">
-                                </div>
                                 <div class="input-group">
                                     <div class="input-group-addon">Map</div>
                                     <select name="csgoClassicMap" class="form-control">
@@ -492,7 +483,7 @@
                                 </div>
                             </div>
                             <button type="button" class="btn btn-default" onclick="Launch_CSGO_Classic(
-                                            $('#tab-csgo-freeplay input[name=csgoClassicHostname]').val(),
+                                            'Laclede\'s LAN CS:GO Classic',
                                             $('#tab-csgo-freeplay select[name=csgoClassicMap]').val() 	);">Generate</button>
                         </form>
 
@@ -500,10 +491,6 @@
                         <h3>Launch Deathmatch Server</h3>
                         <form class="form-inline" autocomplete="off">
                             <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Server Name</div>
-                                    <input type="text" class="form-control" name="csgoDeathmatchHostname" placeholder="LL CS:GO Deathmatch" autocomplete="off">
-                                </div>
                                 <div class="input-group">
                                     <div class="input-group-addon">Map</div>
                                     <select name="csgoDeathmatchMap" class="form-control">
@@ -548,7 +535,7 @@
                                 </div>
                             </div>
                             <button type="button" class="btn btn-default" onclick="Launch_CSGO_Deathmatch(
-                                            $('#tab-csgo-freeplay input[name=csgoDeathmatchHostname]').val(),
+                                            'Laclede\'s LAN CS:GO Deathmatch',
                                             $('#tab-csgo-freeplay select[name=csgoDeathmatchMap]').val() 	);">Generate</button>
                         </form>
 
@@ -563,10 +550,6 @@
                         <h3>Launch HL2DM Server</h3>
                         <form class="form-inline" autocomplete="off">
                             <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Server Name</div>
-                                    <input type="text" class="form-control" name="hl2dmHostname" placeholder="LL Half-Life 2 Deathmatch Server" autocomplete="off">
-                                </div>
                                 <div class="input-group">
                                     <div class="input-group-addon">Map</div>
                                     <select name="hl2dmMap" class="form-control hl2dm-maps">
@@ -593,8 +576,8 @@
                                 </div>
                             </div>
                             <button type="button" class="btn btn-default" onclick="Launch_HL2DM_Freeplay(
-                                            $('#tab-hl2dm input[name=hl2dmHostname]').val(),
-                                            $('#tab-hl2dm select[name=hl2dmMap]').val() 	);">Generate</button>
+                                            'Laclede\'s LAN HL2DM Freeplay',
+                                            $('#tab-hl2dm select[name=hl2dmMap]').val());">Generate</button>
                         </form>
                     </div>
                 </div>
@@ -608,10 +591,6 @@
                         <h3>Launch Team Fortress 2</h3>
                         <form class="form-inline" autocomplete="off">
                             <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Server Name</div>
-                                    <input type="text" class="form-control" name="tf2Hostname" placeholder="LL Team Fortress 2" autocomplete="off">
-                                </div>
                                 <div class="input-group">
                                     <div class="input-group-addon">Mapcycle</div>
                                     <select name="tf2Mapcycle" class="form-control">
@@ -641,7 +620,7 @@
                                 </div>
                             </div>
                             <button type="button" class="btn btn-default" onclick="Launch_TF2_Freeplay(
-                                        $('#tab-tf2 input[name=tf2Hostname]').val(),
+                                        'Laclede\'s LAN TF2 Freeplay',
                                         $('#tab-tf2 select[name=tf2Mapcycle]').val() 	);">Generate</button>
                         </form>
 
@@ -650,10 +629,6 @@
                         <form class="form-inline" autocomplete="off">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <div class="input-group-addon">Server Name</div>
-                                    <input type="text" class="form-control" name="blindFragHostname" placeholder="LL TF2 Blind Frag" autocomplete="off">
-                                </div>
-                                <div class="input-group">
                                     <div class="input-group-addon">Map</div>
                                     <select name="blindFragMap" class="form-control blindFrag-maps">
                                         <option selected value="koth_harvest_final">koth_harvest_final</option>
@@ -661,7 +636,7 @@
                                 </div>
                             </div>
                             <button type="button" class="btn btn-default" onclick="Launch_TF2_BlindFrag(
-                                        $('#tab-tf2 input[name=blindFragHostname]').val(),
+                                        'Laclede\'s LAN TF2 Blind Frag',
                                         $('#tab-tf2 select[name=blindFragMap]').val()
                                     );">Generate</button>
                         </form>
