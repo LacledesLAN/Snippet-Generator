@@ -459,11 +459,10 @@ function Launch_CSGO_Test(map, ip) {
         var serverLaunchString = modalFormatCommands(dockerCommand, dockerArgs, [srcdsCommand, srcdsArgs])
 
         clientConnectString = 'connect ';
-        clientConnectString += ip + ':27015; ';
-        clientConnectString += 'password ' + prettyPrintArray(password);
+        clientConnectString += ip + ':27015';
 
         $('#modalString .modal-title').html(hostname);
-        $('#modalString .modal-body #serverPassword').html(prettyPrintArray(password));
+        $('#modalString .modal-body #serverPassword').html("N/A");
         $('#modalString .modal-body #serverLaunchString').html(serverLaunchString);
         $('#modalString .modal-body #clientConnectString').html(clientConnectString);
         $('#modalString').modal('show');
