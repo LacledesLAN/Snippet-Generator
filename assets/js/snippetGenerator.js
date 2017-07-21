@@ -40,7 +40,7 @@ function generatePasswordArray(strength, maxLength) {
             strength = 5;
         }
     } else {
-        strength = 2;
+        strength = 1;
     }
     
     if (isWholeNumber(maxLength) && maxLength !== NaN) {
