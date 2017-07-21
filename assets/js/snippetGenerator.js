@@ -265,7 +265,7 @@ function Launch_CSGO_ArmsRace(hostname, map) {
         serverLaunchString += '+game_mode 0 ';
         serverLaunchString += '-usercon ';
         serverLaunchString += '-tickrate 128 ';
-        serverLaunchString += '+mapgroup mg_armsrace ';
+        serverLaunchString += '+mapgroup ll_arms ';
         serverLaunchString += '+map ' + map + ' ';
         serverLaunchString += '-maxplayers_override 16 ';
         serverLaunchString += '+hostname "' + hostname + '" ';
