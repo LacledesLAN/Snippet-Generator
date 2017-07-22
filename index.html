@@ -14,6 +14,7 @@
     <script src="./vendor/js/bootstrap3.min.js"></script>
     <script src="./vendor/js/underscore.min.js"></script>
     <script src="./assets/js/snippetGenerator.js"></script>
+    <script src="./assets/js/dockerServers.js"></script>
 
     <!--Stylesheets-->
     <link rel="stylesheet" href="./vendor/stylesheets/bootstrap3.theme.flatly.min.css">
@@ -81,122 +82,7 @@
 
                                 <div class="input-group">
                                     <div class="input-group-addon">Server</div>
-                                    <select name="serverIP" class="form-control csgo-tournament-serverIP">
-                                        <option selected value="" disabled="disabled">Select Server Binding</option>
-
-                                        <!-- Bruce -->
-                                        <option value="172.30.12.11">Bruce (172.30.12.11 cpu 4)</option>
-                                        <option value="172.30.12.12">Bruce (172.30.12.12 cpu 3)</option>
-                                        <option value="172.30.12.13">Bruce (172.30.12.13 cpu 5)</option>
-                                        <option value="172.30.12.14">Bruce (172.30.12.14 cpu 2)</option>
-                                        <option value="172.30.12.15">Bruce (172.30.12.15 cpu 6)</option>
-                                        <option value="172.30.12.16">Bruce (172.30.12.16 cpu 1)</option>
-                                        <option value="172.30.12.17">Bruce (172.30.12.17 cpu 7)</option>
-                                        <option value="172.30.12.18">Bruce (172.30.12.18 cpu 0)</option>
-
-                                        <!-- Gibson -->
-                                        <option value="172.30.12.21">Gibson (172.30.12.21 cpu 4)</option>
-                                        <option value="172.30.12.22">Gibson (172.30.12.22 cpu 3)</option>
-                                        <option value="172.30.12.23">Gibson (172.30.12.23 cpu 5)</option>
-                                        <option value="172.30.12.24">Gibson (172.30.12.24 cpu 2)</option>
-                                        <option value="172.30.12.25">Gibson (172.30.12.25 cpu 6)</option>
-                                        <option value="172.30.12.26">Gibson (172.30.12.26 cpu 1)</option>
-                                        <option value="172.30.12.27">Gibson (172.30.12.27 cpu 7)</option>
-                                        <option value="172.30.12.28">Gibson (172.30.12.28 cpu 0)</option>
-
-                                        <!-- Hull -->
-                                        <option value="172.30.12.31">Hull (172.30.12.31 cpu 4)</option>
-                                        <option value="172.30.12.32">Hull (172.30.12.32 cpu 3)</option>
-                                        <option value="172.30.12.33">Hull (172.30.12.33 cpu 5)</option>
-                                        <option value="172.30.12.34">Hull (172.30.12.34 cpu 2)</option>
-                                        <option value="172.30.12.35">Hull (172.30.12.35 cpu 6)</option>
-                                        <option value="172.30.12.36">Hull (172.30.12.36 cpu 1)</option>
-                                        <option value="172.30.12.37">Hull (172.30.12.37 cpu 7)</option>
-                                        <option value="172.30.12.38">Hull (172.30.12.38 cpu 0)</option>
-
-                                        <!-- Kelly -->
-                                        <option value="172.30.12.41">Kelly (172.30.12.41 cpu 4)</option>
-                                        <option value="172.30.12.42">Kelly (172.30.12.42 cpu 3)</option>
-                                        <option value="172.30.12.43">Kelly (172.30.12.43 cpu 5)</option>
-                                        <option value="172.30.12.44">Kelly (172.30.12.44 cpu 2)</option>
-                                        <option value="172.30.12.45">Kelly (172.30.12.45 cpu 6)</option>
-                                        <option value="172.30.12.46">Kelly (172.30.12.46 cpu 1)</option>
-                                        <option value="172.30.12.47">Kelly (172.30.12.47 cpu 7)</option>
-                                        <option value="172.30.12.48">Kelly (172.30.12.48 cpu 0)</option>
-
-                                        <!-- McGee -->
-                                        <option value="172.30.12.51">McGee (172.30.12.51 cpu 4)</option>
-                                        <option value="172.30.12.52">McGee (172.30.12.52 cpu 3)</option>
-                                        <option value="172.30.12.53">McGee (172.30.12.53 cpu 5)</option>
-                                        <option value="172.30.12.54">McGee (172.30.12.54 cpu 2)</option>
-                                        <option value="172.30.12.55">McGee (172.30.12.55 cpu 6)</option>
-                                        <option value="172.30.12.56">McGee (172.30.12.56 cpu 1)</option>
-                                        <option value="172.30.12.57">McGee (172.30.12.57 cpu 7)</option>
-                                        <option value="172.30.12.58">McGee (172.30.12.58 cpu 0)</option>
-
-                                        <!-- Musial -->
-                                        <option value="172.30.12.61">Musial (172.30.12.61 cpu 4)</option>
-                                        <option value="172.30.12.62">Musial (172.30.12.62 cpu 3)</option>
-                                        <option value="172.30.12.63">Musial (172.30.12.63 cpu 5)</option>
-                                        <option value="172.30.12.64">Musial (172.30.12.64 cpu 2)</option>
-                                        <option value="172.30.12.65">Musial (172.30.12.65 cpu 6)</option>
-                                        <option value="172.30.12.66">Musial (172.30.12.66 cpu 1)</option>
-                                        <option value="172.30.12.67">Musial (172.30.12.67 cpu 7)</option>
-                                        <option value="172.30.12.68">Musial (172.30.12.68 cpu 0)</option>
-
-                                        <!-- Reeves -->
-                                        <option value="172.30.12.71">Reeves (172.30.12.71 cpu 4)</option>
-                                        <option value="172.30.12.72">Reeves (172.30.12.72 cpu 3)</option>
-                                        <option value="172.30.12.73">Reeves (172.30.12.73 cpu 5)</option>
-                                        <option value="172.30.12.74">Reeves (172.30.12.74 cpu 2)</option>
-                                        <option value="172.30.12.75">Reeves (172.30.12.75 cpu 6)</option>
-                                        <option value="172.30.12.76">Reeves (172.30.12.76 cpu 1)</option>
-                                        <option value="172.30.12.77">Reeves (172.30.12.77 cpu 7)</option>
-                                        <option value="172.30.12.78">Reeves (172.30.12.78 cpu 0)</option>               
-
-                                        <!-- Rosenbloom -->
-                                        <option value="172.30.12.81">Rosenbloom (172.30.12.81 cpu 4)</option>
-                                        <option value="172.30.12.82">Rosenbloom (172.30.12.82 cpu 3)</option>
-                                        <option value="172.30.12.83">Rosenbloom (172.30.12.83 cpu 5)</option>
-                                        <option value="172.30.12.84">Rosenbloom (172.30.12.84 cpu 2)</option>
-                                        <option value="172.30.12.85">Rosenbloom (172.30.12.85 cpu 6)</option>
-                                        <option value="172.30.12.86">Rosenbloom (172.30.12.86 cpu 1)</option>
-                                        <option value="172.30.12.87">Rosenbloom (172.30.12.87 cpu 7)</option>
-                                        <option value="172.30.12.88">Rosenbloom (172.30.12.88 cpu 0)</option>                                   
-
-                                        <!-- Youngblood -->
-                                        <option value="172.30.12.91">Youngblood (172.30.12.91 cpu 4)</option>
-                                        <option value="172.30.12.92">Youngblood (172.30.12.92 cpu 3)</option>
-                                        <option value="172.30.12.93">Youngblood (172.30.12.93 cpu 5)</option>
-                                        <option value="172.30.12.94">Youngblood (172.30.12.94 cpu 2)</option>
-                                        <option value="172.30.12.95">Youngblood (172.30.12.95 cpu 6)</option>
-                                        <option value="172.30.12.96">Youngblood (172.30.12.96 cpu 1)</option>
-                                        <option value="172.30.12.97">Youngblood (172.30.12.97 cpu 7)</option>
-                                        <option value="172.30.12.98">Youngblood (172.30.12.98 cpu 0)</option>  
-                                    
-                                        <!-- WARNING MESSAGE -->
-                                        <option disabled="disabled">[===============]</option>
-                                        <option disabled="disabled"> !!! WARNING !!! </option>
-                                        <option disabled="disabled">   TESTING ONLY  </option>
-                                        <option disabled="disabled"> !!! WARNING !!! </option>
-                                        <option disabled="disabled">[===============]</option>
-
-                                        <!-- Fuhr -->
-                                        <option value="172.30.10.31">Fuhr (172.30.10.31 cpu 4)</option>
-                                        <option value="172.30.10.32">Fuhr (172.30.10.32 cpu 3)</option>
-                                        <option value="172.30.10.33">Fuhr (172.30.10.33 cpu 5)</option>
-                                        <option value="172.30.10.34">Fuhr (172.30.10.34 cpu 2)</option>
-                                        <option value="172.30.10.35">Fuhr (172.30.10.35 cpu 6)</option>
-                                        <option value="172.30.10.36">Fuhr (172.30.10.36 cpu 1)</option>
-                                        <option value="172.30.10.37">Fuhr (172.30.10.37 cpu 7)</option>
-                                        <option value="172.30.10.38">Fuhr (172.30.10.38 cpu 0)</option>  
-
-                                        <!-- Ozzie -->
-                                        <option value="172.30.10.12">DUDLEY TEST Ozzie (172.30.10.12 cpu 1)</option>
-                                        <option value="172.30.10.13">DUDLEY TEST Ozzie (172.30.10.13 cpu 0)</option>
-                                        <!-- 0.0.0.0 -->
-                                        <option value="">localhost (0.0.0.0)</option>
-                                    </select>
+                                    <select name="serverIP" class="form-control csgo-tournament-serverIP selectDockerServer"></select>
                                 </div>
 
                             </div>
@@ -254,122 +140,7 @@
 
                                 <div class="input-group">
                                     <div class="input-group-addon">Server</div>
-                                    <select name="serverIP" class="form-control csgo-tournament-serverIP">
-                                        <option selected value="" disabled="disabled">Select Server Binding</option>
-
-                                        <!-- Bruce -->
-                                        <option value="172.30.12.11">Bruce (172.30.12.11 cpu 4)</option>
-                                        <option value="172.30.12.12">Bruce (172.30.12.12 cpu 3)</option>
-                                        <option value="172.30.12.13">Bruce (172.30.12.13 cpu 5)</option>
-                                        <option value="172.30.12.14">Bruce (172.30.12.14 cpu 2)</option>
-                                        <option value="172.30.12.15">Bruce (172.30.12.15 cpu 6)</option>
-                                        <option value="172.30.12.16">Bruce (172.30.12.16 cpu 1)</option>
-                                        <option value="172.30.12.17">Bruce (172.30.12.17 cpu 7)</option>
-                                        <option value="172.30.12.18">Bruce (172.30.12.18 cpu 0)</option>
-
-                                        <!-- Gibson -->
-                                        <option value="172.30.12.21">Gibson (172.30.12.21 cpu 4)</option>
-                                        <option value="172.30.12.22">Gibson (172.30.12.22 cpu 3)</option>
-                                        <option value="172.30.12.23">Gibson (172.30.12.23 cpu 5)</option>
-                                        <option value="172.30.12.24">Gibson (172.30.12.24 cpu 2)</option>
-                                        <option value="172.30.12.25">Gibson (172.30.12.25 cpu 6)</option>
-                                        <option value="172.30.12.26">Gibson (172.30.12.26 cpu 1)</option>
-                                        <option value="172.30.12.27">Gibson (172.30.12.27 cpu 7)</option>
-                                        <option value="172.30.12.28">Gibson (172.30.12.28 cpu 0)</option>
-
-                                        <!-- Hull -->
-                                        <option value="172.30.12.31">Hull (172.30.12.31 cpu 4)</option>
-                                        <option value="172.30.12.32">Hull (172.30.12.32 cpu 3)</option>
-                                        <option value="172.30.12.33">Hull (172.30.12.33 cpu 5)</option>
-                                        <option value="172.30.12.34">Hull (172.30.12.34 cpu 2)</option>
-                                        <option value="172.30.12.35">Hull (172.30.12.35 cpu 6)</option>
-                                        <option value="172.30.12.36">Hull (172.30.12.36 cpu 1)</option>
-                                        <option value="172.30.12.37">Hull (172.30.12.37 cpu 7)</option>
-                                        <option value="172.30.12.38">Hull (172.30.12.38 cpu 0)</option>
-
-                                        <!-- Kelly -->
-                                        <option value="172.30.12.41">Kelly (172.30.12.41 cpu 4)</option>
-                                        <option value="172.30.12.42">Kelly (172.30.12.42 cpu 3)</option>
-                                        <option value="172.30.12.43">Kelly (172.30.12.43 cpu 5)</option>
-                                        <option value="172.30.12.44">Kelly (172.30.12.44 cpu 2)</option>
-                                        <option value="172.30.12.45">Kelly (172.30.12.45 cpu 6)</option>
-                                        <option value="172.30.12.46">Kelly (172.30.12.46 cpu 1)</option>
-                                        <option value="172.30.12.47">Kelly (172.30.12.47 cpu 7)</option>
-                                        <option value="172.30.12.48">Kelly (172.30.12.48 cpu 0)</option>
-
-                                        <!-- McGee -->
-                                        <option value="172.30.12.51">McGee (172.30.12.51 cpu 4)</option>
-                                        <option value="172.30.12.52">McGee (172.30.12.52 cpu 3)</option>
-                                        <option value="172.30.12.53">McGee (172.30.12.53 cpu 5)</option>
-                                        <option value="172.30.12.54">McGee (172.30.12.54 cpu 2)</option>
-                                        <option value="172.30.12.55">McGee (172.30.12.55 cpu 6)</option>
-                                        <option value="172.30.12.56">McGee (172.30.12.56 cpu 1)</option>
-                                        <option value="172.30.12.57">McGee (172.30.12.57 cpu 7)</option>
-                                        <option value="172.30.12.58">McGee (172.30.12.58 cpu 0)</option>
-
-                                        <!-- Musial -->
-                                        <option value="172.30.12.61">Musial (172.30.12.61 cpu 4)</option>
-                                        <option value="172.30.12.62">Musial (172.30.12.62 cpu 3)</option>
-                                        <option value="172.30.12.63">Musial (172.30.12.63 cpu 5)</option>
-                                        <option value="172.30.12.64">Musial (172.30.12.64 cpu 2)</option>
-                                        <option value="172.30.12.65">Musial (172.30.12.65 cpu 6)</option>
-                                        <option value="172.30.12.66">Musial (172.30.12.66 cpu 1)</option>
-                                        <option value="172.30.12.67">Musial (172.30.12.67 cpu 7)</option>
-                                        <option value="172.30.12.68">Musial (172.30.12.68 cpu 0)</option>
-
-                                        <!-- Reeves -->
-                                        <option value="172.30.12.71">Reeves (172.30.12.71 cpu 4)</option>
-                                        <option value="172.30.12.72">Reeves (172.30.12.72 cpu 3)</option>
-                                        <option value="172.30.12.73">Reeves (172.30.12.73 cpu 5)</option>
-                                        <option value="172.30.12.74">Reeves (172.30.12.74 cpu 2)</option>
-                                        <option value="172.30.12.75">Reeves (172.30.12.75 cpu 6)</option>
-                                        <option value="172.30.12.76">Reeves (172.30.12.76 cpu 1)</option>
-                                        <option value="172.30.12.77">Reeves (172.30.12.77 cpu 7)</option>
-                                        <option value="172.30.12.78">Reeves (172.30.12.78 cpu 0)</option>               
-
-                                        <!-- Rosenbloom -->
-                                        <option value="172.30.12.81">Rosenbloom (172.30.12.81 cpu 4)</option>
-                                        <option value="172.30.12.82">Rosenbloom (172.30.12.82 cpu 3)</option>
-                                        <option value="172.30.12.83">Rosenbloom (172.30.12.83 cpu 5)</option>
-                                        <option value="172.30.12.84">Rosenbloom (172.30.12.84 cpu 2)</option>
-                                        <option value="172.30.12.85">Rosenbloom (172.30.12.85 cpu 6)</option>
-                                        <option value="172.30.12.86">Rosenbloom (172.30.12.86 cpu 1)</option>
-                                        <option value="172.30.12.87">Rosenbloom (172.30.12.87 cpu 7)</option>
-                                        <option value="172.30.12.88">Rosenbloom (172.30.12.88 cpu 0)</option>                                   
-
-                                        <!-- Youngblood -->
-                                        <option value="172.30.12.91">Youngblood (172.30.12.91 cpu 4)</option>
-                                        <option value="172.30.12.92">Youngblood (172.30.12.92 cpu 3)</option>
-                                        <option value="172.30.12.93">Youngblood (172.30.12.93 cpu 5)</option>
-                                        <option value="172.30.12.94">Youngblood (172.30.12.94 cpu 2)</option>
-                                        <option value="172.30.12.95">Youngblood (172.30.12.95 cpu 6)</option>
-                                        <option value="172.30.12.96">Youngblood (172.30.12.96 cpu 1)</option>
-                                        <option value="172.30.12.97">Youngblood (172.30.12.97 cpu 7)</option>
-                                        <option value="172.30.12.98">Youngblood (172.30.12.98 cpu 0)</option>  
-                                    
-                                        <!-- WARNING MESSAGE -->
-                                        <option disabled="disabled">[===============]</option>
-                                        <option disabled="disabled"> !!! WARNING !!! </option>
-                                        <option disabled="disabled">   TESTING ONLY  </option>
-                                        <option disabled="disabled"> !!! WARNING !!! </option>
-                                        <option disabled="disabled">[===============]</option>
-
-                                        <!-- Fuhr -->
-                                        <option value="172.30.10.31">Fuhr (172.30.10.31 cpu 4)</option>
-                                        <option value="172.30.10.32">Fuhr (172.30.10.32 cpu 3)</option>
-                                        <option value="172.30.10.33">Fuhr (172.30.10.33 cpu 5)</option>
-                                        <option value="172.30.10.34">Fuhr (172.30.10.34 cpu 2)</option>
-                                        <option value="172.30.10.35">Fuhr (172.30.10.35 cpu 6)</option>
-                                        <option value="172.30.10.36">Fuhr (172.30.10.36 cpu 1)</option>
-                                        <option value="172.30.10.37">Fuhr (172.30.10.37 cpu 7)</option>
-                                        <option value="172.30.10.38">Fuhr (172.30.10.38 cpu 0)</option>  
-
-                                        <!-- Ozzie -->
-                                        <option value="172.30.10.12">DUDLEY TEST Ozzie (172.30.10.12 cpu 1)</option>
-                                        <option value="172.30.10.13">DUDLEY TEST Ozzie (172.30.10.13 cpu 0)</option>
-                                        <!-- 0.0.0.0 -->
-                                        <option value="">localhost (0.0.0.0)</option>
-                                    </select>
+                                    <select name="serverIP" class="form-control csgo-tournament-serverIP selectDockerServer"></select>
                                 </div>
 
                             </div>
@@ -574,10 +345,17 @@
                                         <option value="dm_tech">dm_tech</option>
                                     </select>
                                 </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">Server</div>
+                                    <select name="hl2dmServerIP" class="form-control selectDockerServer"></select>
+                                </div>
+
                             </div>
                             <button type="button" class="btn btn-default" onclick="Launch_HL2DM_Freeplay(
                                             'Laclede\'s LAN HL2DM Freeplay',
-                                            $('#tab-hl2dm select[name=hl2dmMap]').val());">Generate</button>
+                                            $('#tab-hl2dm select[name=hl2dmMap]').val(),
+                                            $('#tab-hl2dm select[name=hl2dmServerIP]').val()
+                                        );">Generate</button>
                         </form>
                     </div>
                 </div>

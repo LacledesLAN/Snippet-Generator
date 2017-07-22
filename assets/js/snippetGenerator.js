@@ -376,13 +376,12 @@ function Launch_CSGO_Test(map, ip) {
 
     do {
 
-
         if (!map) {
             alert('ERROR - NO MAP WAS SPECIFIED!');
             break;
         }
 
-        ip = "" + ip.trim();
+        ip = ip.toString().trim();
 
         hostname = hostname.split(' ').join('_');
 
@@ -394,38 +393,14 @@ function Launch_CSGO_Test(map, ip) {
         dockerContainerName += zeroPad(currentDate.getSeconds(), 2) + 's';
         
         if (ip) {
-            // Determine Docker CPU Flag
-            switch (ip.substr(ip.length - 1, 1)) {
-                case '1':
-                    cpuFlag = '--cpuset-cpus="4"';
-                    break;
-                case '2':
-                    cpuFlag = '--cpuset-cpus="3"';
-                    break;
-                case '3':
-                    cpuFlag = '--cpuset-cpus="5"';
-                    break;
-                case '4':
-                    cpuFlag = '--cpuset-cpus="2"';
-                    break;
-                case '5':
-                    cpuFlag = '--cpuset-cpus="6"';
-                    break;
-                case '6':
-                    cpuFlag = '--cpuset-cpus="1"';
-                    break;
-                case '7':
-                    cpuFlag = '--cpuset-cpus="7"';
-                    break;
-                case '8':
-                    cpuFlag = '--cpuset-cpus="0"';
-                    break;
-                default:
-                    cpuFlag = "";
-                    break;
+            let cpuId = GetCPUFromIPAddress(ip);
+
+            if (cpuId) {
+                cpuFlag = '--cpuset-cpus="' + cpuId + '"';
+            } else {
+                cpuFlag = "";
             }
         }
-
         
         // Docker Command
         var dockerCommand = 'docker run -d ';
@@ -434,7 +409,7 @@ function Launch_CSGO_Test(map, ip) {
         if (cpuFlag.trim().length > 0) {
             dockerArgs += cpuFlag + ' ';    
         }
-        dockerArgs  = '--name ' + dockerContainerName + ' ';
+        dockerArgs += '--name ' + dockerContainerName + ' ';
         dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
         dockerArgs += 'lacledeslan/gamesvr-srcds-csgo-test:linux ';
 
@@ -529,35 +504,12 @@ function Launch_CSGO_Tournament(bracketID, team1, team2, map, ip) {
         dockerContainerName += zeroPad(currentDate.getSeconds(), 2) + 's';
         
         if (ip) {
-            // Determine Docker CPU Flag
-            switch (ip.substr(ip.length - 1, 1)) {
-                case '1':
-                    cpuFlag = '--cpuset-cpus="4"';
-                    break;
-                case '2':
-                    cpuFlag = '--cpuset-cpus="3"';
-                    break;
-                case '3':
-                    cpuFlag = '--cpuset-cpus="5"';
-                    break;
-                case '4':
-                    cpuFlag = '--cpuset-cpus="2"';
-                    break;
-                case '5':
-                    cpuFlag = '--cpuset-cpus="6"';
-                    break;
-                case '6':
-                    cpuFlag = '--cpuset-cpus="1"';
-                    break;
-                case '7':
-                    cpuFlag = '--cpuset-cpus="7"';
-                    break;
-                case '8':
-                    cpuFlag = '--cpuset-cpus="0"';
-                    break;
-                default:
-                    cpuFlag = "";
-                    break;
+            let cpuId = GetCPUFromIPAddress(ip);
+
+            if (cpuId) {
+                cpuFlag = '--cpuset-cpus="' + cpuId + '"';
+            } else {
+                cpuFlag = "";
             }
         }
 
@@ -611,8 +563,12 @@ function Launch_CSGO_Tournament(bracketID, team1, team2, map, ip) {
 }
 
 
-function Launch_HL2DM_Freeplay(hostname, map) {
-    var clientConnectString = 'N/A',
+function Launch_HL2DM_Freeplay(hostname, map, ip) {
+    let clientConnectString = 'N/A',
+        cpuFlag = '',
+        currentDate = new Date(),
+        dockerArgs = '',
+        dockerContainerName = '',
         serverLaunchString = '';
 
     do {
@@ -626,14 +582,53 @@ function Launch_HL2DM_Freeplay(hostname, map) {
             break;
         }
 
-        serverLaunchString += './srcds_run ';
-        serverLaunchString += '-port 27015 ';
-        serverLaunchString += '-game hl2mp ';
-        serverLaunchString += '+sv_pure 1 ';
-        serverLaunchString += '+maxplayers 24 ';
-        serverLaunchString += '+map ' + map + ' ';
-        serverLaunchString += '+hostname "' + hostname + '" ';
-        serverLaunchString += '+rcon_password "' + RCON_PASS + '" ';
+        if (!ip) {
+            alert('ERROR - NO SERVER WAS SELECTED');
+            break;
+        }
+
+        // Generate Docker Container Name
+        dockerContainerName = 'HL2DMFreeplay_';
+        dockerContainerName += ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][currentDate.getDay()];
+        dockerContainerName += zeroPad(currentDate.getHours(), 2) + 'h';
+        dockerContainerName += zeroPad(currentDate.getMinutes(), 2) + 'm';
+        dockerContainerName += zeroPad(currentDate.getSeconds(), 2) + 's';
+
+        if (ip) {
+            let cpuId = GetCPUFromIPAddress(ip);
+
+            if (cpuId) {
+                cpuFlag = '--cpuset-cpus="' + cpuId + '"';
+            } else {
+                cpuFlag = "";
+            }
+        }
+
+        // Docker Command
+        let dockerCommand = 'docker run -d ';
+
+        if (cpuFlag.trim().length > 0) {
+            dockerArgs += cpuFlag + ' ';    
+        }
+        dockerArgs += '--name ' + dockerContainerName + ' ';
+        dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
+        dockerArgs += 'lacledeslan/gamesvr-hl2dm-freeplay:linux ';
+
+        // HL2DM Freeplay Server Specific
+        var srcdsCommand = './srcds_run ';
+        let srcdsArgs = '-game csgo ';
+        srcdsArgs += '-port 27015 ';
+        srcdsArgs += '-game hl2mp ';
+        srcdsArgs += '+sv_pure 1 ';
+        srcdsArgs += '+maxplayers 24 ';
+        srcdsArgs += '+map ' + map + ' ';
+        srcdsArgs += '+hostname "' + hostname + '" ';
+        srcdsArgs += '+rcon_password "' + RCON_PASS + '" ';
+
+        serverLaunchString = modalFormatCommands(dockerCommand, dockerArgs, [srcdsCommand, srcdsArgs]);
+
+        clientConnectString = 'connect ';
+        clientConnectString += ip + ':27015';
 
         $('#modalString .modal-title').html(hostname);
         $('#modalString .modal-body #serverPassword').html('N/A');
