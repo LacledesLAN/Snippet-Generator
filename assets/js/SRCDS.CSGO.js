@@ -91,7 +91,7 @@ SRCDS.CSGO.LaunchArmsRace = function(hostname, map, ip) {
 
         serverLaunchString = modalFormatCommands(dockerCommand, dockerArgs, [srcdsCommand, srcdsArgs]);
 
-        clientConnectString = 'connect ' + ip;
+        clientConnectString = 'connect ' + ip + ':27015';
 
         $('#modalString .modal-title').html(hostname);
         $('#modalString .modal-body #serverPassword').html('N/A');
@@ -175,7 +175,7 @@ SRCDS.CSGO.LaunchClassic = function(hostname, map, ip) {
 
         serverLaunchString = modalFormatCommands(dockerCommand, dockerArgs, [srcdsCommand, srcdsArgs]);
 
-        clientConnectString = 'connect ' + ip;
+        clientConnectString = 'connect ' + ip + ':27015';
 
         $('#modalString .modal-title').html(hostname);
         $('#modalString .modal-body #serverPassword').html('N/A');
@@ -261,7 +261,7 @@ SRCDS.CSGO.LaunchDeathmatch = function(hostname, map, ip) {
 
         serverLaunchString = modalFormatCommands(dockerCommand, dockerArgs, [srcdsCommand, srcdsArgs]);
 
-        clientConnectString = 'connect ' + ip;
+        clientConnectString = 'connect ' + ip + ':27015';
 
         $('#modalString .modal-title').html(hostname);
         $('#modalString .modal-body #serverPassword').html('N/A');
