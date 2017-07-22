@@ -18,7 +18,7 @@ function addLogMessage(what, details, icon) {
     details = details.toString().trim();
     icon = (icon || 'fa fa-desktop').trim();
     
-    var curDate = new Date(),
+    let curDate = new Date(),
         timestamp = zeroPad(curDate.getHours()) + ':' + zeroPad(curDate.getMinutes()) + ':' + zeroPad(curDate.getSeconds()) + '.' + zeroPad(curDate.getMilliseconds(), 4);
 
     $('#snippetGeneratorLogTable').append('<tr><td>' + timestamp + '</td><td><i class="' + icon + '"></i></td><td>' + what + '</td><td>' + details + '</td></tr>');
@@ -150,7 +150,7 @@ function getRandomTeamName() {
                     'London Kings', 'Metropolis Meteors', 'Metropolis Monarchs', 'Beaneaters', 'Bridegrooms', 'Excelsiors', 'Haymakers', 'Keystones', 'Knickerbockers', 'Pastime Club',
                     'Pioneers', 'Atomic Supermen', 'Basin City Blues', 'Cascade Jaguars', 'Charlotte Banshees', 'Deon Demons', 'Dimmsdale Ballhogs', 'Metropolis Generals',
                     'Philadelphia Spartans', 'Roswell Rayguns', 'Gotham Guardsmen', 'Gotham Gators', 'Austin Celtics', 'Springfield Celtics', 'Monstars', 'ToonSquad', 'Flint Tropics',
-                    'Bushido Blades', 'Flying Scotsmen', 'Gorgon\'s Gargoyles', 'Montezuma Mashers', 'Siberian Wolves', 'Teutonic Titans', 'Gloucester Meteors', 'Reading Whackers',
+                    'Bushido Blades', 'Flying Scotsmen', "Gorgon's Gargoyles", 'Montezuma Mashers', 'Siberian Wolves', 'Teutonic Titans', 'Gloucester Meteors', 'Reading Whackers',
                     'Average Joe\'s', 'Charging Donkeys', 'Skillz That Killz', 'Lumberjacks', 'Team Blitzkrieg', 'Osaka Kamikazes', 'New Orleans Clown Punchers', 'Monterrey Mulchers',
                     'Troop 417', 'Yetis', 'Pouncers', 'Spleen Mashers', 'Savage Squad 300', 'Adams College Atoms', 'Ampipe Bulldogs', 'Atlanta Cobras', 'Arizona Sparklies', 'California Atoms',
                     'Denver Monarchs', 'Desert Bluff Vultures', 'Dillon Panthers', 'Duluth Bulldogs', 'East Dillon Lions', 'Faber Mongols', 'London Silly Nannies', 'McKinley Titans',
@@ -364,7 +364,7 @@ function Launch_CSGO_Deathmatch(hostname, map) {
 
 
 function Launch_CSGO_Test(map, ip) {
-    var clientConnectString = '',
+    let clientConnectString = '',
         currentDate = new Date(),
         cpuFlag = '',
         dockerContainerName = '',
@@ -375,9 +375,13 @@ function Launch_CSGO_Test(map, ip) {
         team2 = "Gotham Rogues".trim();
 
     do {
-
         if (!map) {
             alert('ERROR - NO MAP WAS SPECIFIED!');
+            break;
+        }
+
+        if (!ip) {
+            alert('ERROR - NO SERVER WAS SELECTED');
             break;
         }
 
@@ -403,8 +407,8 @@ function Launch_CSGO_Test(map, ip) {
         }
         
         // Docker Command
-        var dockerCommand = 'docker run -d ';
-        var dockerArgs = '';
+        let dockerCommand = 'docker run -d ';
+        let dockerArgs = '';
 
         if (cpuFlag.trim().length > 0) {
             dockerArgs += cpuFlag + ' ';    
@@ -414,8 +418,8 @@ function Launch_CSGO_Test(map, ip) {
         dockerArgs += 'lacledeslan/gamesvr-srcds-csgo-test:linux ';
 
         // SRCDS Command
-        var srcdsCommand = './srcds_run ';
-        var srcdsArgs = '-port 27015 ';
+        let srcdsCommand = './srcds_run ';
+        let srcdsArgs = '-port 27015 ';
         srcdsArgs += '-game csgo ';
         srcdsArgs += '+game_type 0 ';
         srcdsArgs += '+game_mode 1 ';
@@ -431,7 +435,7 @@ function Launch_CSGO_Test(map, ip) {
         srcdsArgs += '+rcon_password "' + RCON_PASS + '" ';
         srcdsArgs += '-maxplayers_override 16 ';
 
-        var serverLaunchString = modalFormatCommands(dockerCommand, dockerArgs, [srcdsCommand, srcdsArgs])
+        let serverLaunchString = modalFormatCommands(dockerCommand, dockerArgs, [srcdsCommand, srcdsArgs])
 
         clientConnectString = 'connect ';
         clientConnectString += ip + ':27015';
@@ -684,7 +688,7 @@ function Launch_TF2_BlindFrag(hostname, map) {
 
 
 function Launch_TF2_Freeplay(hostname, mapcycle) {
-    var map = '',
+    let map = '',
         serverLaunchString = '';
 
     do {
@@ -698,77 +702,6 @@ function Launch_TF2_Freeplay(hostname, mapcycle) {
             break;
         }
 
-        switch (String(mapcycle).toLowerCase().trim()) {
-        case 'mapcycle.txt':
-            map = 'ctf_2fort';
-            break;
-        case 'mapcycle_beta_asteroid.txt':
-            map = 'rd_asteroid';
-            break;
-        case 'mapcycle_beta_cactus_canyon.txt':
-            map = 'pl_cactuscanyon';
-            break;
-        case 'mapcycle_beta_mannpower.txt':
-            map = 'ctf_thundermountain';
-            break;
-        case 'mapcycle_default.txt':
-            map = 'ctf_2fort';
-            break;
-        case 'mapcycle_doomsday_event_247.txt':
-            map = 'sd_doomsday_event';
-            break;
-        case 'mapcycle_featured_maps.txt':
-            map = 'koth_highpass';
-            break;
-        case 'mapcycle_halloween.txt':
-            map = 'koth_harvest_event';
-            break;
-        case 'mapcycle_halloween_event_247.txt':
-            map = 'koth_moonshine_event';
-            break;
-        case 'mapcycle_hightower_event_247.txt':
-            map = 'plr_hightower_event';
-            break;
-        case 'mapcycle_invasion_maps.txt':
-            map = 'ctf_2fort_invasion';
-            break;
-        case 'mapcycle_ladder.txt':
-            map = 'cp_granary';
-            break;
-        case 'mapcycle_lakeside_event_247.txt':
-            map = 'koth_lakeside_event';
-            break;
-        case 'mapcycle_mannpower.txt':
-            map = 'ctf_thundermountain';
-            break;
-        case 'mapcycle_quickplay_arena.txt':
-            map = 'arena_lumberyard';
-            break;
-        case 'mapcycle_quickplay_attackdefense.txt':
-            map = 'cp_gravelpit';
-            break;
-        case 'mapcycle_quickplay_cp.txt':
-            map = 'cp_badlands';
-            break;
-        case 'mapcycle_quickplay_ctf_sd.txt':
-            map = 'ctf_2fort';
-            break;
-        case 'mapcycle_quickplay_koth.txt':
-            map = 'koth_badlands';
-            break;
-        case 'mapcycle_quickplay_passtime.txt':
-            map = 'pass_warehouse';
-            break;
-        case 'mapcycle_quickplay_payload.txt':
-            map = 'pl_badwater';
-            break;
-        case 'mapcycle_quickplay_payloadrace.txt':
-            map = 'plr_hightower';
-            break;
-        default:
-            map = 'ctf_2fort';
-        }
-
         serverLaunchString += './srcds_run -game tf ';
         serverLaunchString += '-port 27015 ';
         serverLaunchString += '+sv_pure 0 ';
@@ -777,7 +710,7 @@ function Launch_TF2_Freeplay(hostname, mapcycle) {
         serverLaunchString += '-usercon ';
         serverLaunchString += '-replay ';
         serverLaunchString += '+mapcyclefile ' + mapcycle + ' ';
-        serverLaunchString += '+map ' + map + ' ';
+        serverLaunchString += '+randommap '
         serverLaunchString += '+hostname "' + hostname + '" ';
         serverLaunchString += '+rcon_password "' + RCON_PASS + '" ';
 
