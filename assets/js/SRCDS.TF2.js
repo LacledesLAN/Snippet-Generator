@@ -106,7 +106,6 @@ SRCDS.TF2.LaunchFreeplay = function(hostname, mapcycle, ip) {
         currentDate = new Date(),
         dockerCommand = '',
         dockerArgs = '',
-        password = generatePasswordArray(),
         serverLaunchString = '',
         srcdsCommand = '',
         srcdsArgs = '';
@@ -168,8 +167,7 @@ SRCDS.TF2.LaunchFreeplay = function(hostname, mapcycle, ip) {
 
         serverLaunchString = modalFormatCommands(dockerCommand, dockerArgs, [srcdsCommand, srcdsArgs]);
 
-        clientConnectString = 'connect ';
-        clientConnectString += ip + ' password ' + prettyPrintArray(password);
+        clientConnectString = 'connect ' + ip;
 
         $('#modalString .modal-title').html(hostname);
         $('#modalString .modal-body #serverPassword').html('N/A');
