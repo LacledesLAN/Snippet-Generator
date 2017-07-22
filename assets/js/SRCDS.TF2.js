@@ -87,7 +87,7 @@ SRCDS.TF2.LaunchBlindFrag = function(hostname, map, ip) {
         serverLaunchString = modalFormatCommands(dockerCommand, dockerArgs, [srcdsCommand, srcdsArgs]);
 
         clientConnectString = 'connect ';
-        clientConnectString += ip + ' password ' + prettyPrintArray(password);
+        clientConnectString += ip + ' password; ' + prettyPrintArray(password);
 
         $('#modalString .modal-title').html(hostname);
         $('#modalString .modal-body #serverPassword').html(prettyPrintArray(password));
