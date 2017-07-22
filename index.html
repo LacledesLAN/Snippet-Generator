@@ -13,8 +13,11 @@
     <script src="./vendor/js/jquery3-edge.min.js"></script>
     <script src="./vendor/js/bootstrap3.min.js"></script>
     <script src="./vendor/js/underscore.min.js"></script>
+    <script src="./assets/js/Global.js"></script>
     <script src="./assets/js/snippetGenerator.js"></script>
+
     <script src="./assets/js/BareMetal.js"></script>
+    <script src="./assets/js/SRCDS.CSGO.js"></script>
     <script src="./assets/js/SRCDS.HL2DM.js"></script>
     <script src="./assets/js/SRCDS.TF2.js"></script>
 
@@ -77,12 +80,7 @@
 
                                 <div class="input-group">
                                     <div class="input-group-addon">Map</div>
-                                    <select name="map" class="form-control csgo-tournament-maps">
-                                        <option value="de_orange">de_orange</option>
-                                        <option value="fy_pool_day">fy_pool_day</option>
-                                        <option value="gg_ctm_csgo">gg_ctm_csgo</option>
-                                        <option value="orangebox_warmup_day">orangebox_warmup_day</option>
-                                    </select>
+                                    <select name="map" class="form-control csgo-tournament-maps selectCSGOTestMaps"></select>
                                 </div>
 
                                 <div class="input-group">
@@ -91,7 +89,7 @@
                                 </div>
 
                             </div>
-                            <button type="button" class="btn btn-default" onclick="Launch_CSGO_Test(
+                            <button type="button" class="btn btn-default" onclick="SRCDS.CSGO.LaunchClientTest(
                                             $('#tab-csgo-test select[name=map]').val(),
                                             $('#tab-csgo-test select[name=serverIP]').val()
                                             );">Generate</button>
@@ -132,15 +130,7 @@
 
                                 <div class="input-group">
                                     <div class="input-group-addon">Map</div>
-                                    <select name="map" class="form-control csgo-tournament-maps">
-                                        <option value="de_cache">de_cache</option>
-                                        <option value="de_cbble">de_cobblestone</option>
-                                        <option value="de_inferno">de_inferno</option>
-                                        <option value="de_nuke">de_nuke</option>
-                                        <option value="de_mirage">de_mirage</option>
-                                        <option value="de_overpass">de_overpass</option>
-                                        <option value="de_train">de_train</option>
-                                    </select>
+                                    <select name="map" class="form-control csgo-tournament-maps selectCSGOTourneyMaps"></select>
                                 </div>
 
                                 <div class="input-group">
@@ -149,7 +139,7 @@
                                 </div>
 
                             </div>
-                            <button type="button" class="btn btn-default" onclick="Launch_CSGO_Tournament(
+                            <button type="button" class="btn btn-default" onclick="SRCDS.CSGO.LaunchTourney(
                                             $('#tab-csgo-tournament input[name=bracketID]').val(),
                                             $('#tab-csgo-tournament input[name=teamCounterTerrorists]').val(),
                                             $('#tab-csgo-tournament input[name=teamTerrorists]').val(),
@@ -178,18 +168,18 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon">Map</div>
-                                    <select name="csgoArmsraceMap" class="form-control csgo-arms-maps">
-                                        <option>ar_baggage</option>
-                                        <option>ar_monastery</option>
-                                        <option>ar_shoots</option>
-                                        <option>de_lake</option>
-                                        <option>de_stmarc</option>
-                                    </select>
+                                    <select name="csgoArmsraceMap" class="form-control csgo-arms-maps selectCSGOArmsRaceMaps"></select>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">Server</div>
+                                    <select name="csgoArmsraceMapServer" class="form-control selectBareMetalServer"></select>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-default" onclick="Launch_CSGO_ArmsRace(
+                            <button type="button" class="btn btn-default" onclick="SRCDS.CSGO.LaunchArmsRace(
                                             'Laclede\'s LAN CS:GO Arms Race',
-                                            $('#tab-csgo-freeplay select[name=csgoArmsraceMap]').val() 	);">Generate</button>
+                                            $('#tab-csgo-freeplay select[name=csgoArmsraceMap]').val(),
+                                            $('#tab-csgo-freeplay select[name=csgoArmsraceMapServer]').val()
+                                        );">Generate</button>
                         </form>
                         <br />
                         <h3>Launch Classic Server</h3>
@@ -197,70 +187,18 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon">Map</div>
-                                    <select name="csgoClassicMap" class="form-control">
-                                        <option>cs_agency</option>
-                                        <option>cs_assault</option>
-                                        <option>cs_backalley</option>
-                                        <option>cs_cruise</option>
-                                        <option>cs_downtown</option>
-                                        <option>cs_insertion</option>
-                                        <option>cs_italy</option>
-                                        <option>cs_militia</option>
-                                        <option>cs_motel</option>
-                                        <option>cs_office</option>
-                                        <option>cs_rush</option>
-                                        <option>cs_thunder</option>
-                                        <option>cs_workout</option>
-                                        <option>de_ali</option>
-                                        <option>de_austria</option>
-                                        <option>de_aztec</option>
-                                        <option>de_bank</option>
-                                        <option>de_bazaar</option>
-                                        <option>de_blackgold</option>
-                                        <option>de_cache</option>
-                                        <option>de_canals</option>
-                                        <option>de_castle</option>
-                                        <option>de_cbble</option>
-                                        <option>de_coast</option>
-                                        <option>de_dust</option>
-                                        <option>de_dust2</option>
-                                        <option>de_empire</option>
-                                        <option>de_facade</option>
-                                        <option>de_favela</option>
-                                        <option>de_inferno</option>
-                                        <option>de_lake</option>
-                                        <option>de_lite</option>
-                                        <option>de_log</option>
-                                        <option>de_marquis</option>
-                                        <option>de_mikla</option>
-                                        <option>de_mirage</option>
-                                        <option>de_mist</option>
-                                        <option>de_nuke</option>
-                                        <option>de_nuke_se</option>
-                                        <option>de_overgrown</option>
-                                        <option>de_overpass</option>
-                                        <option>de_rails</option>
-                                        <option>de_resort</option>
-                                        <option>de_royal</option>
-                                        <option>de_safehouse</option>
-                                        <option>de_santorini</option>
-                                        <option>de_seaside</option>
-                                        <option>de_season</option>
-                                        <option>de_shortdust</option>
-                                        <option>de_shorttrain</option>
-                                        <option>de_stmarc</option>
-                                        <option>de_sugarcane</option>
-                                        <option>de_thrill</option>
-                                        <option>de_train</option>
-                                        <option>de_tulip</option>
-                                        <option>de_vertigo</option>
-                                        <option>de_zoo</option>
-                                    </select>
+                                    <select name="csgoClassicMap" class="form-control selectCSGOClassicMaps"></select>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">Server</div>
+                                    <select name="csgoClassicServer" class="form-control selectBareMetalServer"></select>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-default" onclick="Launch_CSGO_Classic(
+                            <button type="button" class="btn btn-default" onclick="SRCDS.CSGO.LaunchClassic(
                                             'Laclede\'s LAN CS:GO Classic',
-                                            $('#tab-csgo-freeplay select[name=csgoClassicMap]').val() 	);">Generate</button>
+                                            $('#tab-csgo-freeplay select[name=csgoClassicMap]').val(),
+                                            $('#tab-csgo-freeplay select[name=csgoClassicServer]').val()
+                                        );">Generate</button>
                         </form>
 
                         <br />
@@ -269,50 +207,18 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon">Map</div>
-                                    <select name="csgoDeathmatchMap" class="form-control">
-                                        <option>ar_baggage</option>
-                                        <option>ar_monastery</option>
-                                        <option>ar_shoots</option>
-                                        <option>cs_agency</option>
-                                        <option>cs_assault</option>
-                                        <option>cs_backalley</option>
-                                        <option>cs_cruise</option>
-                                        <option>cs_downtown</option>
-                                        <option>cs_insertion</option>
-                                        <option>cs_italy</option>
-                                        <option>cs_militia</option>
-                                        <option>cs_motel</option>
-                                        <option>cs_office</option>
-                                        <option>cs_rush</option>
-                                        <option>cs_thunder</option>
-                                        <option>cs_workout</option>
-                                        <option>de_austria</option>
-                                        <option>de_aztec</option>
-                                        <option>de_bank</option>
-                                        <option>de_canals</option>
-                                        <option>de_cbble</option>
-                                        <option>de_dust</option>
-                                        <option>de_dust2</option>
-                                        <option>de_inferno</option>
-                                        <option>de_lake</option>
-                                        <option>de_lite</option>
-                                        <option>de_mirage</option>
-                                        <option>de_nuke</option>
-                                        <option>de_nuke_se</option>
-                                        <option>de_overpass</option>
-                                        <option>de_safehouse</option>
-                                        <option>de_shortdust</option>
-                                        <option>de_shorttrain</option>
-                                        <option>de_stmarc</option>
-                                        <option>de_thrill</option>
-                                        <option>de_sugarcane</option>
-                                        <option>de_vertigo</option>
-                                    </select>
+                                    <select name="csgoDeathmatchMap" class="form-control selectCSGODeathmatchMaps"></select>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">Server</div>
+                                    <select name="csgoDeathmatchServer" class="form-control selectBareMetalServer"></select>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-default" onclick="Launch_CSGO_Deathmatch(
+                            <button type="button" class="btn btn-default" onclick="SRCDS.CSGO.LaunchDeathmatch(
                                             'Laclede\'s LAN CS:GO Deathmatch',
-                                            $('#tab-csgo-freeplay select[name=csgoDeathmatchMap]').val() 	);">Generate</button>
+                                            $('#tab-csgo-freeplay select[name=csgoDeathmatchMap]').val(),
+                                            $('#tab-csgo-freeplay select[name=csgoDeathmatchServer]').val(),
+                                            );">Generate</button>
                         </form>
 
                     </div>

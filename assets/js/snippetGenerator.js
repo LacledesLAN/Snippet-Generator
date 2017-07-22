@@ -13,6 +13,8 @@ var RCON_PASS = generatePasswordArray(4);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
 function addLogMessage(what, details, icon) {
     what = what.toString().trim();
     details = details.toString().trim();
@@ -22,10 +24,6 @@ function addLogMessage(what, details, icon) {
         timestamp = zeroPad(curDate.getHours()) + ':' + zeroPad(curDate.getMinutes()) + ':' + zeroPad(curDate.getSeconds()) + '.' + zeroPad(curDate.getMilliseconds(), 4);
 
     $('#snippetGeneratorLogTable').append('<tr><td>' + timestamp + '</td><td><i class="' + icon + '"></i></td><td>' + what + '</td><td>' + details + '</td></tr>');
-}
-
-function cleanSpaces(s) {
-    return s.replace(/\s+/g, ' ');
 }
 
 function generatePasswordArray(strength, maxLength) {
@@ -159,46 +157,13 @@ function getRandomTeamName() {
                     'South Park Cows'];
 }
 
-function isWholeNumber(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n) && Math.round(n) === Number(n) && n >= 0;
-}
 
-
-function prettyPrintArray(valueArray) {
-    var html = '<strong>',
-        i = 0;
-
-    if (valueArray instanceof Array) {
-        for (i = 0; i < valueArray.length; i++) {
-            if (i % 2 === 0) {
-                html += '<span style="color: red;">';
-            } else {
-                html += '<span style="color: blue;">';
-            }
-
-            html += valueArray[i] + '</span>';
-        }
-    } else {
-        alert('prettyPrintArray() - recieved non array!');
-    }
-
-    return '</strong>' + html;
-}
-
-
-function zeroPad(number, width) {
-    number = number.toString();
-    width = width || 2;
-
-    return number.length >= width ? number : new Array(width - number.length + 1).join('0') + number;
-}
 
 var Docker = Docker || {};
 
 Docker.NetString_SRCDS = function(ip) {
     var portsUDP = ['1200', '1500', '3005', '3101', '28960', '3478-3479', '4379-4380', '26900-26915', '27000-27030'];
     var portsTCP = ['27000-27050'];
-
 
     var netString = '';
 
@@ -223,7 +188,7 @@ Docker.NetString_SRCDS = function(ip) {
 function modalFormatCommands(command, args, nestedCommand = []) {
 
     function nest(command, args, nestedCommand = []) {
-        var rString = '<span>';
+        let rString = '<span>';
         rString += '<command>' + command + '</command>';
         rString += '<arguments>' + args + '</arguments>';
         
@@ -241,327 +206,4 @@ function modalFormatCommands(command, args, nestedCommand = []) {
     returnStr += '</div>';
 
     return returnStr;
-}
-
-
-function Launch_CSGO_ArmsRace(hostname, map) {
-    var serverLaunchString = '';
-
-    do {
-        hostname = (hostname)
-            ? String(hostname)
-            : 'LL Arms Race Server';
-        hostname = hostname.split(' ').join('_');
-
-        if (!map) {
-            alert('ERROR - NO MAP WAS SPECIFIED!');
-            break;
-        }
-
-        serverLaunchString += './srcds_run ';
-        serverLaunchString += '-game csgo ';
-        serverLaunchString += '-console ';
-        serverLaunchString += '+game_type 1 ';
-        serverLaunchString += '+game_mode 0 ';
-        serverLaunchString += '-usercon ';
-        serverLaunchString += '-tickrate 128 ';
-        serverLaunchString += '+mapgroup ll_arms ';
-        serverLaunchString += '+map ' + map + ' ';
-        serverLaunchString += '-maxplayers_override 16 ';
-        serverLaunchString += '+hostname "' + hostname + '" ';
-        serverLaunchString += '+sv_lan 1 ';
-        serverLaunchString += '+rcon_password "' + RCON_PASS + '" ';
-
-        $('#modalString .modal-title').html(hostname);
-        $('#modalString .modal-body #serverPassword').html('N/A');
-        $('#modalString .modal-body #serverLaunchString').html(serverLaunchString);
-        $('#modalString .modal-body #clientConnectString').html('N/A');
-        $('#modalString').modal('show');
-        
-        addLogMessage('CSGO Arms Race', serverLaunchString);
-        
-    } while (false);
-}
-
-
-function Launch_CSGO_Classic(hostname, map) {
-    var serverLaunchString = '';
-
-    do {
-        hostname = (hostname)
-            ? String(hostname)
-            : 'LL Classic Server';
-        hostname = hostname.split(' ').join('_');
-
-        if (!map) {
-            alert('ERROR - NO MAP WAS SPECIFIED!');
-            break;
-        }
-
-        serverLaunchString += './srcds_run ';
-        serverLaunchString += '-game csgo ';
-        serverLaunchString += '-console ';
-        serverLaunchString += '+game_type 0 ';
-        serverLaunchString += '+game_mode 0 ';
-        serverLaunchString += '-usercon ';
-        serverLaunchString += '-tickrate 128 ';
-        serverLaunchString += '+mapgroup mg_active ';
-        serverLaunchString += '+map ' + map + ' ';
-        serverLaunchString += '-maxplayers_override 16 ';
-        serverLaunchString += '+hostname "' + hostname + '" ';
-        serverLaunchString += '+sv_lan 1 ';
-        serverLaunchString += '+rcon_password "' + RCON_PASS + '" ';
-
-        $('#modalString .modal-title').html(hostname);
-        $('#modalString .modal-body #serverPassword').html('N/A');
-        $('#modalString .modal-body #serverLaunchString').html(serverLaunchString);
-        $('#modalString .modal-body #clientConnectString').html('N/A');
-        $('#modalString').modal('show');
-        
-        addLogMessage('CSGO Classic', serverLaunchString);
-    } while (false);
-}
-
-
-function Launch_CSGO_Deathmatch(hostname, map) {
-    var serverLaunchString = '';
-
-    do {
-        hostname = (hostname)
-            ? String(hostname)
-            : 'LL Deathmatch Server';
-        hostname = hostname.split(' ').join('_');
-
-        if (!map) {
-            alert('ERROR - NO MAP WAS SPECIFIED!');
-            break;
-        }
-
-        serverLaunchString += './srcds_run ';
-        serverLaunchString += '-port 27015 ';
-        serverLaunchString += '-game csgo ';
-        serverLaunchString += '-console ';
-        serverLaunchString += '+game_type 1 ';
-        serverLaunchString += '+game_mode 2 ';
-        serverLaunchString += '-usercon ';
-        serverLaunchString += '-tickrate 128 ';
-        serverLaunchString += '+mapgroup mg_deathmatch ';
-        serverLaunchString += '+map ' + map + ' ';
-        serverLaunchString += '-maxplayers_override 16 ';
-        serverLaunchString += '+hostname "' + hostname + '" ';
-        serverLaunchString += '+sv_lan 1 ';
-        serverLaunchString += '+rcon_password "' + RCON_PASS + '" ';
-
-        $('#modalString .modal-title').html(hostname);
-        $('#modalString .modal-body #serverPassword').html('N/A');
-        $('#modalString .modal-body #serverLaunchString').html(serverLaunchString);
-        $('#modalString .modal-body #clientConnectString').html('N/A');
-        $('#modalString').modal('show');
-        
-        addLogMessage('CSGO Classic', serverLaunchString);
-    } while (false);
-}
-
-
-function Launch_CSGO_Test(map, ip) {
-    let clientConnectString = '',
-        currentDate = new Date(),
-        cpuFlag = '',
-        dockerContainerName = '',
-        hostname = "CSGO Client Test Server",
-        password = generatePasswordArray(),
-        serverLaunchString = '',
-        team1 = "Isotopes".trim(),
-        team2 = "Gotham Rogues".trim();
-
-    do {
-        if (!map) {
-            alert('ERROR - NO MAP WAS SPECIFIED!');
-            break;
-        }
-
-        if (!ip) {
-            alert('ERROR - NO SERVER WAS SELECTED');
-            break;
-        }
-
-        ip = ip.toString().trim();
-
-        hostname = hostname.split(' ').join('_');
-
-        // Generate Docker Container Name
-        dockerContainerName = 'CSGOTest_';
-        dockerContainerName += ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][currentDate.getDay()];
-        dockerContainerName += zeroPad(currentDate.getHours(), 2) + 'h';
-        dockerContainerName += zeroPad(currentDate.getMinutes(), 2) + 'm';
-        dockerContainerName += zeroPad(currentDate.getSeconds(), 2) + 's';
-        
-        if (ip) {
-            let cpuId = BareMetal.GetCPUFromIPAddress(ip);
-
-            if (cpuId) {
-                cpuFlag = '--cpuset-cpus="' + cpuId + '"';
-            } else {
-                cpuFlag = "";
-            }
-        }
-        
-        // Docker Command
-        let dockerCommand = 'docker run -d ';
-        let dockerArgs = '';
-
-        if (cpuFlag.trim().length > 0) {
-            dockerArgs += cpuFlag + ' ';    
-        }
-        dockerArgs += '--name ' + dockerContainerName + ' ';
-        dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
-        dockerArgs += 'lacledeslan/gamesvr-srcds-csgo-test:linux ';
-
-        // SRCDS Command
-        let srcdsCommand = './srcds_run ';
-        let srcdsArgs = '-port 27015 ';
-        srcdsArgs += '-game csgo ';
-        srcdsArgs += '+game_type 0 ';
-        srcdsArgs += '+game_mode 1 ';
-        srcdsArgs += '-tickrate 128 ';
-        srcdsArgs += '-console ';
-        srcdsArgs += '-usercon ';
-        srcdsArgs += '+mapgroup ll_orange ';
-        srcdsArgs += '+map ' + map + ' ';
-        srcdsArgs += '+hostname "' + hostname + '" ';
-        srcdsArgs += '+sv_lan 1 ';
-        srcdsArgs += '+mp_teamname_1 "' + team1 + '" ';
-        srcdsArgs += '+mp_teamname_2 "' + team2 + '" ';
-        srcdsArgs += '+rcon_password "' + RCON_PASS + '" ';
-        srcdsArgs += '-maxplayers_override 16 ';
-
-        let serverLaunchString = modalFormatCommands(dockerCommand, dockerArgs, [srcdsCommand, srcdsArgs])
-
-        clientConnectString = 'connect ';
-        clientConnectString += ip + ':27015';
-
-        $('#modalString .modal-title').html(hostname);
-        $('#modalString .modal-body #serverPassword').html("N/A");
-        $('#modalString .modal-body #serverLaunchString').html(serverLaunchString);
-        $('#modalString .modal-body #clientConnectString').html(clientConnectString);
-        $('#modalString').modal('show');
-        
-        addLogMessage('CSGO Tourney', serverLaunchString);
-    } while (false);
-}
-
-
-function Launch_CSGO_Tournament(bracketID, team1, team2, map, ip) {
-    var clientConnectString = '',
-        currentDate = new Date(),
-        cpuFlag = '',
-        dockerContainerName = '',
-        hostname = "",
-        password = generatePasswordArray(),
-        serverLaunchString = '';
-
-    do {
-        bracketID = bracketID.toString().trim();
-        if (String(bracketID).length < 1) {
-            alert('Bracket ID was left empty!');
-            break;
-        }
-
-        if (!isWholeNumber(bracketID)) {
-            alert('Bracket ID must be a positive whole number!');
-            break;
-        }
-
-        team1 = team1.trim();
-        if (String(team1).length < 1) {
-            alert('Team 1 was left empty!');
-            break;
-        }
-
-        team2 = team2.trim();
-        if (String(team2).length < 1) {
-            alert('Team 2 was left empty!');
-            break;
-        }
-
-        if (!map) {
-            alert('ERROR - NO MAP WAS SPECIFIED!');
-            break;
-        }
-
-        ip = ip.trim();
-
-        // Generate hostname
-        if (team1 !== undefined || team2 !== undefined) {
-            team1 = String(team1 || 'Unknown');
-            team2 = String(team2 || 'Unknown');
-            hostname = 'CSGO Match ' + bracketID + ' ' + team1 + ' v ' + team2;
-        }
-
-        hostname = hostname.split(' ').join('_');
-
-        // Generate Docker Container Name
-        dockerContainerName = 'CSGOTourn_' + bracketID + '_';
-        dockerContainerName += ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][currentDate.getDay()];
-        dockerContainerName += zeroPad(currentDate.getHours(), 2) + 'h';
-        dockerContainerName += zeroPad(currentDate.getMinutes(), 2) + 'm';
-        dockerContainerName += zeroPad(currentDate.getSeconds(), 2) + 's';
-        
-        if (ip) {
-            let cpuId = BareMetal.GetCPUFromIPAddress(ip);
-
-            if (cpuId) {
-                cpuFlag = '--cpuset-cpus="' + cpuId + '"';
-            } else {
-                cpuFlag = "";
-            }
-        }
-
-        // Docker Launch String
-        var dockerComand = 'docker run -d ';
-        var dockerArgs = '';
-
-        if (cpuFlag.trim().length > 0) {
-            dockerArgs += cpuFlag + ' ';
-        }
-        dockerArgs += '--name ' + dockerContainerName + ' ';
-        dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
-        dockerArgs += '-v /home/sysoper/logs/' + dockerContainerName + ':/app/bin/csgo/logs ';
-        dockerArgs += '-v /home/sysoper/logs/' + dockerContainerName + '/warmod:/app/bin/csgo/addons/sourcemod/logs ';
-        dockerArgs += 'lacledeslan/gamesvr-srcds-csgo-tourney:linux ';
-
-        // CS:GO Tournament Server Specific
-        var srcdsCommand = './srcds_run ';
-        var srcdsArgs = '-game csgo ';
-
-        srcdsArgs += '+game_type 0 ';
-        srcdsArgs += '+game_mode 1 ';
-        srcdsArgs += '-tickrate 128 ';
-        srcdsArgs += '-console ';
-        srcdsArgs += '-usercon ';
-        srcdsArgs += '+map ' + map + ' ';
-        srcdsArgs += '+hostname "' + hostname + '" ';
-        srcdsArgs += '+sv_password "' + password.join('') + '" ';
-        srcdsArgs += '+sv_lan 1 ';
-        srcdsArgs += '+mp_teamname_1 "' + team1 + '" ';
-        srcdsArgs += '+mp_teamname_2 "' + team2 + '" ';
-        srcdsArgs += '+rcon_password "' + RCON_PASS + '" ';
-        srcdsArgs += '+tv_name "zLLTV_CSGO_BRACKET_' + bracketID + '" ';
-        srcdsArgs += '+tv_password "brianprefersmustard567" ';
-        srcdsArgs += '+tv_relaypassword "brianprefersmustard567" ';
-
-        serverLaunchString = modalFormatCommands(dockerComand, dockerArgs, [srcdsCommand, srcdsArgs]);
-
-        clientConnectString = 'connect ';
-        clientConnectString += ip + ':27015; ';
-        clientConnectString += 'password ' + prettyPrintArray(password);
-
-        $('#modalString .modal-title').html(hostname);
-        $('#modalString .modal-body #serverPassword').html(prettyPrintArray(password));
-        $('#modalString .modal-body #serverLaunchString').html(serverLaunchString);
-        $('#modalString .modal-body #clientConnectString').html(clientConnectString);
-        $('#modalString').modal('show');
-        
-        addLogMessage('CSGO Tourney', serverLaunchString);
-    } while (false);
 }
