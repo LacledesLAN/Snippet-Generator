@@ -12,7 +12,9 @@ SRCDS.TF2.MapCyclesStock = ["mapcycle.txt", "mapcycle_beta_asteroid.txt", "mapcy
 SRCDS.TF2.MapCyclesLL = ["mapcycle_LL_all.txt", "mapcycle_LL_arena.txt", "mapcycle_LL_cp.txt", "mapcycle_LL_ctf.txt", "mapcycle_LL_koth.txt",
                             "mapcycle_LL_ph.txt", "mapcycle_LL_pl.txt", "mapcycle_LL_plr.txt"];
 
-SRCDS.TF2.MapCycles = SRCDS.TF2.MapCyclesStock.concat(SRCDS.TF2.MapCyclesLL).sort();
+SRCDS.TF2.MapCycles = SRCDS.TF2.MapCyclesStock.concat(SRCDS.TF2.MapCyclesLL).sort(function (a, b) {
+    return a.toLowerCase().localeCompare(b.toLowerCase());
+});
 
 SRCDS.TF2.LaunchBlindFrag = function(hostname, map, ip) {
     let clientConnectString = 'N/A',

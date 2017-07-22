@@ -15,6 +15,7 @@
     <script src="./vendor/js/underscore.min.js"></script>
     <script src="./assets/js/snippetGenerator.js"></script>
     <script src="./assets/js/BareMetal.js"></script>
+    <script src="./assets/js/SRCDS.HL2DM.js"></script>
     <script src="./assets/js/SRCDS.TF2.js"></script>
 
     <!--Stylesheets-->
@@ -327,27 +328,7 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon">Map</div>
-                                    <select name="hl2dmMap" class="form-control hl2dm-maps">
-                                        <option selected value="dm_underpass">dm_underpass</option>
-                                        <option value="dm_backwash2">dm_backwash2</option>
-                                        <option value="dm_bk_lambda_box_rc1">dm_bk_lambda_box_rc1</option>
-                                        <option value="dm_bwo_parking_np">dm_bwo_parking_np</option>
-                                        <option value="dm_crossfire_final">dm_crossfire_final</option>
-                                        <option value="dm_datacore">dm_datacore</option>
-                                        <option value="dm_fool_day">dm_fool_day</option>
-                                        <option value="DM_Gothic_UTclassic_v7b">DM_Gothic_UTclassic_v7b</option>
-                                        <option value="dm_greenhouse">dm_greenhouse</option>
-                                        <option value="dm_lockdown">dm_lockdown</option>
-                                        <option value="dm_mine_enhanced">dm_mine_enhanced</option>
-                                        <option value="dm_octagon">dm_octagon</option>
-                                        <option value="dm_overwatch">dm_overwatch</option>
-                                        <option value="dm_powerhouse">dm_powerhouse</option>
-                                        <option value="dm_quake_b1">dm_quake_b1</option>
-                                        <option value="dm_resistance">dm_resistance</option>
-                                        <option value="dm_runoff">dm_runoff</option>
-                                        <option value="dm_steamlab">dm_steamlab</option>
-                                        <option value="dm_tech">dm_tech</option>
-                                    </select>
+                                    <select name="hl2dmMap" class="form-control hl2dm-maps selectHL2DMMaps"></select>
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-addon">Server</div>
@@ -355,7 +336,7 @@
                                 </div>
 
                             </div>
-                            <button type="button" class="btn btn-default" onclick="Launch_HL2DM_Freeplay(
+                            <button type="button" class="btn btn-default" onclick="SRCDS.HL2DM.Launch_HL2DM_Freeplay(
                                             'Laclede\'s LAN HL2DM Freeplay',
                                             $('#tab-hl2dm select[name=hl2dmMap]').val(),
                                             $('#tab-hl2dm select[name=hl2dmServerIP]').val()
