@@ -87,7 +87,7 @@ SRCDS.TF2.LaunchBlindFrag = function(hostname, map, ip) {
         serverLaunchString = modalFormatCommands(dockerCommand, dockerArgs, [srcdsCommand, srcdsArgs]);
 
         clientConnectString = 'connect ';
-        clientConnectString += ip + ' password; ' + prettyPrintArray(password);
+        clientConnectString += ip + ':27015 password; ' + prettyPrintArray(password);
 
         $('#modalString .modal-title').html(hostname);
         $('#modalString .modal-body #serverPassword').html(prettyPrintArray(password));
@@ -167,7 +167,7 @@ SRCDS.TF2.LaunchFreeplay = function(hostname, mapcycle, ip) {
 
         serverLaunchString = modalFormatCommands(dockerCommand, dockerArgs, [srcdsCommand, srcdsArgs]);
 
-        clientConnectString = 'connect ' + ip;
+        clientConnectString = 'connect ' + ip + ':27015';
 
         $('#modalString .modal-title').html(hostname);
         $('#modalString .modal-body #serverPassword').html('N/A');
