@@ -72,7 +72,7 @@ SRCDS.CSGO.LaunchArmsRace = function(hostname, map, ip) {
         }
         dockerArgs += '--name ' + dockerContainerName + ' ';
         dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
-        dockerArgs += 'lacledeslan/gamesvr-csgo-freeplay:linux ';
+        dockerArgs += 'lacledeslan/gamesvr-srcds-csgo-freeplay:linux ';
 
         // CSGO Arms Race Server Specific
         srcdsCommand = './srcds_run ';
@@ -156,7 +156,7 @@ SRCDS.CSGO.LaunchClassic = function(hostname, map, ip) {
         }
         dockerArgs += '--name ' + dockerContainerName + ' ';
         dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
-        dockerArgs += 'lacledeslan/gamesvr-csgo-freeplay:linux ';
+        dockerArgs += 'lacledeslan/gamesvr-srcds-csgo-freeplay:linux ';
 
         // CSGO Classic Server Specific
         srcdsCommand = './srcds_run ';
@@ -240,7 +240,7 @@ SRCDS.CSGO.LaunchDeathmatch = function(hostname, map, ip) {
         }
         dockerArgs += '--name ' + dockerContainerName + ' ';
         dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
-        dockerArgs += 'lacledeslan/gamesvr-csgo-freeplay:linux ';
+        dockerArgs += 'lacledeslan/gamesvr-srcds-csgo-freeplay:linux ';
 
         // CSGO Classic Server Specific
         srcdsCommand = './srcds_run ';
