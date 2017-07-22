@@ -1,5 +1,7 @@
 
-var physicalServers = {
+var BareMetal = BareMetal || {};
+
+BareMetal.ServerPool = {
     "prod": {
         "Bruce":        ["172.30.12.11", "172.30.12.12", "172.30.12.13", "172.30.12.14", "172.30.12.15", "172.30.12.16", "172.30.12.17", "172.30.12.18"],
         "Gibson":       ["172.30.12.21", "172.30.12.22", "172.30.12.23", "172.30.12.24", "172.30.12.25", "172.30.12.26", "172.30.12.27", "172.30.12.28"],
@@ -18,32 +20,24 @@ var physicalServers = {
     }
 }
 
-function GetCPUFromIPAddress(ipAddress) {
+BareMetal.GetCPUFromIPAddress = function (ipAddress)
+{
     switch (ipAddress.substr(ipAddress.length - 1, 1)) {
-        case '1':
-            return 4;
-        case '2':
-            return 3;
-        case '3':
-            return 5;
-        case '4':
-            return 2;
-        case '5':
-            return 6;
-        case '6':
-            return 1;
-        case '7':
-            return 7;
-        case '8':
-            return 0;
-        default:
-            return;
+        case '1':   return 4;
+        case '2':   return 3;
+        case '3':   return 5;
+        case '4':   return 2;
+        case '5':   return 6;
+        case '6':   return 1;
+        case '7':   return 7;
+        case '8':   return 0;
+        default:    return;
     }
 }
 
 
 $( document ).ready(function() {
-    $(".selectDockerServer").each(
+    $(".selectBareMetalServer").each(
         function() {
             let selectControl = this;
 
@@ -57,14 +51,14 @@ $( document ).ready(function() {
                 })
             );
 
-            for (let server in physicalServers.prod) {
-                for (let element in physicalServers.prod[server]) {
+            for (let server in BareMetal.ServerPool.prod) {
+                for (let element in BareMetal.ServerPool.prod[server]) {
 
-                    let ipAddress = physicalServers.prod[server][element];
+                    let ipAddress = BareMetal.ServerPool.prod[server][element];
 
                     $(selectControl).append(
                         $("<option>", {
-                            text: server + " (" + ipAddress + " on cpu " + GetCPUFromIPAddress(ipAddress) + ")",
+                            text: server + " (" + ipAddress + " on cpu " + BareMetal.GetCPUFromIPAddress(ipAddress) + ")",
                             value: ipAddress
                         })
                     );
@@ -86,14 +80,14 @@ $( document ).ready(function() {
                 })
             );
 
-            for (let server in physicalServers.test) {
-                for (let element in physicalServers.test[server]) {
+            for (let server in BareMetal.ServerPool.test) {
+                for (let element in BareMetal.ServerPool.test[server]) {
 
-                    let ipAddress = physicalServers.test[server][element];
+                    let ipAddress = BareMetal.ServerPool.test[server][element];
 
                     $(selectControl).append(
                         $("<option>", {
-                            text: server + " (" + ipAddress + " on cpu " + GetCPUFromIPAddress(ipAddress) + ")",
+                            text: server + " (" + ipAddress + " on cpu " + BareMetal.GetCPUFromIPAddress(ipAddress) + ")",
                             value: ipAddress
                         })
                     );

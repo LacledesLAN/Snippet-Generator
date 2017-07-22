@@ -397,7 +397,7 @@ function Launch_CSGO_Test(map, ip) {
         dockerContainerName += zeroPad(currentDate.getSeconds(), 2) + 's';
         
         if (ip) {
-            let cpuId = GetCPUFromIPAddress(ip);
+            let cpuId = BareMetal.GetCPUFromIPAddress(ip);
 
             if (cpuId) {
                 cpuFlag = '--cpuset-cpus="' + cpuId + '"';
@@ -508,7 +508,7 @@ function Launch_CSGO_Tournament(bracketID, team1, team2, map, ip) {
         dockerContainerName += zeroPad(currentDate.getSeconds(), 2) + 's';
         
         if (ip) {
-            let cpuId = GetCPUFromIPAddress(ip);
+            let cpuId = BareMetal.GetCPUFromIPAddress(ip);
 
             if (cpuId) {
                 cpuFlag = '--cpuset-cpus="' + cpuId + '"';
@@ -599,7 +599,7 @@ function Launch_HL2DM_Freeplay(hostname, map, ip) {
         dockerContainerName += zeroPad(currentDate.getSeconds(), 2) + 's';
 
         if (ip) {
-            let cpuId = GetCPUFromIPAddress(ip);
+            let cpuId = BareMetal.GetCPUFromIPAddress(ip);
 
             if (cpuId) {
                 cpuFlag = '--cpuset-cpus="' + cpuId + '"';
@@ -641,85 +641,5 @@ function Launch_HL2DM_Freeplay(hostname, map, ip) {
         $('#modalString').modal('show');
         
         addLogMessage('HL2DM Freeplay', serverLaunchString);
-    } while (false);
-}
-
-function Launch_TF2_BlindFrag(hostname, map) {
-    var clientConnectString = 'N/A',
-        password = generatePasswordArray(),
-        serverLaunchString = '';
-
-    do {
-        hostname = (hostname)
-            ? String(hostname)
-            : 'LL TF2 Blind Frag';
-        hostname = hostname.split(' ').join('_');
-
-        if (!map) {
-            alert('ERROR - NO MAP WAS SPECIFIED!');
-            break;
-        }
-
-        serverLaunchString += './srcds_run ';
-        serverLaunchString += '-port 27015 ';
-        serverLaunchString += '-game tf ';
-        serverLaunchString += '+maxplayers 24 ';
-        serverLaunchString += '-console ';
-        serverLaunchString += '-usercon ';
-        serverLaunchString += '+hostname "' + hostname + '" ';
-        serverLaunchString += '+sv_password "' + password.join('') + '" ';
-        serverLaunchString += '+map ' + map + ' ';
-        serverLaunchString += '+maplist mapcycle_quickplay_koth ';
-        serverLaunchString += '-insecure ';
-        serverLaunchString += '+ip 0.0.0.0 ';
-        serverLaunchString += '-port 27015 ';
-        serverLaunchString += '+rcon_password "' + RCON_PASS + '" ';
-
-        $('#modalString .modal-title').html(hostname);
-        $('#modalString .modal-body #serverPassword').html(prettyPrintArray(password));
-        $('#modalString .modal-body #serverLaunchString').html(serverLaunchString);
-        $('#modalString .modal-body #clientConnectString').html(clientConnectString);
-        $('#modalString').modal('show');
-        
-        addLogMessage('TF2 BlindFrag', serverLaunchString);
-        
-    } while (false);
-}
-
-
-function Launch_TF2_Freeplay(hostname, mapcycle) {
-    let map = '',
-        serverLaunchString = '';
-
-    do {
-        hostname = (hostname)
-            ? String(hostname)
-            : 'LL Team Fortress 2';
-        hostname = hostname.split(' ').join('_');
-
-        if (!mapcycle) {
-            alert('ERROR - NO MAPCYCLE WAS SPECIFIED!');
-            break;
-        }
-
-        serverLaunchString += './srcds_run -game tf ';
-        serverLaunchString += '-port 27015 ';
-        serverLaunchString += '+sv_pure 0 ';
-        serverLaunchString += '+maxplayers 24 ';
-        serverLaunchString += '-console ';
-        serverLaunchString += '-usercon ';
-        serverLaunchString += '-replay ';
-        serverLaunchString += '+mapcyclefile ' + mapcycle + ' ';
-        serverLaunchString += '+randommap '
-        serverLaunchString += '+hostname "' + hostname + '" ';
-        serverLaunchString += '+rcon_password "' + RCON_PASS + '" ';
-
-        $('#modalString .modal-title').html(hostname);
-        $('#modalString .modal-body #serverPassword').html('N/A');
-        $('#modalString .modal-body #serverLaunchString').html(serverLaunchString);
-        $('#modalString .modal-body #clientConnectString').html('N/A');
-        $('#modalString').modal('show');
-        
-        addLogMessage('TF2 Freeplay', serverLaunchString);
     } while (false);
 }
