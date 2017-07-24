@@ -68,26 +68,32 @@ $( document ).ready(function() {
             $(selectControl).append(
                 $("<option>", {
                     disabled: "disabled",
-                    text: "========================="
+                    text: "========================"               
                 }),
                 $("<option>", {
                     disabled: "disabled",
-                    text: "   [Test Servers]"
+                    text: "     [Test Servers]"
                 }),
                 $("<option>", {
                     disabled: "disabled",
-                    text: "========================="
+                    text: "========================"
                 })
             );
 
             for (let server in BareMetal.ServerPool.test) {
                 for (let element in BareMetal.ServerPool.test[server]) {
 
-                    let ipAddress = BareMetal.ServerPool.test[server][element];
+                    let cpu = '',
+                        description = '',
+                        ipAddress = BareMetal.ServerPool.test[server][element].trim();
+                    
+                    if (ipAddress != 'localhost' && ipAddress != '0.0.0.0') {
+                        description = " (" + ipAddress + " on cpu " + BareMetal.GetCPUFromIPAddress(ipAddress) + ")";
+                    }
 
                     $(selectControl).append(
                         $("<option>", {
-                            text: server + " (" + ipAddress + " on cpu " + BareMetal.GetCPUFromIPAddress(ipAddress) + ")",
+                            text: server + description,
                             value: ipAddress
                         })
                     );
