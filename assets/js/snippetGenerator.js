@@ -159,32 +159,6 @@ function getRandomTeamName() {
 
 
 
-var Docker = Docker || {};
-
-Docker.NetString_SRCDS = function(ip) {
-    var portsUDP = ['1200', '1500', '3005', '3101', '28960', '3478-3479', '4379-4380', '26900-26915', '27000-27030'];
-    var portsTCP = ['27000-27050'];
-
-    var netString = '';
-
-    if (ip || !(/^\s*$/.test(ip))) {
-        ip += ':';
-    } else {
-        ip = '';
-    }
-
-    for (var i in portsUDP) {
-        netString += '-p=' + ip + portsUDP[i] + ':' + portsUDP[i] + '/udp ';
-    }
-
-    for (var i in portsTCP) {
-        netString += '-p=' + ip + portsTCP[i] + ':' + portsTCP[i] + '/tcp ';
-    }
-
-    return netString.trim();
-}
-
-
 function modalFormatCommands(command, args, nestedCommand = []) {
 
     function nest(command, args, nestedCommand = []) {
