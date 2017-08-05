@@ -24,3 +24,19 @@ Docker.NetString_SRCDS = function(ip) {
 
     return netString.trim();
 }
+
+Docker.GenerateContainerName = function(prefix) {
+    let containerName = '',
+        currentDate = new Date();
+
+    if (prefix.toString().trim().length > 0) {
+        containerName = prefix + '_';
+    }
+
+    containerName += ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][currentDate.getDay()];
+    containerName += zeroPad(currentDate.getHours(), 2) + 'h';
+    containerName += zeroPad(currentDate.getMinutes(), 2) + 'm';
+    containerName += zeroPad(currentDate.getSeconds(), 2) + 's';
+
+    return containerName;
+}

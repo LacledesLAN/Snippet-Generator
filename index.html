@@ -40,9 +40,8 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
-                <li role="presentation"><a title="CS:GO Freeplay" href="#tab-csgo-freeplay" role="tab" data-toggle="tab">CS:GO Freeplays</a></li>
-                <li role="presentation"><a title="CS:GO Test" href="#tab-csgo-test" role="tab" data-toggle="tab">CS:GO Cliest Test</a></li>
-                <li role="presentation"><a title="CS:GO Tournament" href="#tab-csgo-tournament" role="tab" data-toggle="tab">CS:GO Tournament</a></li>
+                <li role="presentation"><a title="CS:GO Tournament" href="#tab-csgo-tournament" role="tab" data-toggle="tab">CS:GO Tourney</a></li>
+                <li role="presentation"><a title="CS:GO other" href="#tab-csgo-other" role="tab" data-toggle="tab">CS:GO Other</a></li>
                 <li role="presentation"><a title="Half-Life 2: Deathmatch" href="#tab-hl2dm" role="tab" data-toggle="tab">Half-Life 2: Deathmatch</a></li>
                 <li role="presentation"><a title="TF2" href="#tab-tf2" role="tab" data-toggle="tab">TF2</a></li>
                 <li role="presentation"><a title="Tools" href="#tab-tools" role="tab" data-toggle="tab">Tools</a></li>
@@ -69,42 +68,6 @@
                         </table>
                     </div>
                 </div>
-
-
-                <!-- CS:GO Test-->
-                <div role="tabpanel" class="tab-pane" id="tab-csgo-test">
-                    <div class="row">
-                        <br />
-                        <h3>Launch Test CSGO Server</h3>
-                        <form class="form-inline" autocomplete="off">
-                            <div class="form-group">
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">Map</div>
-                                    <select name="map" class="form-control csgo-tournament-maps selectCSGOTestMaps"></select>
-                                </div>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">Server</div>
-                                    <select name="serverIP" class="form-control csgo-tournament-serverIP selectBareMetalServer"></select>
-                                </div>
-
-                            </div>
-                            <button type="button" class="btn btn-default" onclick="SRCDS.CSGO.LaunchClientTest(
-                                            $('#tab-csgo-test select[name=map]').val(),
-                                            $('#tab-csgo-test select[name=serverIP]').val()
-                                            );">Generate</button>
-                        </form>
-                        <h3>Execute Overtime</h3>
-                        <br />
-                        <blockquote>
-                            <div class="well">
-                                Launch String: <strong>+exec overtime.cfg</strong>
-                            </div>
-                        </blockquote>
-                    </div>
-                </div>
-                <!-- End CS:GO Test-->
 
 
                 <!-- CS:GO Tournament-->
@@ -160,69 +123,114 @@
                 <!-- End CS:GO Tourney-->
 
 
-                <!-- CS:GO PUG-->
-                <div role="tabpanel" class="tab-pane" id="tab-csgo-freeplay">
+                <!-- CS:GO * -->
+                <div role="tabpanel" class="tab-pane" id="tab-csgo-other">
                     <div class="row">
-                        <br />
-                        <h3>Launch Arms Race Server</h3>
-                        <form class="form-inline" autocomplete="off">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Map</div>
-                                    <select name="csgoArmsraceMap" class="form-control csgo-arms-maps selectCSGOArmsRaceMaps"></select>
-                                </div>
-                                <div class="input-group">
-                                    <div class="input-group-addon">Server</div>
-                                    <select name="csgoArmsraceMapServer" class="form-control selectBareMetalServer"></select>
-                                </div>
-                            </div>
-                            <button type="button" class="btn btn-default" onclick="SRCDS.CSGO.LaunchArmsRace(
-                                            'Laclede\'s LAN CS:GO Arms Race',
-                                            $('#tab-csgo-freeplay select[name=csgoArmsraceMap]').val(),
-                                            $('#tab-csgo-freeplay select[name=csgoArmsraceMapServer]').val()
-                                        );">Generate</button>
-                        </form>
-                        <br />
-                        <h3>Launch Classic Server</h3>
-                        <form class="form-inline" autocomplete="off">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Map</div>
-                                    <select name="csgoClassicMap" class="form-control selectCSGOClassicMaps"></select>
-                                </div>
-                                <div class="input-group">
-                                    <div class="input-group-addon">Server</div>
-                                    <select name="csgoClassicServer" class="form-control selectBareMetalServer"></select>
-                                </div>
-                            </div>
-                            <button type="button" class="btn btn-default" onclick="SRCDS.CSGO.LaunchClassic(
-                                            'Laclede\'s LAN CS:GO Classic',
-                                            $('#tab-csgo-freeplay select[name=csgoClassicMap]').val(),
-                                            $('#tab-csgo-freeplay select[name=csgoClassicServer]').val()
-                                        );">Generate</button>
-                        </form>
-
-                        <br />
-                        <h3>Launch Deathmatch Server</h3>
-                        <form class="form-inline" autocomplete="off">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Map</div>
-                                    <select name="csgoDeathmatchMap" class="form-control selectCSGODeathmatchMaps"></select>
-                                </div>
-                                <div class="input-group">
-                                    <div class="input-group-addon">Server</div>
-                                    <select name="csgoDeathmatchServer" class="form-control selectBareMetalServer"></select>
-                                </div>
-                            </div>
-                            <button type="button" class="btn btn-default" onclick="SRCDS.CSGO.LaunchDeathmatch(
-                                            'Laclede\'s LAN CS:GO Deathmatch',
-                                            $('#tab-csgo-freeplay select[name=csgoDeathmatchMap]').val(),
-                                            $('#tab-csgo-freeplay select[name=csgoDeathmatchServer]').val(),
-                                            );">Generate</button>
-                        </form>
-
+                        <h3>Launch Client Test CSGO Server</h3>
                     </div>
+                    <form class="form-inline" autocomplete="off">
+                        <div class="form-group row">
+
+                            <div class="input-group col-md-4">
+                                <div class="input-group-addon">Map</div>
+                                <select name="csgoClientTestmap" class="form-control csgo-tournament-maps selectCSGOTestMaps"></select>
+                            </div>
+
+                            <div class="input-group col-md-6">
+                                <div class="input-group-addon">Server</div>
+                                <select name="csgoClientTestServerIP" class="form-control csgo-tournament-serverIP selectBareMetalServer"></select>
+                            </div>
+
+                            <div class="input-group col-md-1">
+                                <button type="button" class="btn btn-default" onclick="SRCDS.CSGO.LaunchClientTest(
+                                                $('#tab-csgo-other select[name=csgoClientTestmap]').val(),
+                                                $('#tab-csgo-other select[name=csgoClientTestServerIP]').val()
+                                            );"><span class="fa fa-rocket" aria-hidden="true"></span></button>
+                            </div>
+                        </div>
+                    </form>
+
+
+                    <div class="row">
+                        <h3>Launch Arms Race Server</h3>
+                    </div>
+                    <form class="form-inline" autocomplete="off">
+                        <div class="form-group row">
+
+                            <div class="input-group col-md-4">
+                                <div class="input-group-addon">Map</div>
+                                <select name="csgoArmsraceMap" class="form-control csgo-arms-maps selectCSGOArmsRaceMaps"></select>
+                            </div>
+
+                            <div class="input-group col-md-6">
+                                <div class="input-group-addon">Server</div>
+                                <select name="csgoArmsraceMapServer" class="form-control selectBareMetalServer"></select>
+                            </div>
+
+                            <div class="input-group col-md-1">
+                                <button type="button" class="btn btn-default" onclick="SRCDS.CSGO.LaunchArmsRace(
+                                                'Laclede\'s LAN CS:GO Arms Race',
+                                                $('#tab-csgo-other select[name=csgoArmsraceMap]').val(),
+                                                $('#tab-csgo-other select[name=csgoArmsraceMapServer]').val()
+                                            );"><span class="fa fa-rocket" aria-hidden="true"></span></button>
+                            </div>
+                        </div>
+                    </form>
+
+
+                    <div class="row">
+                        <h3>Launch Classic Server</h3>
+                    </div>
+
+                    <form class="form-inline" autocomplete="off">
+                        <div class="form-group row">
+
+                            <div class="input-group col-md-4">
+                                <div class="input-group-addon">Map</div>
+                                <select name="csgoClassicMap" class="form-control selectCSGOClassicMaps"></select>
+                            </div>
+
+                            <div class="input-group col-md-6">
+                                <div class="input-group-addon">Server</div>
+                                <select name="csgoClassicServer" class="form-control selectBareMetalServer"></select>
+                            </div>
+
+                            <div class="input-group col-md-1">
+                                <button type="button" class="btn btn-default" onclick="SRCDS.CSGO.LaunchClassic(
+                                                'Laclede\'s LAN CS:GO Classic',
+                                                $('#tab-csgo-other select[name=csgoClassicMap]').val(),
+                                                $('#tab-csgo-other select[name=csgoClassicServer]').val()
+                                            );"><span class="fa fa-rocket" aria-hidden="true"></span></button>
+                            </div>
+
+                        </div>
+                    </form>
+
+
+                    <div class="row">
+                        <h3>Launch Deathmatch Server</h3>
+                    </div>
+
+                    <form class="form-inline" autocomplete="off">
+                        <div class="form-group row">
+                            <div class="input-group col-md-4">
+                                <div class="input-group-addon">Map</div>
+                                <select name="csgoDeathmatchMap" class="form-control selectCSGODeathmatchMaps"></select>
+                            </div>
+                            <div class="input-group col-md-6">
+                                <div class="input-group-addon">Server</div>
+                                <select name="csgoDeathmatchServer" class="form-control selectBareMetalServer"></select>
+                            </div>
+                            <div class="input-group col-md-1">
+                                <button type="button" class="btn btn-default" onclick="SRCDS.CSGO.LaunchDeathmatch(
+                                                'Laclede\'s LAN CS:GO Deathmatch',
+                                                $('#tab-csgo-other select[name=csgoDeathmatchMap]').val(),
+                                                $('#tab-csgo-other select[name=csgoDeathmatchServer]').val()
+                                            );"><span class="fa fa-rocket" aria-hidden="true"></span></button>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
                 <!-- End CS:GO PUG-->
 
@@ -256,49 +264,92 @@
                 <!-- TF2 PUG-->
                 <div role="tabpanel" class="tab-pane" id="tab-tf2">
                     <div class="row">
+                        <h3>Launch TF2 Freeplay</h3>
+                    </div>
+                    <form class="form-inline" autocomplete="off">
+                        <div class="form-group row">
 
-                        <br />
-                        <h3>Launch Team Fortress 2</h3>
-                        <form class="form-inline" autocomplete="off">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Mapcycle</div>
-                                    <select name="tf2Mapcycle" class="form-control selectTF2MapCycles"></select>
-                                </div>
-                                <div class="input-group">
-                                    <div class="input-group-addon">Server</div>
-                                    <select name="tf2FreeplayServerIP" class="form-control selectBareMetalServer"></select>
-                                </div>
+                            <div class="input-group col-md-4">
+                                <div class="input-group-addon">Mapcycle</div>
+                                <select name="tf2Mapcycle" class="form-control selectTF2MapCycles"></select>
                             </div>
-                            <button type="button" class="btn btn-default" onclick="SRCDS.TF2.LaunchFreeplay(
-                                        'Laclede\'s LAN TF2 Freeplay',
-                                        $('#tab-tf2 select[name=tf2Mapcycle]').val(),
-                                        $('#tab-tf2 select[name=tf2FreeplayServerIP]').val()
-                                        );">Generate</button>
-                        </form>
 
-                        <br />
-                        <h3>Launch Team Fortress 2 - Blind Frag</h3>
-                        <form class="form-inline" autocomplete="off">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Map</div>
-                                    <select name="blindFragMap" class="form-control blindFrag-maps">
-                                        <option selected value="koth_harvest_final">koth_harvest_final</option>
-                                    </select>
-                                </div>
-                                <div class="input-group">
-                                    <div class="input-group-addon">Server</div>
-                                    <select name="tf2BlindFragServerIP" class="form-control selectBareMetalServer"></select>
-                                </div>
+                            <div class="input-group col-md-6">
+                                <div class="input-group-addon">Server</div>
+                                <select name="tf2FreeplayServerIP" class="form-control selectBareMetalServer"></select>
                             </div>
-                            <button type="button" class="btn btn-default" onclick="SRCDS.TF2.LaunchBlindFrag(
+
+                            <div class="input-group col-md-1">
+                                <button type="button" class="btn btn-default" onclick="SRCDS.TF2.LaunchFreeplay(
+                                            'Laclede\'s LAN TF2 Freeplay',
+                                            $('#tab-tf2 select[name=tf2Mapcycle]').val(),
+                                            $('#tab-tf2 select[name=tf2FreeplayServerIP]').val()
+                                        );"><span class="fa fa-rocket" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+
+                    <div class="row">
+                        <h3>Launch TF2 Blind Frag</h3>
+                    </div>
+                    <form class="form-inline" autocomplete="off">
+                        <div class="form-group row">
+
+                            <div class="input-group col-md-4">
+                                <div class="input-group-addon">Map</div>
+                                <select name="blindFragMap" class="form-control blindFrag-maps">
+                                    <option selected value="koth_harvest_final">koth_harvest_final</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group col-md-6">
+                                <div class="input-group-addon">Server</div>
+                                <select name="tf2BlindFragServerIP" class="form-control selectBareMetalServer"></select>
+                            </div>
+
+                            <div class="input-group col-md-1">
+                                <button type="button" class="btn btn-default" onclick="SRCDS.TF2.LaunchBlindFrag(
                                         'Laclede\'s LAN TF2 Blind Frag',
                                         $('#tab-tf2 select[name=blindFragMap]').val(),
                                         $('#tab-tf2 select[name=tf2BlindFragServerIP]').val()
-                                    );">Generate</button>
-                        </form>
+                                    );"><span class="fa fa-rocket" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+
+                    <div class="row">
+                        <h3>Launch TF2-Ware</h3>
                     </div>
+                    <form class="form-inline" autocomplete="off">
+                        <div class="form-group row">
+
+                            <div class="input-group col-md-4">
+                                <div class="input-group-addon">Mapcycle</div>
+                                <select name="tf2WareMapcycle" class="form-control blindFrag-maps">
+                                    <option selected value="mapcycle_tf2ware">mapcycle_tf2ware</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group col-md-6">
+                                <div class="input-group-addon">Server</div>
+                                <select name="tf2WareServerIP" class="form-control selectBareMetalServer"></select>
+                            </div>
+
+                            <div class="input-group col-md-1">
+                                <button type="button" class="btn btn-default" onclick="SRCDS.TF2.LaunchWare(
+                                        'Laclede\'s LAN TF2WARE',
+                                        $('#tab-tf2 select[name=tf2WareMapcycle]').val(),
+                                        $('#tab-tf2 select[name=tf2WareServerIP]').val()
+                                    );"><span class="fa fa-rocket" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
                 <!-- END TF2 PUG-->
 
