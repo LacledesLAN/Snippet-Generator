@@ -65,7 +65,6 @@ SRCDS.TF2.LaunchBlindFrag = function(hostname, map, ip) {
 
         // Build SRCDS Command & Args
         srcdsCommand = './srcds_run ';
-        srcdsArgs += '-port 27015 ';
         srcdsArgs += '-game tf ';
         srcdsArgs += '+maxplayers 24 ';
         srcdsArgs += '-console ';
@@ -74,9 +73,6 @@ SRCDS.TF2.LaunchBlindFrag = function(hostname, map, ip) {
         srcdsArgs += '+sv_password "' + password.join('') + '" ';
         srcdsArgs += '+map ' + map + ' ';
         srcdsArgs += '+maplist mapcycle_quickplay_koth ';
-        srcdsArgs += '-insecure ';
-        srcdsArgs += '+ip 0.0.0.0 ';
-        srcdsArgs += '-port 27015 ';
         srcdsArgs += '+rcon_password "' + RCON_PASS + '" ';
 
         serverLaunchString = modalFormatCommands(dockerCommand, dockerArgs, [srcdsCommand, srcdsArgs]);
