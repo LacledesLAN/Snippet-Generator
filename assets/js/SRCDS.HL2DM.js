@@ -64,9 +64,8 @@ SRCDS.HL2DM.Launch_HL2DM_Freeplay = function(hostname, map, ip) {
 
         // HL2DM Freeplay Server Specific
         var srcdsCommand = './srcds_run ';
-        let srcdsArgs = '-game csgo ';
+        let srcdsArgs = '-game hl2mp ';
         srcdsArgs += '-port 27015 ';
-        srcdsArgs += '-game hl2mp ';
         srcdsArgs += '+sv_pure 1 ';
         srcdsArgs += '+maxplayers 24 ';
         srcdsArgs += '+map ' + map + ' ';
