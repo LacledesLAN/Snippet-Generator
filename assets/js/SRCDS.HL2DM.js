@@ -60,7 +60,7 @@ SRCDS.HL2DM.Launch_HL2DM_Freeplay = function(hostname, map, ip) {
         }
         dockerArgs += '--name ' + dockerContainerName + ' ';
         dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
-        dockerArgs += 'lacledeslan/gamesvr-srcds-hl2dm-freeplay:linux ';
+        dockerArgs += 'lacledeslan/gamesvr-hl2dm-freeplay ';
 
         // HL2DM Freeplay Server Specific
         var srcdsCommand = './srcds_run ';

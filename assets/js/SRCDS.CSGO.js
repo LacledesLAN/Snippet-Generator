@@ -72,7 +72,7 @@ SRCDS.CSGO.LaunchArmsRace = function(hostname, map, ip) {
         }
         dockerArgs += '--name ' + dockerContainerName + ' ';
         dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
-        dockerArgs += 'lacledeslan/gamesvr-srcds-csgo-freeplay:linux ';
+        dockerArgs += 'lacledeslan/gamesvr-csgo-freeplay ';
 
         // CSGO Arms Race Server Specific
         srcdsCommand = './srcds_run ';
@@ -156,7 +156,7 @@ SRCDS.CSGO.LaunchClassic = function(hostname, map, ip) {
         }
         dockerArgs += '--name ' + dockerContainerName + ' ';
         dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
-        dockerArgs += 'lacledeslan/gamesvr-srcds-csgo-freeplay:linux ';
+        dockerArgs += 'lacledeslan/gamesvr-csgo-freeplay ';
 
         // CSGO Classic Server Specific
         srcdsCommand = './srcds_run ';
@@ -240,7 +240,7 @@ SRCDS.CSGO.LaunchDeathmatch = function(hostname, map, ip) {
         }
         dockerArgs += '--name ' + dockerContainerName + ' ';
         dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
-        dockerArgs += 'lacledeslan/gamesvr-srcds-csgo-freeplay:linux ';
+        dockerArgs += 'lacledeslan/gamesvr-csgo-freeplay ';
 
         // CSGO Classic Server Specific
         srcdsCommand = './srcds_run ';
@@ -325,7 +325,7 @@ SRCDS.CSGO.LaunchClientTest = function(map, ip) {
         }
         dockerArgs += '--name ' + dockerContainerName + ' ';
         dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
-        dockerArgs += 'lacledeslan/gamesvr-srcds-csgo-test:linux ';
+        dockerArgs += 'lacledeslan/gamesvr-csgo-test ';
 
         // SRCDS Command
         let srcdsCommand = './srcds_run ';
@@ -438,7 +438,7 @@ SRCDS.CSGO.LaunchTourney = function(bracketID, team1, team2, map, ip) {
         dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
         dockerArgs += '-v /home/sysoper/logs/' + dockerContainerName + ':/app/bin/csgo/logs ';
         dockerArgs += '-v /home/sysoper/logs/' + dockerContainerName + '/warmod:/app/bin/csgo/addons/sourcemod/logs ';
-        dockerArgs += 'lacledeslan/gamesvr-srcds-csgo-tourney:linux ';
+        dockerArgs += 'lacledeslan/gamesvr-csgo-tourney ';
 
         // CS:GO Tournament Server Specific
         var srcdsCommand = './srcds_run ';

@@ -61,7 +61,7 @@ SRCDS.TF2.LaunchBlindFrag = function(hostname, map, ip) {
         }
         dockerArgs += '--name ' + dockerContainerName + ' ';
         dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
-        dockerArgs += 'lacledeslan/gamesvr-srcds-tf2-blindfrag:linux ';
+        dockerArgs += 'lacledeslan/gamesvr-tf2-blindfrag ';
 
         // Build SRCDS Command & Args
         srcdsCommand = './srcds_run ';
@@ -135,7 +135,7 @@ SRCDS.TF2.LaunchFreeplay = function(hostname, mapcycle, ip) {
         }
         dockerArgs += '--name ' + dockerContainerName + ' ';
         dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
-        dockerArgs += 'lacledeslan/gamesvr-srcds-tf2-freeplay:linux ';
+        dockerArgs += 'lacledeslan/gamesvr-tf2-freeplay ';
 
         // Build SRCDS Command & Args
         srcdsCommand = './srcds_run -game tf ';
@@ -209,7 +209,7 @@ SRCDS.TF2.LaunchWare = function(hostname, mapcycle, ip) {
         }
         dockerArgs += '--name ' + dockerContainerName + ' ';
         dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
-        dockerArgs += 'lacledeslan/gamesvr-srcds-tf2-ware:linux ';
+        dockerArgs += 'lacledeslan/gamesvr-tf2-ware ';
 
         // Build SRCDS Command & Args
         srcdsCommand = './srcds_run -game tf ';
