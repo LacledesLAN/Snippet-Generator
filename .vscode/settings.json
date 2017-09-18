@@ -1,0 +1,16 @@
+{
+    "javascript.validate.enable": true,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "editor.trimAutoWhitespace": true,
+    "jslint.enable": true,
+    "jslint.options": {
+        "browser": true,
+        "devel": true,
+        "es6": true,
+        "indent": 4,
+        "multivar": true,
+        "predef": ["$", "_", "alert", "window"]
+    },
+    "jslint.version": "latest"
+}

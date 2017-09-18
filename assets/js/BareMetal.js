@@ -1,4 +1,3 @@
-
 var BareMetal = BareMetal || {};
 
 BareMetal.ServerPool = {
@@ -18,36 +17,21 @@ BareMetal.ServerPool = {
         "BEAN TEST Fuhr":       ["172.30.10.31", "172.30.10.32", "172.30.10.33", "172.30.10.34", "172.30.10.35", "172.30.10.36", "172.30.10.37", "172.30.10.38"],
         "DUDLEY TEST Ozzie":    ["172.30.10.12", "172.30.10.13"]
     }
-}
-
-BareMetal.GetCPUFromIPAddress = function (ipAddress)
-{
-    switch (ipAddress.substr(ipAddress.length - 1, 1)) {
-        case '1':   return 4;
-        case '2':   return 3;
-        case '3':   return 5;
-        case '4':   return 2;
-        case '5':   return 6;
-        case '6':   return 1;
-        case '7':   return 7;
-        case '8':   return 0;
-        default:    return;
-    }
-}
+};
 
 
-$( document ).ready(function() {
+$(document).ready(function() {
+    "use strict";
+
     $(".selectBareMetalServer").each(
         function() {
             let selectControl = this;
 
             $(selectControl).append(
-                $("<option>", {
-                    text: "",
-                }),
+                $("<option>", { text: "" }),
                 $("<option>", {
                     disabled: "disabled",
-                    text: "[Production Servers]",
+                    text: "[Production Servers]"
                 })
             );
 
@@ -58,7 +42,7 @@ $( document ).ready(function() {
 
                     $(selectControl).append(
                         $("<option>", {
-                            text: server + " (" + ipAddress + " on cpu " + BareMetal.GetCPUFromIPAddress(ipAddress) + ")",
+                            text: server + " (" + ipAddress + ")",
                             value: ipAddress
                         })
                     );
@@ -68,7 +52,7 @@ $( document ).ready(function() {
             $(selectControl).append(
                 $("<option>", {
                     disabled: "disabled",
-                    text: "========================"               
+                    text: "========================"
                 }),
                 $("<option>", {
                     disabled: "disabled",
@@ -83,12 +67,12 @@ $( document ).ready(function() {
             for (let server in BareMetal.ServerPool.test) {
                 for (let element in BareMetal.ServerPool.test[server]) {
 
-                    let cpu = '',
-                        description = '',
+                    let cpu = "",
+                        description = "",
                         ipAddress = BareMetal.ServerPool.test[server][element].trim();
-                    
-                    if (ipAddress != 'localhost' && ipAddress != '0.0.0.0') {
-                        description = " (" + ipAddress + " on cpu " + BareMetal.GetCPUFromIPAddress(ipAddress) + ")";
+
+                    if (ipAddress != "localhost" && ipAddress != "0.0.0.0") {
+                        description = " (" + ipAddress + ")";
                     }
 
                     $(selectControl).append(

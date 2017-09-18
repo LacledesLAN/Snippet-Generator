@@ -1,32 +1,35 @@
-
 var Docker = Docker || {};
 
-Docker.NetString_SRCDS = function(ip) {
-    let netString = '',
-        portsUDP = ['1200', '1500', '3005', '3101', '28960', '3478-3479', '4379-4380', '26900-26915', '27000-27030'],
-        portsTCP = ['27000-27050'];
+Docker.NetString_SRCDS = function (ip) {
+    "use strict";
 
-    ip = ip.toString().trim();
+    let netString = "",
+        portsUDP = ["27015", "27020"],
+        portsTCP = ["27015", "27020"];
 
-    if (ip && ip != '0.0.0.0' && ip != 'localhost') {
-        ip += ':';
+    ip = ip.toString().trim().toLowerCase();
+
+    if (ip && ip !== "0.0.0.0" && ip !== "localhost") {
+        ip += ":";
     } else {
-        ip = '';
+        ip = "";
     }
 
-    for (let i in portsUDP) {
-        netString += '-p=' + ip + portsUDP[i] + ':' + portsUDP[i] + '/udp ';
-    }
+    portsUDP.forEach(function (portSet) {
+        netString += "-p=" + ip + portSet + ":" + portSet + "/udp ";
+    });
 
-    for (let i in portsTCP) {
-        netString += '-p=' + ip + portsTCP[i] + ':' + portsTCP[i] + '/tcp ';
-    }
+    portsTCP.forEach(function (portSet) {
+        netString += "-p=" + ip + portSet + ":" + portSet + "/tcp ";
+    });
 
     return netString.trim();
-}
+};
 
-Docker.GenerateContainerName = function(prefix) {
-    let containerName = '',
+Docker.GenerateContainerName = function (prefix) {
+    "use strict";
+
+    let containerName = "",
         currentDate = new Date();
 
     if (prefix.toString().trim().length > 0) {
@@ -34,9 +37,9 @@ Docker.GenerateContainerName = function(prefix) {
     }
 
     containerName += ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][currentDate.getDay()];
-    containerName += zeroPad(currentDate.getHours(), 2) + 'h';
-    containerName += zeroPad(currentDate.getMinutes(), 2) + 'm';
-    containerName += zeroPad(currentDate.getSeconds(), 2) + 's';
+    containerName += _.padStart(currentDate.getHours(), 2, "0") + "h";
+    containerName += _.padStart(currentDate.getMinutes(), 2, "0") + "m";
+    containerName += _.padStart(currentDate.getSeconds(), 2, "0") + "s";
 
     return containerName;
-}
+};

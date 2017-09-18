@@ -1,10 +1,9 @@
-
 var SRCDS = SRCDS || {};
 SRCDS.CSGO = SRCDS.CSGO || {};
 
 SRCDS.CSGO.MapsArmsRace = ["ar_baggage", "ar_monastery", "ar_shoots", "de_lake", "de_stmarc"];
 
-SRCDS.CSGO.MapsClassic = ["cs_agency", "cs_assault", "cs_backalley", "cs_cruise", "cs_downtown", "cs_insertion", "cs_italy", "cs_militia", "cs_motel", 
+SRCDS.CSGO.MapsClassic = ["cs_agency", "cs_assault", "cs_backalley", "cs_cruise", "cs_downtown", "cs_insertion", "cs_italy", "cs_militia", "cs_motel",
                             "cs_office", "cs_rush", "cs_thunder", "cs_workout", "de_ali", "de_austria", "de_aztec", "de_bank", "de_bazaar", "de_blackgold",
                             "de_cache", "de_canals", "de_castle", "de_cbble", "de_coast", "de_dust", "de_dust2", "de_empire", "de_facade", "de_favela",
                             "de_inferno", "de_lake", "de_lite", "de_log", "de_marquis", "de_mikla", "de_mirage", "de_mist", "de_nuke", "de_nuke_se",
@@ -16,15 +15,17 @@ SRCDS.CSGO.MapsDeathmatch = ["ar_baggage", "ar_monastery", "ar_shoots", "cs_agen
                             "de_canals", "de_cbble", "de_dust", "de_dust2", "de_inferno", "de_lake", "de_lite", "de_mirage", "de_nuke", "de_nuke_se",
                             "de_overpass", "de_safehouse", "de_shortdust", "de_shorttrain", "de_stmarc", "de_thrill", "de_sugarcane", "de_vertigo"];
 
-SRCDS.CSGO.MapsTest = shuffleArray(["de_orange", "fy_pool_day", "gg_ctm_csgo", "orangebox_warmup_day"]);
+SRCDS.CSGO.MapsTest = _.shuffle(["de_orange", "fy_pool_day", "gg_ctm_csgo", "orangebox_warmup_day"]);
 
 SRCDS.CSGO.MapsTourney = ["de_cache", "de_cbble", "de_inferno", "de_nuke", "de_mirage", "de_overpass", "de_train"];
 
 SRCDS.CSGO.LaunchArmsRace = function(hostname, map, ip) {
+    "use strict";
+
     let clientConnectString = 'N/A',
         cpuFlag = '',
         currentDate = new Date(),
-        dockerCommand = '',
+        dockerCommand = 'docker run -d ',
         dockerContainerName = '',
         dockerArgs = '',
         serverLaunchString = '',
@@ -48,28 +49,9 @@ SRCDS.CSGO.LaunchArmsRace = function(hostname, map, ip) {
         }
 
         // Generate Docker Container Name
-        dockerContainerName = 'CSGOArms_';
-        dockerContainerName += ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][currentDate.getDay()];
-        dockerContainerName += zeroPad(currentDate.getHours(), 2) + 'h';
-        dockerContainerName += zeroPad(currentDate.getMinutes(), 2) + 'm';
-        dockerContainerName += zeroPad(currentDate.getSeconds(), 2) + 's';
-
-        if (ip) {
-            let cpuId = BareMetal.GetCPUFromIPAddress(ip);
-
-            if (cpuId) {
-                cpuFlag = '--cpuset-cpus="' + cpuId + '"';
-            } else {
-                cpuFlag = "";
-            }
-        }
+        dockerContainerName = Docker.GenerateContainerName("CSGOArms_");
 
         // Docker Command
-        let dockerCommand = 'docker run -d ';
-
-        if (cpuFlag.trim().length > 0) {
-            dockerArgs += cpuFlag + ' ';    
-        }
         dockerArgs += '--name ' + dockerContainerName + ' ';
         dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
         dockerArgs += 'lacledeslan/gamesvr-csgo-freeplay ';
@@ -98,13 +80,16 @@ SRCDS.CSGO.LaunchArmsRace = function(hostname, map, ip) {
         $('#modalString .modal-body #serverLaunchString').html(serverLaunchString);
         $('#modalString .modal-body #clientConnectString').html(clientConnectString);
         $('#modalString').modal('show');
-        
+
         addLogMessage('CSGO Arms Race', serverLaunchString);
-        
+
     } while (false);
-}
+};
+
 
 SRCDS.CSGO.LaunchClassic = function(hostname, map, ip) {
+    "use strict";
+
     let clientConnectString = 'N/A',
         cpuFlag = '',
         currentDate = new Date(),
@@ -132,28 +117,11 @@ SRCDS.CSGO.LaunchClassic = function(hostname, map, ip) {
         }
 
         // Generate Docker Container Name
-        dockerContainerName = 'CSGOClassic_';
-        dockerContainerName += ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][currentDate.getDay()];
-        dockerContainerName += zeroPad(currentDate.getHours(), 2) + 'h';
-        dockerContainerName += zeroPad(currentDate.getMinutes(), 2) + 'm';
-        dockerContainerName += zeroPad(currentDate.getSeconds(), 2) + 's';
-
-        if (ip) {
-            let cpuId = BareMetal.GetCPUFromIPAddress(ip);
-
-            if (cpuId) {
-                cpuFlag = '--cpuset-cpus="' + cpuId + '"';
-            } else {
-                cpuFlag = "";
-            }
-        }
+        dockerContainerName = Docker.GenerateContainerName("CSGOClassic_");
 
         // Docker Command
         let dockerCommand = 'docker run -d ';
 
-        if (cpuFlag.trim().length > 0) {
-            dockerArgs += cpuFlag + ' ';    
-        }
         dockerArgs += '--name ' + dockerContainerName + ' ';
         dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
         dockerArgs += 'lacledeslan/gamesvr-csgo-freeplay ';
@@ -182,13 +150,15 @@ SRCDS.CSGO.LaunchClassic = function(hostname, map, ip) {
         $('#modalString .modal-body #serverLaunchString').html(serverLaunchString);
         $('#modalString .modal-body #clientConnectString').html(clientConnectString);
         $('#modalString').modal('show');
-        
+
         addLogMessage('CSGO Classic', serverLaunchString);
     } while (false);
-}
+};
 
 
 SRCDS.CSGO.LaunchDeathmatch = function(hostname, map, ip) {
+    "use strict";
+
     let clientConnectString = 'N/A',
         cpuFlag = '',
         currentDate = new Date(),
@@ -216,28 +186,11 @@ SRCDS.CSGO.LaunchDeathmatch = function(hostname, map, ip) {
         }
 
         // Generate Docker Container Name
-        dockerContainerName = 'CSGODeathmatch_';
-        dockerContainerName += ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][currentDate.getDay()];
-        dockerContainerName += zeroPad(currentDate.getHours(), 2) + 'h';
-        dockerContainerName += zeroPad(currentDate.getMinutes(), 2) + 'm';
-        dockerContainerName += zeroPad(currentDate.getSeconds(), 2) + 's';
-
-        if (ip) {
-            let cpuId = BareMetal.GetCPUFromIPAddress(ip);
-
-            if (cpuId) {
-                cpuFlag = '--cpuset-cpus="' + cpuId + '"';
-            } else {
-                cpuFlag = "";
-            }
-        }
+        dockerContainerName = Docker.GenerateContainerName("CSGODeathmatch_");
 
         // Docker Command
         let dockerCommand = 'docker run -d ';
 
-        if (cpuFlag.trim().length > 0) {
-            dockerArgs += cpuFlag + ' ';    
-        }
         dockerArgs += '--name ' + dockerContainerName + ' ';
         dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
         dockerArgs += 'lacledeslan/gamesvr-csgo-freeplay ';
@@ -268,12 +221,15 @@ SRCDS.CSGO.LaunchDeathmatch = function(hostname, map, ip) {
         $('#modalString .modal-body #serverLaunchString').html(serverLaunchString);
         $('#modalString .modal-body #clientConnectString').html(clientConnectString);
         $('#modalString').modal('show');
-        
+
         addLogMessage('CSGO Classic', serverLaunchString);
     } while (false);
-}
+};
+
 
 SRCDS.CSGO.LaunchClientTest = function(map, ip) {
+    "use strict";
+
     let clientConnectString = '',
         currentDate = new Date(),
         cpuFlag = '',
@@ -300,29 +256,12 @@ SRCDS.CSGO.LaunchClientTest = function(map, ip) {
         hostname = hostname.split(' ').join('_');
 
         // Generate Docker Container Name
-        dockerContainerName = 'CSGOTest_';
-        dockerContainerName += ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][currentDate.getDay()];
-        dockerContainerName += zeroPad(currentDate.getHours(), 2) + 'h';
-        dockerContainerName += zeroPad(currentDate.getMinutes(), 2) + 'm';
-        dockerContainerName += zeroPad(currentDate.getSeconds(), 2) + 's';
-        
-        if (ip) {
-            let cpuId = BareMetal.GetCPUFromIPAddress(ip);
+        dockerContainerName = Docker.GenerateContainerName("CSGOTest_");
 
-            if (cpuId) {
-                cpuFlag = '--cpuset-cpus="' + cpuId + '"';
-            } else {
-                cpuFlag = "";
-            }
-        }
-        
         // Docker Command
         let dockerCommand = 'docker run -d ';
         let dockerArgs = '';
 
-        if (cpuFlag.trim().length > 0) {
-            dockerArgs += cpuFlag + ' ';    
-        }
         dockerArgs += '--name ' + dockerContainerName + ' ';
         dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
         dockerArgs += 'lacledeslan/gamesvr-csgo-test ';
@@ -355,13 +294,15 @@ SRCDS.CSGO.LaunchClientTest = function(map, ip) {
         $('#modalString .modal-body #serverLaunchString').html(serverLaunchString);
         $('#modalString .modal-body #clientConnectString').html(clientConnectString);
         $('#modalString').modal('show');
-        
+
         addLogMessage('CSGO Tourney', serverLaunchString);
     } while (false);
-}
+};
 
 
 SRCDS.CSGO.LaunchTourney = function(bracketID, team1, team2, map, ip) {
+    "use strict";
+
     var clientConnectString = '',
         currentDate = new Date(),
         cpuFlag = '',
@@ -411,29 +352,12 @@ SRCDS.CSGO.LaunchTourney = function(bracketID, team1, team2, map, ip) {
         hostname = hostname.split(' ').join('_');
 
         // Generate Docker Container Name
-        dockerContainerName = 'CSGOTourn_' + bracketID + '_';
-        dockerContainerName += ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][currentDate.getDay()];
-        dockerContainerName += zeroPad(currentDate.getHours(), 2) + 'h';
-        dockerContainerName += zeroPad(currentDate.getMinutes(), 2) + 'm';
-        dockerContainerName += zeroPad(currentDate.getSeconds(), 2) + 's';
-        
-        if (ip) {
-            let cpuId = BareMetal.GetCPUFromIPAddress(ip);
-
-            if (cpuId) {
-                cpuFlag = '--cpuset-cpus="' + cpuId + '"';
-            } else {
-                cpuFlag = "";
-            }
-        }
+        dockerContainerName = Docker.GenerateContainerName("CSGOTourn_" + bracketID);
 
         // Docker Launch String
         var dockerComand = 'docker run -d ';
         var dockerArgs = '';
 
-        if (cpuFlag.trim().length > 0) {
-            dockerArgs += cpuFlag + ' ';
-        }
         dockerArgs += '--name ' + dockerContainerName + ' ';
         dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
         dockerArgs += '-v /home/sysoper/logs/' + dockerContainerName + ':/app/bin/csgo/logs ';
@@ -471,14 +395,16 @@ SRCDS.CSGO.LaunchTourney = function(bracketID, team1, team2, map, ip) {
         $('#modalString .modal-body #serverLaunchString').html(serverLaunchString);
         $('#modalString .modal-body #clientConnectString').html(clientConnectString);
         $('#modalString').modal('show');
-        
+
         addLogMessage('CSGO Tourney', serverLaunchString);
     } while (false);
-}
+};
 
 
 /// Add Maps to all appropriate HTML SELECT controls
 $( document ).ready(function() {
+    "use strict";
+
     $(".selectCSGOArmsRaceMaps").each(
         function() {
             let selectControl = this;

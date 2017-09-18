@@ -1,8 +1,7 @@
-
 var SRCDS = SRCDS || {};
 SRCDS.TF2 = SRCDS.TF2 || {};
 
-SRCDS.TF2.MapCyclesStock = ["mapcycle.txt", "mapcycle_beta_asteroid.txt", "mapcycle_beta_cactus_canyon.txt", "mapcycle_beta_mannpower.txt", "mapcycle_default.txt", 
+SRCDS.TF2.MapCyclesStock = ["mapcycle.txt", "mapcycle_beta_asteroid.txt", "mapcycle_beta_cactus_canyon.txt", "mapcycle_beta_mannpower.txt", "mapcycle_default.txt",
                             "mapcycle_doomsday_event_247.txt", "mapcycle_featured_maps.txt", "mapcycle_halloween.txt", "mapcycle_halloween_event_247.txt",
                             "mapcycle_hightower_event_247.txt", "mapcycle_invasion_maps.txt", "mapcycle_ladder.txt", "mapcycle_lakeside_event_247.txt",
                             "mapcycle_mannpower.txt", "mapcycle_quickplay_arena.txt", "mapcycle_quickplay_attackdefense.txt", "mapcycle_quickplay_cp.txt",
@@ -13,54 +12,43 @@ SRCDS.TF2.MapCyclesLL = ["mapcycle_LL_all.txt", "mapcycle_LL_arena.txt", "mapcyc
                             "mapcycle_LL_ph.txt", "mapcycle_LL_pl.txt", "mapcycle_LL_plr.txt"];
 
 SRCDS.TF2.MapCycles = SRCDS.TF2.MapCyclesStock.concat(SRCDS.TF2.MapCyclesLL).sort(function (a, b) {
+    "use strict";
     return a.toLowerCase().localeCompare(b.toLowerCase());
 });
 
 SRCDS.TF2.LaunchBlindFrag = function(hostname, map, ip) {
-    let clientConnectString = 'N/A',
+    "use strict";
+
+    let clientConnectString = "N/A",
         currentDate = new Date(),
-        dockerCommand = '',
-        dockerArgs = '',
+        dockerCommand = "docker run -d ",
+        dockerArgs = "",
         password = generatePasswordArray(),
-        serverLaunchString = '',
-        srcdsCommand = '',
-        srcdsArgs = '';
+        serverLaunchString = "",
+        srcdsCommand = "",
+        srcdsArgs = "";
 
     do {
         hostname = (hostname)
             ? String(hostname)
-            : 'LL TF2 Blind Frag';
-        hostname = hostname.split(' ').join('_');
+            : "LL TF2 Blind Frag";
+        hostname = hostname.split(" ").join("_");
 
         if (!map) {
-            alert('ERROR - NO MAP WAS SPECIFIED!');
+            alert("ERROR - NO MAP WAS SPECIFIED!");
             break;
         }
 
         if (!ip) {
-            alert('ERROR - NO SERVER WAS SELECTED');
+            alert("ERROR - NO SERVER WAS SELECTED");
             break;
         }
 
-        let dockerContainerName = Docker.GenerateContainerName('TF2BlindFrag');
-
-        if (ip) {
-            let cpuId = BareMetal.GetCPUFromIPAddress(ip);
-
-            if (cpuId) {
-                cpuFlag = '--cpuset-cpus="' + cpuId + '"';
-            } else {
-                cpuFlag = "";
-            }
-        }
+        let dockerContainerName = Docker.GenerateContainerName("TF2BlindFrag");
 
         // Build Docker Command & Args
-        let dockerCommand = 'docker run -d ';
-        if (cpuFlag.trim().length > 0) {
-            dockerArgs += cpuFlag + ' ';    
-        }
-        dockerArgs += '--name ' + dockerContainerName + ' ';
-        dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
+        dockerArgs += '--name ' + dockerContainerName + " ";
+        dockerArgs += Docker.NetString_SRCDS(ip) + " ";
         dockerArgs += 'lacledeslan/gamesvr-tf2-blindfrag ';
 
         // Build SRCDS Command & Args
@@ -85,13 +73,15 @@ SRCDS.TF2.LaunchBlindFrag = function(hostname, map, ip) {
         $('#modalString .modal-body #serverLaunchString').html(serverLaunchString);
         $('#modalString .modal-body #clientConnectString').html(clientConnectString);
         $('#modalString').modal('show');
-        
+
         addLogMessage('TF2 BlindFrag', serverLaunchString);
-        
+
     } while (false);
-}
+};
 
 SRCDS.TF2.LaunchFreeplay = function(hostname, mapcycle, ip) {
+    "use strict";
+
     let clientConnectString = 'N/A',
         cpuFlag = '',
         dockerCommand = '',
@@ -118,21 +108,8 @@ SRCDS.TF2.LaunchFreeplay = function(hostname, mapcycle, ip) {
 
         let dockerContainerName = Docker.GenerateContainerName('TF2Freeplay');
 
-        if (ip) {
-            let cpuId = BareMetal.GetCPUFromIPAddress(ip);
-
-            if (cpuId) {
-                cpuFlag = '--cpuset-cpus="' + cpuId + '"';
-            } else {
-                cpuFlag = "";
-            }
-        }
-
         // Docker Command
         dockerCommand = 'docker run -d ';
-        if (cpuFlag.trim().length > 0) {
-            dockerArgs += cpuFlag + ' ';    
-        }
         dockerArgs += '--name ' + dockerContainerName + ' ';
         dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
         dockerArgs += 'lacledeslan/gamesvr-tf2-freeplay ';
@@ -146,7 +123,7 @@ SRCDS.TF2.LaunchFreeplay = function(hostname, mapcycle, ip) {
         srcdsArgs += '-usercon ';
         srcdsArgs += '-replay ';
         srcdsArgs += '+mapcyclefile ' + mapcycle + ' ';
-        srcdsArgs += '+randommap '
+        srcdsArgs += '+randommap ';
         srcdsArgs += '+hostname "' + hostname + '" ';
         srcdsArgs += '+rcon_password "' + RCON_PASS + '" ';
 
@@ -159,13 +136,15 @@ SRCDS.TF2.LaunchFreeplay = function(hostname, mapcycle, ip) {
         $('#modalString .modal-body #serverLaunchString').html(serverLaunchString);
         $('#modalString .modal-body #clientConnectString').html(clientConnectString);
         $('#modalString').modal('show');
-        
+
         addLogMessage('TF2 Freeplay', serverLaunchString);
     } while (false);
-}
+};
 
 
 SRCDS.TF2.LaunchWare = function(hostname, mapcycle, ip) {
+    "use strict";
+
     let clientConnectString = 'N/A',
         cpuFlag = '',
         dockerCommand = '',
@@ -192,21 +171,9 @@ SRCDS.TF2.LaunchWare = function(hostname, mapcycle, ip) {
 
         let dockerContainerName = Docker.GenerateContainerName('TF2Ware');
 
-        if (ip) {
-            let cpuId = BareMetal.GetCPUFromIPAddress(ip);
-
-            if (cpuId) {
-                cpuFlag = '--cpuset-cpus="' + cpuId + '"';
-            } else {
-                cpuFlag = "";
-            }
-        }
-
         // Docker Command
         dockerCommand = 'docker run -d ';
-        if (cpuFlag.trim().length > 0) {
-            dockerArgs += cpuFlag + ' ';    
-        }
+
         dockerArgs += '--name ' + dockerContainerName + ' ';
         dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
         dockerArgs += 'lacledeslan/gamesvr-tf2-ware ';
@@ -222,7 +189,7 @@ SRCDS.TF2.LaunchWare = function(hostname, mapcycle, ip) {
         srcdsArgs += '-insecure ';
         srcdsArgs += '-replay ';
         srcdsArgs += '+mapcyclefile ' + mapcycle + ' ';
-        srcdsArgs += '+map tf2ware2_a4 '
+        srcdsArgs += '+map tf2ware2_a4 ';
         srcdsArgs += '+hostname "' + hostname + '" ';
         srcdsArgs += '+rcon_password "' + RCON_PASS + '" ';
 
@@ -235,14 +202,16 @@ SRCDS.TF2.LaunchWare = function(hostname, mapcycle, ip) {
         $('#modalString .modal-body #serverLaunchString').html(serverLaunchString);
         $('#modalString .modal-body #clientConnectString').html(clientConnectString);
         $('#modalString').modal('show');
-        
+
         addLogMessage('TF2 Freeplay', serverLaunchString);
     } while (false);
-}
+};
 
 
 /// Add Map Cycles to all appropriate HTML SELECT controls
 $( document ).ready(function() {
+    "use strict";
+
     $(".selectTF2MapCycles").each(
         function() {
             let selectControl = this;
