@@ -15,7 +15,7 @@ SRCDS.CSGO.MapsDeathmatch = ["ar_baggage", "ar_monastery", "ar_shoots", "cs_agen
         "de_canals", "de_cbble", "de_dust", "de_dust2", "de_inferno", "de_lake", "de_lite", "de_mirage", "de_nuke", "de_nuke_se",
         "de_overpass", "de_safehouse", "de_shortdust", "de_shorttrain", "de_stmarc", "de_thrill", "de_sugarcane", "de_vertigo"];
 
-SRCDS.CSGO.MapsTest = _.shuffle(["de_orange", "fy_pool_day", "gg_ctm_csgo", "orangebox_warmup_day"]);
+SRCDS.CSGO.MapsTest = ["de_orange", "fy_pool_day", "gg_ctm_csgo", "orangebox_warmup_day"];
 
 SRCDS.CSGO.MapsTourney = ["de_cache", "de_cbble", "de_inferno", "de_nuke", "de_mirage", "de_overpass", "de_train"];
 
@@ -288,7 +288,7 @@ SRCDS.CSGO.LaunchTourney = function (bracketID, team1, team2, map, ip) {
         dockerComand = 'docker run -d ',
         dockerContainerName = Docker.GenerateContainerName("CSGOTourn" + bracketID),
         hostname = "",
-        password = generatePasswordArray(),
+        pass = password.generateArray(),
         serverLaunchString = '',
         srcdsArgs = '',
         srcdsCommand = './srcds_run ',
@@ -349,7 +349,7 @@ SRCDS.CSGO.LaunchTourney = function (bracketID, team1, team2, map, ip) {
         srcdsArgs += '-usercon ';
         srcdsArgs += '+map ' + map + ' ';
         srcdsArgs += '+hostname "' + hostname + '" ';
-        srcdsArgs += '+sv_password "' + password.join('') + '" ';
+        srcdsArgs += '+sv_password "' + pass.join('') + '" ';
         srcdsArgs += '+sv_lan 1 ';
         srcdsArgs += '+mp_teamname_1 "' + team1 + '" ';
         srcdsArgs += '+mp_teamname_2 "' + team2 + '" ';
@@ -360,9 +360,9 @@ SRCDS.CSGO.LaunchTourney = function (bracketID, team1, team2, map, ip) {
 
         serverLaunchString = modalFormatCommands(dockerComand, dockerArgs, [srcdsCommand, srcdsArgs]);
 
-        clientConnectString = 'connect ' + ip + ':27015; ' + 'password ' + prettyPrintArray(password);
+        clientConnectString = 'connect ' + ip + ':27015; ' + 'password ' + pass.html();
 
-        tvConnectString = 'connect ' + ip + ':27020; password ' + prettyPrintArray(TV_PASS);
+        tvConnectString = 'connect ' + ip + ':27020; password ' + TV_PASS.html();
 
         UI.displayModal(
             "CSGO Tourney",
@@ -375,6 +375,27 @@ SRCDS.CSGO.LaunchTourney = function (bracketID, team1, team2, map, ip) {
 
         addLogMessage('CSGO Tourney', serverLaunchString);
     } while (false);
+};
+
+
+SRCDS.CSGO.TourneyRoundRestore = function (roundNumber) {
+    "use strict";
+
+    let filename = 'LL_round' + _.padStart(roundNumber, 2, '0'),
+        restoreCommand = '';
+
+    restoreCommand += 'mp_backup_restore_load_file ' + filename + '; ';
+    restoreCommand += 'mp_backup_restore_load_file ' + filename + '; ';
+    restoreCommand += 'wm_block_warm_up_grenades 0;';
+
+    UI.displayModal(
+        "CSGO Tourney Round Restore",
+        {
+            "Round restore command": restoreCommand
+        }
+    );
+
+    addLogMessage('CSGO Tourney Round Restore', restoreCommand);
 };
 
 
@@ -408,8 +429,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     document.querySelectorAll(".selectCSGOTestMaps").forEach(function (selectControl) {
+        let selectedMap = _.sample(SRCDS.CSGO.MapsTest);
+
         SRCDS.CSGO.MapsTest.forEach(function (mapName) {
             let option = document.createElement("option");
+            if (mapName === selectedMap) {
+                option.selected = "selected";
+            }
             option.text = mapName;
             selectControl.add(option);
         });
@@ -421,5 +447,16 @@ document.addEventListener('DOMContentLoaded', function () {
             option.text = mapName;
             selectControl.add(option);
         });
+    });
+
+    document.querySelectorAll(".selectCSGORoundRestore").forEach(function (selectControl) {
+        let option;
+
+        for (let i = 0; i < 30; i++) {
+            option = document.createElement("option");
+            option.text = _.padStart(i + 1, 2, '0');
+            option.value = i;
+            selectControl.add(option);
+        }
     });
 });

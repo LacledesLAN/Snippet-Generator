@@ -23,7 +23,7 @@ SRCDS.TF2.LaunchBlindFrag = function(hostname, map, ip) {
         dockerCommand = "docker run -d ",
         dockerContainerName = Docker.GenerateContainerName("TF2BlindFrag"),
         dockerArgs = "",
-        password = generatePasswordArray(),
+        pass = password.generateArray(),
         serverLaunchString = "",
         srcdsCommand = "./srcds_run ",
         srcdsArgs = "";
@@ -53,21 +53,21 @@ SRCDS.TF2.LaunchBlindFrag = function(hostname, map, ip) {
         srcdsArgs += '-console ';
         srcdsArgs += '-usercon ';
         srcdsArgs += '+hostname "' + hostname + '" ';
-        srcdsArgs += '+sv_password "' + password.join('') + '" ';
+        srcdsArgs += '+sv_password "' + pass.join('') + '" ';
         srcdsArgs += '+map ' + map + ' ';
         srcdsArgs += '+maplist mapcycle_quickplay_koth ';
         srcdsArgs += '+rcon_password "' + RCON_PASS.join('') + '" ';
 
         serverLaunchString = modalFormatCommands(dockerCommand, dockerArgs, [srcdsCommand, srcdsArgs]);
 
-        clientConnectString = 'connect ' + ip + ':27015 password; ' + prettyPrintArray(password);
+        clientConnectString = 'connect ' + ip + ':27015 password; ' + pass.html();
 
         UI.displayModal(
             "TF2 BlindFrag",
             {
                 "Launch String": serverLaunchString,
                 "Client Connect": clientConnectString,
-                "Password": prettyPrintArray(password)
+                "Password": pass.html()
             }
         );
 

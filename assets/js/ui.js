@@ -1,5 +1,5 @@
-var RCON_PASS = generatePasswordArray(3),
-    TV_PASS = generatePasswordArray(3), 
+var RCON_PASS = password.generateArray(3),
+    TV_PASS = password.fromArray(['brian', 'prefers', 'mustard', '567']),
     UI = UI || {};
 
 function addLogMessage(what, details, icon) {
@@ -17,11 +17,26 @@ function addLogMessage(what, details, icon) {
             + ":" + _.padStart(curDate.getMinutes(), 2, "0")
             + ":" + _.padStart(curDate.getSeconds(), 2, "0");
 
-    $("#snippetGeneratorLogTable").append("<tr><td>" + timestamp + '</td><td><i class="' + icon + '"></i></td><td>' + what + '</td><td>' + details + '</td></tr>');
+    let table = document.getElementById("snippetGeneratorLogTable");
+    let row = table.insertRow(1);
+
+    let rowWhen = row.insertCell();
+    rowWhen.innerHTML = timestamp;
+
+    let rowIcon = row.insertCell();
+    let iconHtml = document.createElement("i");
+    iconHtml.className += icon;
+    rowIcon.append(iconHtml);
+
+    let rowWhat = row.insertCell();
+    rowWhat.innerHTML = what;
+
+    let rowDetails = row.insertCell();
+    rowDetails.innerHTML = details;
 }
 
 function getRandomTeamName() {
-    let teams = [   'Bad News Bears', 'Bedrock Boulders', 'Capital Congressmen', 'The Electabuzz', 'Hackensack Bulls', 'Hadley Saints', 'The Magikarp', 'Miami Gators', 'O-Town Zeros',
+    let teams = ['Bad News Bears', 'Bedrock Boulders', 'Capital Congressmen', 'The Electabuzz', 'Hackensack Bulls', 'Hadley Saints', 'The Magikarp', 'Miami Gators', 'O-Town Zeros',
             'Springfield Isotopes', 'Stoolbend Turtleheads', 'Tampico Stogies', 'Warriors', 'Wonderdogs', 'Peekskill Parks', 'Dallas Felons', 'Detroit Lemons', 'Miami Dealers',
             'Roswell Aliens', 'Gotham Goliaths', 'Gotham Knights', 'Motor City Wheels', 'Gotham Rogues', 'Jersey Boomers', 'Boston Poindexters', 'Mars Greenskins', 'New New York Mets',
             'Pituitary Giants', 'Swedish Meatballs', 'Atlanta Braves', 'New Jersey Titans', 'Las Venturas Bandits', 'Liberty City Swingers', 'Los Santos Saints', 'San Fierro Packers',
@@ -79,9 +94,37 @@ UI.displayModal = function (title, tuples) {
         }
     });
 
-    $('#modalString .modal-title').html(title);
-    $('#modalString .modal-body').html(modalContents);
-    $('#modalString').modal('show');
+    document.getElementById('displayModalTitle').innerHTML = title;
+    document.getElementById('displayModalBody').innerHTML = modalContents;
+    $('#displayModal').modal('show');
 };
 
-UI.displayModal({test: 1, test2: 2});
+
+document.addEventListener('DOMContentLoaded', function () {
+    try {
+        var tmp1, tmp2;
+
+        do {
+            do {
+                tmp1 = prompt("Enter RCon password to be used in launch strings:").toLowerCase().trim();
+            } while (tmp1.length < 1);
+
+            do {
+                tmp2 = prompt("Confirm RCon password:").toLowerCase().trim();
+            } while (tmp2.length < 1);
+
+            if (tmp1 !== tmp2) {
+                alert("Passwords must match!");
+                tmp1 = '';
+                tmp2 = '';
+            }
+        } while (tmp1.length < 1);
+
+        RCON_PASS = tmp1;
+        addLogMessage('RCon Password', 'The user has provided a RCon password that will be used whenever generating a server launch string.', 'fa fa-key');
+    } catch (err) {
+        addLogMessage('RCon Password', 'Generated password is: ' + RCON_PASS.html(), 'fa fa-key');
+    }
+
+    addLogMessage('TV Password', 'Password is: ' + TV_PASS.html(), 'fa fa-television');
+});

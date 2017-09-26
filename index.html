@@ -18,6 +18,7 @@
 
     <script src="./assets/js/BareMetal.js"></script>
     <script src="./assets/js/Docker.js"></script>
+    <script src="./assets/js/SRCDS.BlackMesa.js"></script>
     <script src="./assets/js/SRCDS.CSGO.js"></script>
     <script src="./assets/js/SRCDS.HL2DM.js"></script>
     <script src="./assets/js/SRCDS.TF2.js"></script>
@@ -40,9 +41,9 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
-                <li role="presentation"><a title="CS:GO Tournament" href="#tab-csgo-tournament" role="tab" data-toggle="tab">CS:GO Tourney</a></li>
-                <li role="presentation"><a title="CS:GO other" href="#tab-csgo-other" role="tab" data-toggle="tab">CS:GO Other</a></li>
-                <li role="presentation"><a title="Half-Life 2: Deathmatch" href="#tab-hl2dm" role="tab" data-toggle="tab">Half-Life 2: Deathmatch</a></li>
+                <li role="presentation"><a title="CS:GO Tournament" href="#tab-csgo-tourney" role="tab" data-toggle="tab">CS:GO Tourney</a></li>
+                <li role="presentation"><a title="CS:GO Other" href="#tab-csgo-other" role="tab" data-toggle="tab">CS:GO Other</a></li>
+                <li role="presentation"><a title="SRCDS *" href="#tab-srcds" role="tab" data-toggle="tab">SRCDS *</a></li>
                 <li role="presentation"><a title="TF2" href="#tab-tf2" role="tab" data-toggle="tab">TF2</a></li>
                 <li role="presentation"><a title="Tools" href="#tab-tools" role="tab" data-toggle="tab">Tools</a></li>
             </ul>
@@ -71,10 +72,10 @@
 
 
                 <!-- CS:GO Tournament-->
-                <div role="tabpanel" class="tab-pane" id="tab-csgo-tournament">
+                <div role="tabpanel" class="tab-pane" id="tab-csgo-tourney">
                     <div class="row">
                         <br />
-                        <h3>Launch Tourney Server</h3>
+                        <h3>Tourney Server</h3>
                         <form class="form-inline" autocomplete="off">
                             <div class="form-group">
                                 <div class="input-group">
@@ -94,7 +95,7 @@
 
                                 <div class="input-group">
                                     <div class="input-group-addon">Map</div>
-                                    <select name="map" class="form-control csgo-tournament-maps selectCSGOTourneyMaps"></select>
+                                    <select name="csgoTourneyMap" class="form-control csgo-tournament-maps selectCSGOTourneyMaps"></select>
                                 </div>
 
                                 <div class="input-group">
@@ -104,29 +105,42 @@
 
                             </div>
                             <button type="button" class="btn btn-default" onclick="SRCDS.CSGO.LaunchTourney(
-                                            $('#tab-csgo-tournament input[name=bracketID]').val(),
-                                            $('#tab-csgo-tournament input[name=teamCounterTerrorists]').val(),
-                                            $('#tab-csgo-tournament input[name=teamTerrorists]').val(),
-                                            $('#tab-csgo-tournament select[name=map]').val(),
-                                            $('#tab-csgo-tournament select[name=serverIP]').val()
+                                            $('#tab-csgo-tourney input[name=bracketID]').val(),
+                                            $('#tab-csgo-tourney input[name=teamCounterTerrorists]').val(),
+                                            $('#tab-csgo-tourney input[name=teamTerrorists]').val(),
+                                            $('#tab-csgo-tourney select[name=csgoTourneyMap]').val(),
+                                            $('#tab-csgo-tourney select[name=serverIP]').val()
                                             );">Generate</button>
                         </form>
-                        <h3>Execute Overtime</h3>
-                        <br />
-                        <blockquote>
-                            <div class="well">
-                                Launch String: <strong>+exec overtime.cfg</strong>
-                            </div>
-                        </blockquote>
                     </div>
+
+                    <div class="row">
+                        <br />
+                        <h3>Round Restore</h3>
+                        <form class="form-inline" autocomplete="off">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Round</div>
+                                    <select name="csgoRoundRestore" class="form-control selectCSGORoundRestore"></select>
+                                </div>
+                            </div>
+                            <div class="input-group col-md-1">
+                                <button type="button" class="btn btn-default" onclick="SRCDS.CSGO.TourneyRoundRestore(
+                                        $('#tab-csgo-tourney select[name=csgoRoundRestore]').val(),
+                                        );"><span class="fa fa-rocket" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
                 </div>
                 <!-- End CS:GO Tourney-->
 
 
-                <!-- CS:GO * -->
+                <!-- CS:GO Other -->
                 <div role="tabpanel" class="tab-pane" id="tab-csgo-other">
                     <div class="row">
-                        <h3>Launch Client Test CSGO Server</h3>
+                        <h3>Client Test Server</h3>
                     </div>
                     <form class="form-inline" autocomplete="off">
                         <div class="form-group row">
@@ -152,7 +166,7 @@
 
 
                     <div class="row">
-                        <h3>Launch Arms Race Server</h3>
+                        <h3>Arms Race Server</h3>
                     </div>
                     <form class="form-inline" autocomplete="off">
                         <div class="form-group row">
@@ -179,7 +193,7 @@
 
 
                     <div class="row">
-                        <h3>Launch Classic Server</h3>
+                        <h3>Classic Server</h3>
                     </div>
 
                     <form class="form-inline" autocomplete="off">
@@ -208,7 +222,7 @@
 
 
                     <div class="row">
-                        <h3>Launch Deathmatch Server</h3>
+                        <h3>Deathmatch Server</h3>
                     </div>
 
                     <form class="form-inline" autocomplete="off">
@@ -234,11 +248,39 @@
                 </div>
                 <!-- End CS:GO PUG-->
 
-                <!-- HL2DM PUG-->
-                <div role="tabpanel" class="tab-pane" id="tab-hl2dm">
+
+
+                <!-- SRCDS *-->
+                <div role="tabpanel" class="tab-pane" id="tab-srcds">
+
+                <!-- Black Mesa Freeplay -->
+                <div class="row">
+                        <br />
+                        <h3>Black Mesa Freeplay Server</h3>
+                        <form class="form-inline" autocomplete="off">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Map</div>
+                                    <select name="blackMesaMap" class="form-control hl2dm-maps selectBlackMesaMaps"></select>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">Server</div>
+                                    <select name="blackMesaServerIP" class="form-control selectBareMetalServer"></select>
+                                </div>
+
+                            </div>
+                            <button type="button" class="btn btn-default" onclick="SRCDS.BlackMesa.Launch_BlackMesa_Freeplay(
+                                            'Laclede\'s LAN Black Mesa Freeplay',
+                                            $('#tab-srcds select[name=blackMesaMap]').val(),
+                                            $('#tab-srcds select[name=blackMesaServerIP]').val()
+                                        );">Generate</button>
+                        </form>
+                    </div>
+
+                    <!-- HL2DM Freeplay -->
                     <div class="row">
                         <br />
-                        <h3>Launch HL2DM Server</h3>
+                        <h3>Half-Life 2 Deathmatch Freeplay Server</h3>
                         <form class="form-inline" autocomplete="off">
                             <div class="form-group">
                                 <div class="input-group">
@@ -253,18 +295,18 @@
                             </div>
                             <button type="button" class="btn btn-default" onclick="SRCDS.HL2DM.Launch_HL2DM_Freeplay(
                                             'Laclede\'s LAN HL2DM Freeplay',
-                                            $('#tab-hl2dm select[name=hl2dmMap]').val(),
-                                            $('#tab-hl2dm select[name=hl2dmServerIP]').val()
+                                            $('#tab-srcds select[name=hl2dmMap]').val(),
+                                            $('#tab-srcds select[name=hl2dmServerIP]').val()
                                         );">Generate</button>
                         </form>
                     </div>
                 </div>
-                <!-- End HL2DM PUG-->
+                <!-- End SRCDS *-->
 
                 <!-- TF2 PUG-->
                 <div role="tabpanel" class="tab-pane" id="tab-tf2">
                     <div class="row">
-                        <h3>Launch TF2 Freeplay</h3>
+                        <h3>TF2 Freeplay</h3>
                     </div>
                     <form class="form-inline" autocomplete="off">
                         <div class="form-group row">
@@ -292,7 +334,7 @@
 
 
                     <div class="row">
-                        <h3>Launch TF2 Blind Frag</h3>
+                        <h3>TF2 Blind Frag</h3>
                     </div>
                     <form class="form-inline" autocomplete="off">
                         <div class="form-group row">
@@ -322,7 +364,7 @@
 
 
                     <div class="row">
-                        <h3>Launch TF2-Ware</h3>
+                        <h3>TF2-Ware</h3>
                     </div>
                     <form class="form-inline" autocomplete="off">
                         <div class="form-group row">
@@ -354,42 +396,46 @@
                 <!-- END TF2 PUG-->
 
 
-                <!-- Log -->
+                <!-- Tools -->
                 <div role="tabpanel" class="tab-pane" id="tab-tools">
                     <div class="row">
                         <br />
                         <form class="form-inline" id="tools_generatePassword">
                             <h3>Password Generator</h3>
                             <div class="form-group">
-                                <button class="btn btn-default" type="button" onclick="UI_GeneratePassword(
-                                            $('#tab-tools select[name=tools_generatePasswordStrength]').val()
-                                        );"><i class="fa fa-key"></i> Generate a Password</button>
-                                <div class="form-control" id="generatePassword" style="width: 302px;"><i class="fa fa-long-arrow-left"></i> Click to generate a password</div>
-                                <select name="tools_generatePasswordStrength" class="form-control">
-                                        <option value="1">Strength: 1</option>
-                                        <option value="2" selected>Strength: 2 (recommended)</option>
-                                        <option value="3">Strength: 3</option>
-                                        <option value="4">Strength: 4</option>
-                                    </select>
+                                <button class="btn btn-default" type="button" onclick="
+                                    (function () {
+                                        document.querySelector('#tab-tools #generatedPassword').innerHTML = 
+                                            password.generateArray(
+                                                document.querySelector('#tab-tools #strength').value
+                                            ).html();
+                                    })();"><i class="fa fa-key"></i> Generate a Password</button>
+                                <div class="form-control" id="generatedPassword" style="width: 302px;"><i class="fa fa-long-arrow-left"></i> Click to generate a password</div>
+                                <select id="strength" class="form-control">
+                                    <option value="1">Strength: 1</option>
+                                    <option value="2" selected>Strength: 2 (recommended)</option>
+                                    <option value="3">Strength: 3</option>
+                                    <option value="4">Strength: 4</option>
+                                </select>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <!-- End Log -->
+            <!-- End Tools -->
 
         </div>
     </div>
 
     <!-- Modals -->
-    <div class="modal fade" id="modalString" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h3 class="modal-title">Modal title</h3>
+                    <h3 id="displayModalTitle" class="modal-title">Modal title</h3>
                 </div>
-                <div class="modal-body">
+                <div id="displayModalBody" class="modal-body">
                     Modal Body
                 </div>
                 <div class="modal-footer">
@@ -398,43 +444,6 @@
             </div>
         </div>
     </div>
-
-    <script type="text/javascript">
-        function UI_GeneratePassword(strength) {
-            $('#tab-tools #generatePassword').html(prettyPrintArray(generatePasswordArray(strength)));
-        }
-
-        // Prompt user for a rcon password
-        $(document).ready(function () {
-            try {
-                var tmp1, tmp2;
-
-                do {
-                    do {
-                        tmp1 = prompt("Enter RCon password to be used in launch strings:").toLowerCase().trim();
-                    } while (tmp1.length < 1);
-
-                    do {
-                        tmp2 = prompt("Confirm RCon password:").toLowerCase().trim();
-                    } while (tmp2.length < 1);
-
-                    if (tmp1 !== tmp2) {
-                        alert("Passwords must match!");
-                        tmp1 = '';
-                        tmp2 = '';
-                    }
-                } while (tmp1.length < 1);
-
-                RCON_PASS = tmp1;
-                addLogMessage('RCon Password', 'The user has provided a RCon password that will be used whenever generating a server launch string.', 'fa fa-key');
-            } catch (err) {
-                addLogMessage('RCon Password', 'Generated password is: ' + prettyPrintArray(RCON_PASS), 'fa fa-key');
-            }
-
-            addLogMessage('TV Password', 'Generated password is: ' + prettyPrintArray(TV_PASS), 'fa fa-television');
-            
-        });
-    </script>
 
 </body>
 
