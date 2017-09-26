@@ -20,7 +20,7 @@ BareMetal.ServerPool = {
 };
 
 
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function () {
     "use strict";
 
     $(".selectBareMetalServer").each(

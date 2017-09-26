@@ -24,8 +24,8 @@ function generatePasswordArray(strength) {
             // Complete random
             let result = [];
 
-            _.times(6, function () {
-                result.push(Math.random().toString(36).substring(9));
+            _.times(4, function () {
+                result.push(_.truncate(Math.random().toString(36).substring(7), {'length': 4, 'omission': ''}));
             });
 
             return result;
@@ -63,4 +63,10 @@ function prettyPrintArray(valueArray) {
     }
 
     return '</strong>' + html;
+}
+
+function stringIsNullOrEmpty(str) {
+    "use strict";
+
+    return str == null || str.toString().trim().length < 1;
 }

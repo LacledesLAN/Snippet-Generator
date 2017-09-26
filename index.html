@@ -390,19 +390,7 @@
                     <h3 class="modal-title">Modal title</h3>
                 </div>
                 <div class="modal-body">
-                    <h4>Password</h4>
-                    <div class="well" id="serverPassword">N/A</div>
-
-                    <h4>Launch String</h4>
-                    <div class="well" id="serverLaunchString">
-                        launch string goes here
-                    </div>
-
-                    <h4>Client Connect</h4>
-                    <div class="well" id="clientConnectString">
-                        N/A
-                    </div>
-
+                    Modal Body
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -412,42 +400,40 @@
     </div>
 
     <script type="text/javascript">
-                                        function UI_GeneratePassword(strength) {
-                                            $('#tab-tools #generatePassword').html(prettyPrintArray(generatePasswordArray(strength)));
-                                        }
+        function UI_GeneratePassword(strength) {
+            $('#tab-tools #generatePassword').html(prettyPrintArray(generatePasswordArray(strength)));
+        }
 
-                                        // Prompt user for a rcon password
-                                        $(document).ready(function () {
-                                            try {
-                                                var tmp1, tmp2;
+        // Prompt user for a rcon password
+        $(document).ready(function () {
+            try {
+                var tmp1, tmp2;
 
-                                                do {
-                                                    do {
-                                                        tmp1 = prompt("Enter RCon password to be used in launch strings:").toLowerCase().trim();
-                                                    } while (tmp1.length < 1);
+                do {
+                    do {
+                        tmp1 = prompt("Enter RCon password to be used in launch strings:").toLowerCase().trim();
+                    } while (tmp1.length < 1);
 
-                                                    do {
-                                                        tmp2 = prompt("Confirm RCon password:").toLowerCase().trim();
-                                                    } while (tmp2.length < 1);
+                    do {
+                        tmp2 = prompt("Confirm RCon password:").toLowerCase().trim();
+                    } while (tmp2.length < 1);
 
-                                                    if (tmp1 !== tmp2) {
-                                                        alert("Passwords must match!");
-                                                        tmp1 = '';
-                                                        tmp2 = '';
-                                                    }
-                                                } while (tmp1.length < 1);
+                    if (tmp1 !== tmp2) {
+                        alert("Passwords must match!");
+                        tmp1 = '';
+                        tmp2 = '';
+                    }
+                } while (tmp1.length < 1);
 
-                                                RCON_PASS = tmp1;
-                                                addLogMessage('RCon Password', 'The user has provided a RCon password that will be used whenever generating a server launch string.', 'fa fa-key');
-                                            } catch (err) {
+                RCON_PASS = tmp1;
+                addLogMessage('RCon Password', 'The user has provided a RCon password that will be used whenever generating a server launch string.', 'fa fa-key');
+            } catch (err) {
+                addLogMessage('RCon Password', 'Generated password is: ' + prettyPrintArray(RCON_PASS), 'fa fa-key');
+            }
 
-                                                var tempPass = generatePasswordArray(3);
-
-                                                RCON_PASS = tempPass.join('');
-
-                                                addLogMessage('RCon Password', 'Generated password is: ' + prettyPrintArray(tempPass), 'fa fa-key');
-                                            }
-                                        });
+            addLogMessage('TV Password', 'Generated password is: ' + prettyPrintArray(TV_PASS), 'fa fa-television');
+            
+        });
     </script>
 
 </body>
