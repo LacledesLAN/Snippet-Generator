@@ -26,7 +26,7 @@ function addLogMessage(what, details, icon) {
     let rowIcon = row.insertCell();
     let iconHtml = document.createElement("i");
     iconHtml.className += icon;
-    rowIcon.append(iconHtml);
+    rowIcon.appendChild(iconHtml);
 
     let rowWhat = row.insertCell();
     rowWhat.innerHTML = what;
@@ -56,11 +56,15 @@ function getRandomTeamName() {
     return _.sample(teams);
 };
 
-function modalFormatCommands(command, args, nestedCommand = []) {
-    function nest(command, args, nestedCommand = []) {
+function modalFormatCommands(command, args, nestedCommand) {
+    function nest(command, args, nestedCommand) {
         let rString = '<span>';
         rString += '<command>' + command + '</command>';
         rString += '<arguments>' + args + '</arguments>';
+
+        if (nestedCommand === undefined || nestedCommand === null) {
+            nestedCommand = [];
+        }
 
         if (nestedCommand.length > 0) {
             rString += nest(nestedCommand[0], nestedCommand[1], nestedCommand[2]);

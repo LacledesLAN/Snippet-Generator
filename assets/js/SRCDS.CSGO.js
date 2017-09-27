@@ -403,7 +403,7 @@ SRCDS.CSGO.TourneyRoundRestore = function (roundNumber) {
 document.addEventListener('DOMContentLoaded', function () {
     "use strict";
 
-    document.querySelectorAll(".selectCSGOArmsRaceMaps").forEach(function (selectControl) {
+    Array.prototype.forEach.call(document.querySelectorAll(".selectCSGOArmsRaceMaps"), function (selectControl) {
         let option;
         SRCDS.CSGO.MapsArmsRace.forEach(function (mapName) {
             option = document.createElement("option");
@@ -412,7 +412,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    document.querySelectorAll(".selectCSGOClassicMaps").forEach(function (selectControl) {
+    Array.prototype.forEach.call(document.querySelectorAll(".selectCSGOClassicMaps"), function (selectControl) {
         SRCDS.CSGO.MapsClassic.forEach(function (mapName) {
             let option = document.createElement("option");
             option.text = mapName;
@@ -420,7 +420,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    document.querySelectorAll(".selectCSGODeathmatchMaps").forEach(function (selectControl) {
+    Array.prototype.forEach.call(document.querySelectorAll(".selectCSGODeathmatchMaps"), function (selectControl) {
         SRCDS.CSGO.MapsDeathmatch.forEach(function (mapName) {
             let option = document.createElement("option");
             option.text = mapName;
@@ -428,7 +428,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    document.querySelectorAll(".selectCSGOTestMaps").forEach(function (selectControl) {
+    Array.prototype.forEach.call(document.querySelectorAll(".selectCSGOTestMaps"), function (selectControl) {
         let selectedMap = _.sample(SRCDS.CSGO.MapsTest);
 
         SRCDS.CSGO.MapsTest.forEach(function (mapName) {
@@ -441,7 +441,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    document.querySelectorAll(".selectCSGOTourneyMaps").forEach(function (selectControl) {
+    Array.prototype.forEach.call(document.querySelectorAll(".selectCSGOTourneyMaps"), function (selectControl) {
         SRCDS.CSGO.MapsTourney.forEach(function (mapName) {
             let option = document.createElement("option");
             option.text = mapName;
@@ -449,7 +449,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    document.querySelectorAll(".selectCSGORoundRestore").forEach(function (selectControl) {
+    Array.prototype.forEach.call(document.querySelectorAll(".selectCSGORoundRestore"), function (selectControl) {
         let option;
 
         for (let i = 0; i < 30; i++) {

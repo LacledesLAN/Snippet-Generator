@@ -66,7 +66,7 @@ SRCDS.BlackMesa.Launch_BlackMesa_Freeplay = function (hostname, map, ip) {
 document.addEventListener('DOMContentLoaded', function () {
     "use strict";
 
-    document.querySelectorAll(".selectBlackMesaMaps").forEach(function (selectControl) {
+    Array.prototype.forEach.call(document.querySelectorAll(".selectBlackMesaMaps"), function (selectControl) {
         let selectedMap = _.sample(SRCDS.BlackMesa.Maps);
 
         SRCDS.BlackMesa.Maps.forEach(function (mapName) {

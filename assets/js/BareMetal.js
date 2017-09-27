@@ -20,11 +20,12 @@ BareMetal.Servers.Test = {
     "DUDLEY TEST Ozzie":    ["172.30.10.12", "172.30.10.13"]
 };
 
+  
 document.addEventListener('DOMContentLoaded', function () {
     "use strict";
 
     // Add all bare metal servers to appropriate html select controls
-    document.querySelectorAll(".selectBareMetalServer").forEach(function (selectControl) {
+    Array.prototype.forEach.call(document.querySelectorAll(".selectBareMetalServer"), function (selectControl) {
         let option;
 
         Object.keys(BareMetal.Servers).forEach(function (environment, index) {

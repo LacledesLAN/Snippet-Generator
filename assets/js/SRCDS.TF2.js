@@ -202,7 +202,7 @@ SRCDS.TF2.LaunchWare = function (hostname, mapcycle, ip) {
 document.addEventListener('DOMContentLoaded', function () {
     "use strict";
 
-    document.querySelectorAll(".selectTF2MapCycles").forEach(function (selectControl) {
+    Array.prototype.forEach.call(document.querySelectorAll(".selectTF2MapCycles"), function (selectControl) {
         SRCDS.TF2.MapCycles.forEach(function (mapCycleName) {
             let option = document.createElement("option");
             option.text = mapCycleName;

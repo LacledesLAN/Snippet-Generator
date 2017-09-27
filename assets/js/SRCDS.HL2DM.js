@@ -70,7 +70,7 @@ SRCDS.HL2DM.Launch_HL2DM_Freeplay = function (hostname, map, ip) {
 document.addEventListener('DOMContentLoaded', function () {
     "use strict";
 
-    document.querySelectorAll(".selectHL2DMMaps").forEach(function (selectControl) {
+    Array.prototype.forEach.call(document.querySelectorAll(".selectHL2DMMaps"), function (selectControl) {
         SRCDS.HL2DM.Maps.forEach(function (mapName) {
             let option = document.createElement("option");
             option.text = mapName;
