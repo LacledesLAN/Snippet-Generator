@@ -381,7 +381,7 @@ SRCDS.CSGO.LaunchTourney = function (bracketID, team1, team2, map, ip) {
 SRCDS.CSGO.TourneyRoundRestore = function (roundNumber) {
     "use strict";
 
-    let filename = 'LL_round' + _.padStart(roundNumber, 2, '0'),
+    let filename = 'LL_round' + _.padStart(roundNumber - 1, 2, '0'),
         restoreCommand = '';
 
     restoreCommand += 'mp_backup_restore_load_file ' + filename + '; ';
@@ -395,7 +395,7 @@ SRCDS.CSGO.TourneyRoundRestore = function (roundNumber) {
         }
     );
 
-    addLogMessage('CSGO Tourney Round Restore', restoreCommand);
+    addLogMessage('CSGO Tourney Round ' + roundNumber + ' Restore', restoreCommand);
 };
 
 
@@ -455,7 +455,7 @@ document.addEventListener('DOMContentLoaded', function () {
         for (let i = 0; i < 30; i++) {
             option = document.createElement("option");
             option.text = _.padStart(i + 1, 2, '0');
-            option.value = i;
+            option.value = i + 1;
             selectControl.add(option);
         }
     });

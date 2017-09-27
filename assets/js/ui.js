@@ -33,7 +33,7 @@ function addLogMessage(what, details, icon) {
 
     let rowDetails = row.insertCell();
     rowDetails.innerHTML = details;
-}
+};
 
 function getRandomTeamName() {
     let teams = ['Bad News Bears', 'Bedrock Boulders', 'Capital Congressmen', 'The Electabuzz', 'Hackensack Bulls', 'Hadley Saints', 'The Magikarp', 'Miami Gators', 'O-Town Zeros',
@@ -52,7 +52,9 @@ function getRandomTeamName() {
             'Mean Machine', 'Miami Bucks', 'Nassau Rebels', 'Park City Pirates', 'Polk School Panthers', 'Raccoon Sharks', 'Roadrunners', 'The Turbos', 'Washington Sentinels',
             'Vice City Mambas', 'Endsville Fluffycats', 'Cleveland Cats', 'San Francisco Treat', 'Metropolis Sharks', 'Smallville Crows', 'New York Mammoths', 'San Francisco Skyhawks',
             'South Park Cows'];
-}
+
+    return _.sample(teams);
+};
 
 function modalFormatCommands(command, args, nestedCommand = []) {
     function nest(command, args, nestedCommand = []) {
@@ -74,7 +76,7 @@ function modalFormatCommands(command, args, nestedCommand = []) {
     returnStr += '</div>';
 
     return returnStr;
-}
+};
 
 UI.displayModal = function (title, tuples) {
     "use strict";
@@ -120,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         } while (tmp1.length < 1);
 
-        RCON_PASS = tmp1;
+        RCON_PASS = password.fromArray([tmp1]);
         addLogMessage('RCon Password', 'The user has provided a RCon password that will be used whenever generating a server launch string.', 'fa fa-key');
     } catch (err) {
         addLogMessage('RCon Password', 'Generated password is: ' + RCON_PASS.html(), 'fa fa-key');
