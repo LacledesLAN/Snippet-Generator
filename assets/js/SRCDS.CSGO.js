@@ -391,7 +391,8 @@ SRCDS.CSGO.TourneyRoundRestore = function (roundNumber) {
     UI.displayModal(
         "CSGO Tourney Round Restore",
         {
-            "Round restore command": restoreCommand
+            "Round Restore": restoreCommand,
+            "Unpause After Round Restore (all players ready)": "mp_unpause_match"
         }
     );
 
