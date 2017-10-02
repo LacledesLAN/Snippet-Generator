@@ -20,7 +20,7 @@ BareMetal.Servers.Test = {
     "DUDLEY TEST Ozzie":    ["172.30.10.12", "172.30.10.13"]
 };
 
-  
+
 document.addEventListener('DOMContentLoaded', function () {
     "use strict";
 
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     option.value = ip;
                     selectControl.add(option);
                 });
-            });         
+            });
         });
     });
 });

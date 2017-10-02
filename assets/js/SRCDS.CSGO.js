@@ -22,359 +22,288 @@ SRCDS.CSGO.MapsTourney = ["de_cache", "de_cbble", "de_inferno", "de_nuke", "de_m
 SRCDS.CSGO.LaunchArmsRace = function (hostname, map, ip) {
     "use strict";
 
-    let clientConnectString = 'N/A',
-        dockerCommand = 'docker run -d ',
-        dockerContainerName = Docker.GenerateContainerName("CSGOArms"),
-        dockerArgs = '',
-        serverLaunchString = '',
-        srcdsCommand = './srcds_run ',
+    let dockerArgs = '',
         srcdsArgs = '';
 
-    do {
-        hostname = (hostname)
-            ? String(hostname)
-            : 'LL Arms Race Server';
-        hostname = hostname.split(' ').join('_');
+    hostname = (hostname) ? String(hostname) : 'LL Arms Race Server';
+    hostname = hostname.split(' ').join('_');
 
-        if (!map) {
-            alert('ERROR - NO MAP WAS SPECIFIED!');
-            break;
+    if (!map) {
+        alert('ERROR - NO MAP WAS SPECIFIED!');
+        return;
+    }
+
+    if (!ip) {
+        alert('ERROR - NO SERVER WAS SPECIFIED!');
+        return;
+    }
+
+    // Docker Command
+    dockerArgs += '--name ' + Docker.GenerateContainerName("CSGOArms") + ' ';
+    dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
+    dockerArgs += 'lacledeslan/gamesvr-csgo-freeplay ';
+
+    // CSGO Arms Race Server Specific
+    srcdsArgs = '-game csgo ';
+    srcdsArgs += '-console ';
+    srcdsArgs += '+game_type 1 ';
+    srcdsArgs += '+game_mode 0 ';
+    srcdsArgs += '-usercon ';
+    srcdsArgs += '-tickrate 128 ';
+    srcdsArgs += '+mapgroup ll_arms ';
+    srcdsArgs += '+map ' + map + ' ';
+    srcdsArgs += '-maxplayers_override 16 ';
+    srcdsArgs += '+hostname "' + hostname + '" ';
+    srcdsArgs += '+sv_lan 1 ';
+    srcdsArgs += '+rcon_password "' + RCON_PASS.join('') + '" ';
+
+    UI.displayModal(
+        "CSGO Arms Race",
+        {
+            "Launch String": UI.formatCommands('docker run -d ', dockerArgs, ['./srcds_run ', srcdsArgs]),
+            "Client Connect": 'connect ' + ip + ':27015'
         }
-
-        if (!ip) {
-            alert('ERROR - NO SERVER WAS SPECIFIED!');
-            break;
-        }
-
-        // Docker Command
-        dockerArgs += '--name ' + dockerContainerName + ' ';
-        dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
-        dockerArgs += 'lacledeslan/gamesvr-csgo-freeplay ';
-
-        // CSGO Arms Race Server Specific
-        srcdsArgs = '-game csgo ';
-        srcdsArgs += '-console ';
-        srcdsArgs += '+game_type 1 ';
-        srcdsArgs += '+game_mode 0 ';
-        srcdsArgs += '-usercon ';
-        srcdsArgs += '-tickrate 128 ';
-        srcdsArgs += '+mapgroup ll_arms ';
-        srcdsArgs += '+map ' + map + ' ';
-        srcdsArgs += '-maxplayers_override 16 ';
-        srcdsArgs += '+hostname "' + hostname + '" ';
-        srcdsArgs += '+sv_lan 1 ';
-        srcdsArgs += '+rcon_password "' + RCON_PASS.join('') + '" ';
-
-        serverLaunchString = modalFormatCommands(dockerCommand, dockerArgs, [srcdsCommand, srcdsArgs]);
-
-        clientConnectString = 'connect ' + ip + ':27015';
-
-        UI.displayModal(
-            "CSGO Arms Race",
-            {
-                "Launch String": serverLaunchString,
-                "Client Connect": clientConnectString
-            }
-        );
-
-        addLogMessage('CSGO Arms Race', serverLaunchString);
-
-    } while (false);
+    );
 };
 
 
 SRCDS.CSGO.LaunchClassic = function (hostname, map, ip) {
     "use strict";
 
-    let clientConnectString = 'N/A',
-        dockerCommand = 'docker run -d ',
-        dockerArgs = '',
-        dockerContainerName = Docker.GenerateContainerName("CSGOClassic"),
-        serverLaunchString = '',
-        srcdsCommand = './srcds_run ',
+    let dockerArgs = '',
         srcdsArgs = '';
 
-    do {
-        hostname = (hostname)
-            ? String(hostname)
-            : 'LL Classic Server';
-        hostname = hostname.split(' ').join('_');
+    hostname = (hostname) ? String(hostname) : 'LL Classic Server';
+    hostname = hostname.split(' ').join('_');
 
-        if (!map) {
-            alert('ERROR - NO MAP WAS SPECIFIED!');
-            break;
+    if (!map) {
+        alert('ERROR - NO MAP WAS SPECIFIED!');
+        return;
+    }
+
+    if (!ip) {
+        alert('ERROR - NO SERVER WAS SPECIFIED!');
+        return;
+    }
+
+    // Docker Args
+    dockerArgs += '--name ' + Docker.GenerateContainerName("CSGOClassic") + ' ';
+    dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
+    dockerArgs += 'lacledeslan/gamesvr-csgo-freeplay ';
+
+    // CSGO Classic Server Specific
+    srcdsArgs += '-game csgo ';
+    srcdsArgs += '-console ';
+    srcdsArgs += '+game_type 0 ';
+    srcdsArgs += '+game_mode 0 ';
+    srcdsArgs += '-usercon ';
+    srcdsArgs += '-tickrate 128 ';
+    srcdsArgs += '+mapgroup ll_bombhostage ';
+    srcdsArgs += '+map ' + map + ' ';
+    srcdsArgs += '-maxplayers_override 16 ';
+    srcdsArgs += '+hostname "' + hostname + '" ';
+    srcdsArgs += '+sv_lan 1 ';
+    srcdsArgs += '+rcon_password "' + RCON_PASS.join('') + '" ';
+
+    UI.displayModal(
+        "CSGO Classic",
+        {
+            "Launch String": UI.formatCommands('docker run -d ', dockerArgs, ['./srcds_run ', srcdsArgs]),
+            "Client Connect": 'connect ' + ip + ':27015'
         }
-
-        if (!ip) {
-            alert('ERROR - NO SERVER WAS SPECIFIED!');
-            break;
-        }
-
-        // Docker Args
-        dockerArgs += '--name ' + dockerContainerName + ' ';
-        dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
-        dockerArgs += 'lacledeslan/gamesvr-csgo-freeplay ';
-
-        // CSGO Classic Server Specific
-        srcdsArgs += '-game csgo ';
-        srcdsArgs += '-console ';
-        srcdsArgs += '+game_type 0 ';
-        srcdsArgs += '+game_mode 0 ';
-        srcdsArgs += '-usercon ';
-        srcdsArgs += '-tickrate 128 ';
-        srcdsArgs += '+mapgroup ll_bombhostage ';
-        srcdsArgs += '+map ' + map + ' ';
-        srcdsArgs += '-maxplayers_override 16 ';
-        srcdsArgs += '+hostname "' + hostname + '" ';
-        srcdsArgs += '+sv_lan 1 ';
-        srcdsArgs += '+rcon_password "' + RCON_PASS.join('') + '" ';
-
-        serverLaunchString = modalFormatCommands(dockerCommand, dockerArgs, [srcdsCommand, srcdsArgs]);
-
-        clientConnectString = 'connect ' + ip + ':27015';
-
-        UI.displayModal(
-            "CSGO Classic",
-            {
-                "Launch String": serverLaunchString,
-                "Client Connect": clientConnectString
-            }
-        );
-
-        addLogMessage('CSGO Classic', serverLaunchString);
-    } while (false);
+    );
 };
 
 
 SRCDS.CSGO.LaunchDeathmatch = function (hostname, map, ip) {
     "use strict";
 
-    let clientConnectString = 'N/A',
-        dockerCommand = 'docker run -d ',
-        dockerArgs = '',
-        dockerContainerName = Docker.GenerateContainerName("CSGODeathmatch"),
-        serverLaunchString = '',
-        srcdsCommand = './srcds_run ',
+    let dockerArgs = '',
         srcdsArgs = '';
 
-    do {
-        hostname = (hostname)
-            ? String(hostname)
-            : 'LL Team Deathmatch Server';
-        hostname = hostname.split(' ').join('_');
+    hostname = (hostname) ? String(hostname) : 'LL Team Deathmatch Server';
+    hostname = hostname.split(' ').join('_');
 
-        if (!map) {
-            alert('ERROR - NO MAP WAS SPECIFIED!');
-            break;
+    if (!map) {
+        alert('ERROR - NO MAP WAS SPECIFIED!');
+        return;
+    }
+
+    if (!ip) {
+        alert('ERROR - NO SERVER WAS SPECIFIED!');
+        return;
+    }
+
+    // Docker Args
+    dockerArgs += '--name ' + Docker.GenerateContainerName("CSGODeathmatch") + ' ';
+    dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
+    dockerArgs += 'lacledeslan/gamesvr-csgo-freeplay ';
+
+    // CSGO Classic Server Specific
+    srcdsArgs += '-port 27015 ';
+    srcdsArgs += '-game csgo ';
+    srcdsArgs += '-console ';
+    srcdsArgs += '+game_type 1 ';
+    srcdsArgs += '+game_mode 2 ';
+    srcdsArgs += '-usercon ';
+    srcdsArgs += '-tickrate 128 ';
+    srcdsArgs += '+mapgroup mg_deathmatch ';
+    srcdsArgs += '+map ' + map + ' ';
+    srcdsArgs += '-maxplayers_override 16 ';
+    srcdsArgs += '+hostname "' + hostname + '" ';
+    srcdsArgs += '+sv_lan 1 ';
+    srcdsArgs += '+rcon_password "' + RCON_PASS.join('') + '" ';
+
+    UI.displayModal(
+        "CSGO Deathmatch",
+        {
+            "Launch String": UI.formatCommands('docker run -d ', dockerArgs, ['./srcds_run ', srcdsArgs]),
+            "Client Connect": 'connect ' + ip + ':27015'
         }
-
-        if (!ip) {
-            alert('ERROR - NO SERVER WAS SPECIFIED!');
-            break;
-        }
-
-        // Docker Args
-        dockerArgs += '--name ' + dockerContainerName + ' ';
-        dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
-        dockerArgs += 'lacledeslan/gamesvr-csgo-freeplay ';
-
-        // CSGO Classic Server Specific
-        srcdsArgs += './srcds_run ';
-        srcdsArgs += '-port 27015 ';
-        srcdsArgs += '-game csgo ';
-        srcdsArgs += '-console ';
-        srcdsArgs += '+game_type 1 ';
-        srcdsArgs += '+game_mode 2 ';
-        srcdsArgs += '-usercon ';
-        srcdsArgs += '-tickrate 128 ';
-        srcdsArgs += '+mapgroup mg_deathmatch ';
-        srcdsArgs += '+map ' + map + ' ';
-        srcdsArgs += '-maxplayers_override 16 ';
-        srcdsArgs += '+hostname "' + hostname + '" ';
-        srcdsArgs += '+sv_lan 1 ';
-        srcdsArgs += '+rcon_password "' + RCON_PASS.join('') + '" ';
-
-        serverLaunchString = modalFormatCommands(dockerCommand, dockerArgs, [srcdsCommand, srcdsArgs]);
-
-        clientConnectString = 'connect ' + ip + ':27015';
-
-        UI.displayModal(
-            "CSGO Deathmatch",
-            {
-                "Launch String": serverLaunchString,
-                "Client Connect": clientConnectString
-            }
-        );
-
-        addLogMessage('CSGO Deathmatch', serverLaunchString);
-    } while (false);
+    );
 };
 
 
 SRCDS.CSGO.LaunchClientTest = function (map, ip) {
     "use strict";
 
-    let clientConnectString = '',
-        dockerArgs = '',
-        dockerCommand = 'docker run -d ',
-        dockerContainerName = Docker.GenerateContainerName("CSGOTest"),
+    let dockerArgs = '',
         hostname = "CSGO Client Test Server",
-        serverLaunchString = '',
         srcdsArgs = '',
-        srcdsCommand = './srcds_run ',
-        team1 = "Isotopes".trim(),
-        team2 = "Gotham Rogues".trim();
+        team1 = "Isotopes",
+        team2 = "Gotham Rogues";
 
-    do {
-        if (!map) {
-            alert('ERROR - NO MAP WAS SPECIFIED!');
-            break;
+    if (!map) {
+        alert('ERROR - NO MAP WAS SPECIFIED!');
+        return;
+    }
+
+    if (!ip) {
+        alert('ERROR - NO SERVER WAS SELECTED');
+        return;
+    }
+
+    ip = ip.toString().trim();
+
+    hostname = hostname.split(' ').join('_');
+
+    // Docker Command
+    dockerArgs += '--name ' + Docker.GenerateContainerName("CSGOTest") + ' ';
+    dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
+    dockerArgs += 'lacledeslan/gamesvr-csgo-test ';
+
+    // SRCDS Command
+    srcdsArgs = '-port 27015 ';
+    srcdsArgs += '-game csgo ';
+    srcdsArgs += '+game_type 0 ';
+    srcdsArgs += '+game_mode 1 ';
+    srcdsArgs += '-tickrate 128 ';
+    srcdsArgs += '-console ';
+    srcdsArgs += '-usercon ';
+    srcdsArgs += '+mapgroup ll_orange ';
+    srcdsArgs += '+map ' + map + ' ';
+    srcdsArgs += '+hostname "' + hostname + '" ';
+    srcdsArgs += '+sv_lan 1 ';
+    srcdsArgs += '+mp_teamname_1 "' + team1 + '" ';
+    srcdsArgs += '+mp_teamname_2 "' + team2 + '" ';
+    srcdsArgs += '+rcon_password "' + RCON_PASS.join('') + '" ';
+    srcdsArgs += '-maxplayers_override 16 ';
+
+    UI.displayModal(
+        "CSGO Client Test",
+        {
+            "Launch String": UI.formatCommands('docker run -d ', dockerArgs, ['./srcds_run ', srcdsArgs]),
+            "Client Connect": 'connect ' + ip + ':27015'
         }
-
-        if (!ip) {
-            alert('ERROR - NO SERVER WAS SELECTED');
-            break;
-        }
-
-        ip = ip.toString().trim();
-
-        hostname = hostname.split(' ').join('_');
-
-        // Docker Command
-        dockerArgs += '--name ' + dockerContainerName + ' ';
-        dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
-        dockerArgs += 'lacledeslan/gamesvr-csgo-test ';
-
-        // SRCDS Command
-        srcdsArgs = '-port 27015 ';
-        srcdsArgs += '-game csgo ';
-        srcdsArgs += '+game_type 0 ';
-        srcdsArgs += '+game_mode 1 ';
-        srcdsArgs += '-tickrate 128 ';
-        srcdsArgs += '-console ';
-        srcdsArgs += '-usercon ';
-        srcdsArgs += '+mapgroup ll_orange ';
-        srcdsArgs += '+map ' + map + ' ';
-        srcdsArgs += '+hostname "' + hostname + '" ';
-        srcdsArgs += '+sv_lan 1 ';
-        srcdsArgs += '+mp_teamname_1 "' + team1 + '" ';
-        srcdsArgs += '+mp_teamname_2 "' + team2 + '" ';
-        srcdsArgs += '+rcon_password "' + RCON_PASS.join('') + '" ';
-        srcdsArgs += '-maxplayers_override 16 ';
-
-        serverLaunchString = modalFormatCommands(dockerCommand, dockerArgs, [srcdsCommand, srcdsArgs]);
-
-        clientConnectString = 'connect ';
-        clientConnectString += ip + ':27015';
-
-        UI.displayModal(
-            "CSGO Client Test",
-            {
-                "Launch String": serverLaunchString,
-                "Client Connect": clientConnectString
-            }
-        );
-
-        addLogMessage('CSGO Client Test', serverLaunchString);
-    } while (false);
+    );
 };
 
 
 SRCDS.CSGO.LaunchTourney = function (bracketID, team1, team2, map, ip) {
     "use strict";
 
-    let clientConnectString = '',
-        dockerArgs = '',
-        dockerComand = 'docker run -d ',
-        dockerContainerName = Docker.GenerateContainerName("CSGOTourn" + bracketID),
+    let dockerArgs = '',
+    dockerContainerName = Docker.GenerateContainerName("CSGOTourn" + bracketID),
         hostname = "",
         pass = password.generateArray(),
-        serverLaunchString = '',
         srcdsArgs = '',
-        srcdsCommand = './srcds_run ',
         tvConnectString = '';
 
-    do {
-        if (stringIsNullOrEmpty(bracketID)) {
-            alert('Bracket ID was left empty!');
-            break;
-        } else if (!isWholeNumber(bracketID)) {
-            alert('Bracket ID must be a positive whole number!');
-            break;
-        } else {
-            bracketID = _.padStart(bracketID.toString().trim(), 2, "0");
+    if (stringIsNullOrEmpty(bracketID)) {
+        alert('Bracket ID was left empty!');
+        return;
+    }
+
+    if (!isWholeNumber(bracketID)) {
+        alert('Bracket ID must be a positive whole number!');
+        return;
+    }
+
+    bracketID = _.padStart(bracketID.toString().trim(), 2, "0");
+
+    team1 = team1.trim();
+    if (String(team1).length < 1) {
+        alert('Team 1 was left empty!');
+        return;
+    }
+
+    team2 = team2.trim();
+    if (String(team2).length < 1) {
+        alert('Team 2 was left empty!');
+        return;
+    }
+
+    if (!map) {
+        alert('ERROR - NO MAP WAS SPECIFIED!');
+        return;
+    }
+
+    ip = ip.trim();
+
+    // Generate hostname
+    if (team1 !== undefined || team2 !== undefined) {
+        team1 = String(team1 || 'Unknown');
+        team2 = String(team2 || 'Unknown');
+        hostname = 'CSGO Match ' + bracketID + ' ' + team1 + ' v ' + team2;
+    }
+
+    hostname = hostname.split(' ').join('_');
+
+    // Docker Args
+    dockerArgs += '--name ' + dockerContainerName + ' ';
+    dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
+    dockerArgs += '-v /home/sysoper/logs/' + dockerContainerName + ':/app/bin/csgo/logs ';
+    dockerArgs += '-v /home/sysoper/logs/' + dockerContainerName + '/warmod:/app/bin/csgo/addons/sourcemod/logs ';
+    dockerArgs += 'lacledeslan/gamesvr-csgo-tourney ';
+
+    // CS:GO Tournament Server Specific
+    srcdsArgs = '-game csgo ';
+    srcdsArgs += '+game_type 0 ';
+    srcdsArgs += '+game_mode 1 ';
+    srcdsArgs += '-tickrate 128 ';
+    srcdsArgs += '-console ';
+    srcdsArgs += '-usercon ';
+    srcdsArgs += '+map ' + map + ' ';
+    srcdsArgs += '+hostname "' + hostname + '" ';
+    srcdsArgs += '+sv_password "' + pass.join('') + '" ';
+    srcdsArgs += '+sv_lan 1 ';
+    srcdsArgs += '+mp_teamname_1 "' + team1 + '" ';
+    srcdsArgs += '+mp_teamname_2 "' + team2 + '" ';
+    srcdsArgs += '+rcon_password "' + RCON_PASS.join('') + '" ';
+    srcdsArgs += '+tv_name "zLLTV_CSGO_BRACKET_' + bracketID + '" ';
+    srcdsArgs += '+tv_password "' + TV_PASS.join('') + '" ';
+    srcdsArgs += '+tv_relaypassword "' + TV_PASS.join('') + '" ';
+
+    tvConnectString = 'connect ' + ip + ':27020; password ' + TV_PASS.html();
+
+    UI.displayModal(
+        "CSGO Tourney",
+        {
+            "Launch String": UI.formatCommands('docker run -d ', dockerArgs, ['./srcds_run ', srcdsArgs]),
+            "Client Connect": 'connect ' + ip + ':27015; ' + 'password ' + pass.html(),
+            "TV Connect": tvConnectString
         }
-
-        team1 = team1.trim();
-        if (String(team1).length < 1) {
-            alert('Team 1 was left empty!');
-            break;
-        }
-
-        team2 = team2.trim();
-        if (String(team2).length < 1) {
-            alert('Team 2 was left empty!');
-            break;
-        }
-
-        if (!map) {
-            alert('ERROR - NO MAP WAS SPECIFIED!');
-            break;
-        }
-
-        ip = ip.trim();
-
-        // Generate hostname
-        if (team1 !== undefined || team2 !== undefined) {
-            team1 = String(team1 || 'Unknown');
-            team2 = String(team2 || 'Unknown');
-            hostname = 'CSGO Match ' + bracketID + ' ' + team1 + ' v ' + team2;
-        }
-
-        hostname = hostname.split(' ').join('_');
-
-        // Docker Args
-        dockerArgs += '--name ' + dockerContainerName + ' ';
-        dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
-        dockerArgs += '-v /home/sysoper/logs/' + dockerContainerName + ':/app/bin/csgo/logs ';
-        dockerArgs += '-v /home/sysoper/logs/' + dockerContainerName + '/warmod:/app/bin/csgo/addons/sourcemod/logs ';
-        dockerArgs += 'lacledeslan/gamesvr-csgo-tourney ';
-
-        // CS:GO Tournament Server Specific
-        srcdsArgs = '-game csgo ';
-        srcdsArgs += '+game_type 0 ';
-        srcdsArgs += '+game_mode 1 ';
-        srcdsArgs += '-tickrate 128 ';
-        srcdsArgs += '-console ';
-        srcdsArgs += '-usercon ';
-        srcdsArgs += '+map ' + map + ' ';
-        srcdsArgs += '+hostname "' + hostname + '" ';
-        srcdsArgs += '+sv_password "' + pass.join('') + '" ';
-        srcdsArgs += '+sv_lan 1 ';
-        srcdsArgs += '+mp_teamname_1 "' + team1 + '" ';
-        srcdsArgs += '+mp_teamname_2 "' + team2 + '" ';
-        srcdsArgs += '+rcon_password "' + RCON_PASS.join('') + '" ';
-        srcdsArgs += '+tv_name "zLLTV_CSGO_BRACKET_' + bracketID + '" ';
-        srcdsArgs += '+tv_password "' + TV_PASS.join('') + '" ';
-        srcdsArgs += '+tv_relaypassword "' + TV_PASS.join('') + '" ';
-
-        serverLaunchString = modalFormatCommands(dockerComand, dockerArgs, [srcdsCommand, srcdsArgs]);
-
-        clientConnectString = 'connect ' + ip + ':27015; ' + 'password ' + pass.html();
-
-        tvConnectString = 'connect ' + ip + ':27020; password ' + TV_PASS.html();
-
-        UI.displayModal(
-            "CSGO Tourney",
-            {
-                "Launch String": serverLaunchString,
-                "Client Connect": clientConnectString,
-                "TV Connect": tvConnectString
-            }
-        );
-
-        addLogMessage('CSGO Tourney', serverLaunchString);
-    } while (false);
+    );
 };
 
 
@@ -395,8 +324,6 @@ SRCDS.CSGO.TourneyRoundRestore = function (roundNumber) {
             "Unpause After Round Restore (all players ready)": "mp_unpause_match"
         }
     );
-
-    addLogMessage('CSGO Tourney Round ' + roundNumber + ' Restore', restoreCommand);
 };
 
 
@@ -404,51 +331,11 @@ SRCDS.CSGO.TourneyRoundRestore = function (roundNumber) {
 document.addEventListener('DOMContentLoaded', function () {
     "use strict";
 
-    Array.prototype.forEach.call(document.querySelectorAll(".selectCSGOArmsRaceMaps"), function (selectControl) {
-        let option;
-        SRCDS.CSGO.MapsArmsRace.forEach(function (mapName) {
-            option = document.createElement("option");
-            option.text = mapName;
-            selectControl.add(option);
-        });
-    });
-
-    Array.prototype.forEach.call(document.querySelectorAll(".selectCSGOClassicMaps"), function (selectControl) {
-        SRCDS.CSGO.MapsClassic.forEach(function (mapName) {
-            let option = document.createElement("option");
-            option.text = mapName;
-            selectControl.add(option);
-        });
-    });
-
-    Array.prototype.forEach.call(document.querySelectorAll(".selectCSGODeathmatchMaps"), function (selectControl) {
-        SRCDS.CSGO.MapsDeathmatch.forEach(function (mapName) {
-            let option = document.createElement("option");
-            option.text = mapName;
-            selectControl.add(option);
-        });
-    });
-
-    Array.prototype.forEach.call(document.querySelectorAll(".selectCSGOTestMaps"), function (selectControl) {
-        let selectedMap = _.sample(SRCDS.CSGO.MapsTest);
-
-        SRCDS.CSGO.MapsTest.forEach(function (mapName) {
-            let option = document.createElement("option");
-            if (mapName === selectedMap) {
-                option.selected = "selected";
-            }
-            option.text = mapName;
-            selectControl.add(option);
-        });
-    });
-
-    Array.prototype.forEach.call(document.querySelectorAll(".selectCSGOTourneyMaps"), function (selectControl) {
-        SRCDS.CSGO.MapsTourney.forEach(function (mapName) {
-            let option = document.createElement("option");
-            option.text = mapName;
-            selectControl.add(option);
-        });
-    });
+    UI.populateSelectFromCollection(".selectCSGOArmsRaceMaps", SRCDS.CSGO.MapsArmsRace);
+    UI.populateSelectFromCollection(".selectCSGOClassicMaps", SRCDS.CSGO.MapsClassic);
+    UI.populateSelectFromCollection(".selectCSGODeathmatchMaps", SRCDS.CSGO.MapsDeathmatch);
+    UI.populateSelectFromCollection(".selectCSGOTestMaps", SRCDS.CSGO.MapsTest, true);
+    UI.populateSelectFromCollection(".selectCSGOTourneyMaps", SRCDS.CSGO.MapsTourney);
 
     Array.prototype.forEach.call(document.querySelectorAll(".selectCSGORoundRestore"), function (selectControl) {
         let option;

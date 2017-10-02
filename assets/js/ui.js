@@ -2,7 +2,7 @@ var RCON_PASS = password.generateArray(3),
     TV_PASS = password.fromArray(['brian', 'prefers', 'mustard', '567']),
     UI = UI || {};
 
-function addLogMessage(what, details, icon) {
+UI.addLogMessage = function(what, details, icon) {
     "use strict";
 
     what = what.toString().trim();
@@ -35,7 +35,32 @@ function addLogMessage(what, details, icon) {
     rowDetails.innerHTML = details;
 };
 
-function getRandomTeamName() {
+
+
+UI.displayModal = function (title, tuples) {
+    "use strict";
+
+    title = title.toString().trim();
+    tuples = tuples === undefined ? {} : tuples;
+
+    let modalContents = '';
+
+    Object.keys(tuples).forEach(function (key) {
+        if (modalContents === '') {
+            UI.addLogMessage(title, tuples[key]);
+        }
+
+        modalContents += '<h4>' + key + '</h4>';
+        modalContents += '<div class="well">' + tuples[key] + '</div>';
+    });
+
+    document.getElementById('displayModalTitle').innerHTML = title;
+    document.getElementById('displayModalBody').innerHTML = modalContents;
+    $('#displayModal').modal('show');
+};
+
+
+UI.getRandomTeamName = function () {
     let teams = ['Bad News Bears', 'Bedrock Boulders', 'Capital Congressmen', 'The Electabuzz', 'Hackensack Bulls', 'Hadley Saints', 'The Magikarp', 'Miami Gators', 'O-Town Zeros',
             'Springfield Isotopes', 'Stoolbend Turtleheads', 'Tampico Stogies', 'Warriors', 'Wonderdogs', 'Peekskill Parks', 'Dallas Felons', 'Detroit Lemons', 'Miami Dealers',
             'Roswell Aliens', 'Gotham Goliaths', 'Gotham Knights', 'Motor City Wheels', 'Gotham Rogues', 'Jersey Boomers', 'Boston Poindexters', 'Mars Greenskins', 'New New York Mets',
@@ -56,7 +81,8 @@ function getRandomTeamName() {
     return _.sample(teams);
 };
 
-function modalFormatCommands(command, args, nestedCommand) {
+
+UI.formatCommands = function (command, args, nestedCommand) {
     function nest(command, args, nestedCommand) {
         let rString = '<span>';
         rString += '<command>' + command + '</command>';
@@ -82,33 +108,31 @@ function modalFormatCommands(command, args, nestedCommand) {
     return returnStr;
 };
 
-UI.displayModal = function (title, tuples) {
-    "use strict";
 
-    title = title.toString().trim();
-    tuples = tuples === undefined ? {} : tuples;
+UI.populateSelectFromCollection = function (selectControl, collection, selectRandom = false) {
+    
+    Array.prototype.forEach.call(document.querySelectorAll(selectControl), function (selectControl) {
+        let option, selected;
 
-    let modalContents = '';
-
-    Object.keys(tuples).forEach(function (key) {
-        modalContents += '<h4>' + key + '</h4>';
-
-        if (typeof tuples[key] === 'string' || tuples[key] instanceof String) {
-            modalContents += '<div class="well">' + tuples[key] + '</div>';
-        } else {
-            modalContents += '<div class="well">' + tuples[key] + '</div>';
+        if (selectRandom) {
+            selected = _.sample(collection);
         }
-    });
 
-    document.getElementById('displayModalTitle').innerHTML = title;
-    document.getElementById('displayModalBody').innerHTML = modalContents;
-    $('#displayModal').modal('show');
+        collection.forEach(function (entity) {
+            option = document.createElement("option");
+            if (selectRandom && entity === selected) {
+                option.selected = "selected";
+            }
+            option.text = entity;
+            selectControl.add(option);
+        });
+    });
 };
 
 
 document.addEventListener('DOMContentLoaded', function () {
     try {
-        var tmp1, tmp2;
+        let tmp1, tmp2;
 
         do {
             do {
@@ -122,15 +146,14 @@ document.addEventListener('DOMContentLoaded', function () {
             if (tmp1 !== tmp2) {
                 alert("Passwords must match!");
                 tmp1 = '';
-                tmp2 = '';
             }
         } while (tmp1.length < 1);
 
         RCON_PASS = password.fromArray([tmp1]);
-        addLogMessage('RCon Password', 'The user has provided a RCon password that will be used whenever generating a server launch string.', 'fa fa-key');
+        UI.addLogMessage('RCon Password', 'The user has provided a RCon password that will be used whenever generating a server launch string.', 'fa fa-key');
     } catch (err) {
-        addLogMessage('RCon Password', 'Generated password is: ' + RCON_PASS.html(), 'fa fa-key');
+        UI.addLogMessage('RCon Password', 'Generated password is: ' + RCON_PASS.html(), 'fa fa-key');
     }
 
-    addLogMessage('TV Password', 'Password is: ' + TV_PASS.html(), 'fa fa-television');
+    UI.addLogMessage('TV Password', 'Password is: ' + TV_PASS.html(), 'fa fa-television');
 });

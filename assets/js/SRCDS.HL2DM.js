@@ -14,67 +14,48 @@ SRCDS.HL2DM.Maps = SRCDS.HL2DM.MapsStock.concat(SRCDS.HL2DM.MapsLL).sort(functio
 SRCDS.HL2DM.Launch_HL2DM_Freeplay = function (hostname, map, ip) {
     "use strict";
 
-    let clientConnectString = 'N/A',
-        dockerArgs = '',
-        dockerCommand = 'docker run -d ',
-        dockerContainerName = Docker.GenerateContainerName("HL2DMFreeplay"),
+    let dockerArgs = '',
         serverLaunchString = '';
 
-    do {
-        hostname = (hostname) ? String(hostname) : 'LL HL2DM Freeplay';
-        hostname = hostname.split(' ').join('_');
+    hostname = (hostname) ? String(hostname) : 'LL HL2DM Freeplay';
+    hostname = hostname.split(' ').join('_');
 
-        if (!map) {
-            alert('ERROR - NO MAP WAS SPECIFIED!');
-            break;
+    if (!map) {
+        alert('ERROR - NO MAP WAS SPECIFIED!');
+        return;
+    }
+
+    if (!ip) {
+        alert('ERROR - NO SERVER WAS SELECTED');
+        return;
+    }
+
+    // Docker Args
+    dockerArgs += '--name ' + Docker.GenerateContainerName("HL2DMFreeplay") + ' ';
+    dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
+    dockerArgs += 'lacledeslan/gamesvr-hl2dm-freeplay ';
+
+    // HL2DM Freeplay Server Specific
+    let srcdsArgs = '-game hl2mp ';
+    srcdsArgs += '-port 27015 ';
+    srcdsArgs += '+sv_pure 1 ';
+    srcdsArgs += '+maxplayers 24 ';
+    srcdsArgs += '+map ' + map + ' ';
+    srcdsArgs += '+hostname "' + hostname + '" ';
+    srcdsArgs += '+rcon_password "' + RCON_PASS.join('') + '" ';
+
+    UI.displayModal(
+        "HL2DM Freeplay",
+        {
+            "Launch String": UI.formatCommands('docker run -d ', dockerArgs, ['./srcds_run ', srcdsArgs]),
+            "Client Connect": 'connect ' + ip + ':27015'
         }
-
-        if (!ip) {
-            alert('ERROR - NO SERVER WAS SELECTED');
-            break;
-        }
-
-        // Docker Args
-        dockerArgs += '--name ' + dockerContainerName + ' ';
-        dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
-        dockerArgs += 'lacledeslan/gamesvr-hl2dm-freeplay ';
-
-        // HL2DM Freeplay Server Specific
-        let srcdsCommand = './srcds_run ';
-        let srcdsArgs = '-game hl2mp ';
-        srcdsArgs += '-port 27015 ';
-        srcdsArgs += '+sv_pure 1 ';
-        srcdsArgs += '+maxplayers 24 ';
-        srcdsArgs += '+map ' + map + ' ';
-        srcdsArgs += '+hostname "' + hostname + '" ';
-        srcdsArgs += '+rcon_password "' + RCON_PASS.join('') + '" ';
-
-        serverLaunchString = modalFormatCommands(dockerCommand, dockerArgs, [srcdsCommand, srcdsArgs]);
-
-        clientConnectString = 'connect ';
-        clientConnectString += ip + ':27015';
-
-        UI.displayModal(
-            "HL2DM Freeplay",
-            {
-                "Launch String": serverLaunchString,
-                "Client Connect": clientConnectString
-            }
-        );
-
-        addLogMessage('HL2DM Freeplay', serverLaunchString);
-    } while (false);
+    );
 };
 
 /// Add Maps to all appropriate HTML SELECT controls
 document.addEventListener('DOMContentLoaded', function () {
     "use strict";
 
-    Array.prototype.forEach.call(document.querySelectorAll(".selectHL2DMMaps"), function (selectControl) {
-        SRCDS.HL2DM.Maps.forEach(function (mapName) {
-            let option = document.createElement("option");
-            option.text = mapName;
-            selectControl.add(option);
-        });
-    });
+    UI.populateSelectFromCollection(".selectHL2DMMaps", SRCDS.HL2DM.Maps, true);
 });
