@@ -20,6 +20,7 @@
     <script src="./assets/js/Docker.js"></script>
     <script src="./assets/js/SRCDS.BlackMesa.js"></script>
     <script src="./assets/js/SRCDS.CSGO.js"></script>
+    <script src="./assets/js/SRCDS.DODS.js"></script>
     <script src="./assets/js/SRCDS.HL2DM.js"></script>
     <script src="./assets/js/SRCDS.TF2.js"></script>
 
@@ -276,6 +277,32 @@
                                         );">Generate</button>
                         </form>
                     </div>
+
+
+                <!-- Day of Defeat -->
+                <div class="row">
+                    <br />
+                    <h3>Day of Defeat Source Freeplay Server</h3>
+                    <form class="form-inline" autocomplete="off">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">Map</div>
+                                <select name="dodsMap" class="form-control selectDodsMap"></select>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-addon">Server</div>
+                                <select name="dodsServerIP" class="form-control selectBareMetalServer"></select>
+                            </div>
+
+                        </div>
+                        <button type="button" class="btn btn-default" onclick="SRCDS.DODS.Launch_Freeplay(
+                                        'Laclede\'s Day of Defeat Source Freeplay',
+                                        $('#tab-srcds select[name=dodsMap]').val(),
+                                        $('#tab-srcds select[name=dodsServerIP]').val()
+                                    );">Generate</button>
+                    </form>
+                </div>
+
 
                     <!-- HL2DM Freeplay -->
                     <div class="row">
