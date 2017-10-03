@@ -1,7 +1,7 @@
 var SRCDS = SRCDS || {};
 SRCDS.GESOURCE = SRCDS.GESOURCE || {};
 
-SRCDS.GESOURCE.Maps = ["ge_archives"];
+SRCDS.GESOURCE.Maps = ["ge_archives", "ge_archives_classic", "ge_aztec", "ge_basement", "ge_basement_classic", "ge_bunker", "ge_bunker_classic", "ge_casino", "ge_caverns", "ge_caves", "ge_complex", "ge_complex_classic", "ge_control", "ge_cradle", "ge_dam", "ge_depot", "ge_egyptian", "ge_facility", "ge_facility_backzone", "ge_facility_classic", "ge_library_classic", "ge_runway", "ge_silo", "ge_stack_classic", "ge_temple_classic", "ge_transition"];
 
 SRCDS.GESOURCE.LaunchFreeplay = function (hostname, map, ip) {
     "use strict";
@@ -50,5 +50,5 @@ SRCDS.GESOURCE.LaunchFreeplay = function (hostname, map, ip) {
 document.addEventListener('DOMContentLoaded', function () {
     "use strict";
 
-    UI.populateSelectFromCollection(".selectGESourceMaps", SRCDS.GESOURCE.Maps);
+    UI.populateSelectFromCollection(".selectGESourceMaps", SRCDS.GESOURCE.Maps, true);
 });
