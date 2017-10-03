@@ -318,7 +318,7 @@ SRCDS.CSGO.TourneyRoundRestore = function (roundNumber) {
     restoreCommand += 'wm_block_warm_up_grenades 0;';
 
     UI.displayModal(
-        "CSGO Tourney Round Restore",
+        "CSGO Tourney Restore Round #" + roundNumber,
         {
             "Round Restore": restoreCommand,
             "Unpause After Round Restore (all players ready)": "mp_unpause_match"

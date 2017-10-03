@@ -22,7 +22,9 @@
     <script src="./assets/js/SRCDS.BlackMesa.js"></script>
     <script src="./assets/js/SRCDS.CSGO.js"></script>
     <script src="./assets/js/SRCDS.DODS.js"></script>
+    <script src="./assets/js/SRCDS.GESOURCE.js"></script>
     <script src="./assets/js/SRCDS.HL2DM.js"></script>
+    <script src="./assets/js/SRCDS.SVENCOOP.js"></script>
     <script src="./assets/js/SRCDS.TF2.js"></script>
 
     <!--Stylesheets-->
@@ -305,6 +307,31 @@
                 </div>
 
 
+                
+                    <!-- Golden Eye Source Freeplay -->
+                    <div class="row">
+                        <br />
+                        <h3>Golden Eye Source Freeplay Server</h3>
+                        <form class="form-inline" autocomplete="off">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Map</div>
+                                    <select name="gesourceMap" class="form-control selectGESourceMaps"></select>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">Server</div>
+                                    <select name="gesourceServerIP" class="form-control selectBareMetalServer"></select>
+                                </div>
+
+                            </div>
+                            <button type="button" class="btn btn-default" onclick="SRCDS.GESOURCE.LaunchFreeplay(
+                                            'Laclede\'s LAN HL2DM Freeplay',
+                                            $('#tab-srcds select[name=gesourceMap]').val(),
+                                            $('#tab-srcds select[name=gesourceServerIP]').val()
+                                        );">Generate</button>
+                        </form>
+                    </div>
+
                     <!-- HL2DM Freeplay -->
                     <div class="row">
                         <br />
@@ -328,6 +355,32 @@
                                         );">Generate</button>
                         </form>
                     </div>
+
+                    <!-- Sven Co-Op Freeplay -->
+                    <div class="row">
+                        <br />
+                        <h3>Sven Co-Op Freeplay Server</h3>
+                        <form class="form-inline" autocomplete="off">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Map</div>
+                                    <select name="svenCoOpMap" class="form-control selectSvenCoOpMaps"></select>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">Server</div>
+                                    <select name="svenCoOpServerIP" class="form-control selectBareMetalServer"></select>
+                                </div>
+
+                            </div>
+                            <button type="button" class="btn btn-default" onclick="SRCDS.SVENCOOP.LaunchFreeplay(
+                                            'Laclede\'s LAN Sven Co-Op Freeplay',
+                                            $('#tab-srcds select[name=svenCoOpMap]').val(),
+                                            $('#tab-srcds select[name=svenCoOpServerIP]').val()
+                                        );">Generate</button>
+                        </form>
+                    </div>
+
+
                 </div>
                 <!-- End SRCDS *-->
 
