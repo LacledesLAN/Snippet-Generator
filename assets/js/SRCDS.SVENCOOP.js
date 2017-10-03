@@ -1,7 +1,7 @@
 var SRCDS = SRCDS || {};
 SRCDS.SVENCOOP = SRCDS.SVENCOOP || {};
 
-SRCDS.SVENCOOP.Maps = ['hl_c01_a1'];
+SRCDS.SVENCOOP.Maps = ['abandoned', 'BlackMesaEPF', 'bm_sts', 'crystal', 'crystal2', 'ctf_warforts', 'deadsimpleneo2', 'desertcircle', 'fortified1', 'hl_c00', 'hl_c01_a1', 'hplanet', 'incoming', 'infested', 'intruder', 'judgement', 'last', 'mommamesa', 'osprey', 'polar_rescue', 'quarter', 'sandstone', 'sc_another', 'sc_doc', 'sc_mazing', 'sc_persia', 'sc_psyko', 'sc_robination_revised', 'sc_tetris1', '-sp_campaign_portal', 'stadium4', 'svencoop1', 'svencoop2', 'svencoop2', 'th_ep1_00', 'toadsnatch', 'toonrun1', 'turretfortress', 'uplink', 'yabma'];
 
 SRCDS.SVENCOOP.LaunchFreeplay = function (hostname, map, ip) {
     "use strict";
@@ -51,5 +51,5 @@ SRCDS.SVENCOOP.LaunchFreeplay = function (hostname, map, ip) {
 document.addEventListener('DOMContentLoaded', function () {
     "use strict";
 
-    UI.populateSelectFromCollection(".selectSvenCoOpMaps", SRCDS.SVENCOOP.Maps);
+    UI.populateSelectFromCollection(".selectSvenCoOpMaps", SRCDS.SVENCOOP.Maps, 'hl_c01_a1');
 });

@@ -108,19 +108,26 @@ UI.formatCommands = function (command, args, nestedCommand) {
     return returnStr;
 };
 
-
-UI.populateSelectFromCollection = function (selectControl, collection, selectRandom = false) {
-    
+/**
+ * Add the contents of a collection to a HTML select control
+ * @param {Object} selectControl Select control to populate
+ * @param {Iterable} collection Collection of elements to add to control
+ * @param {string|boolean} selectedValue String of default selection; true if select random
+ * @return {void}
+ */
+UI.populateSelectFromCollection = function (selectControl, collection, selectedValue = false) {
     Array.prototype.forEach.call(document.querySelectorAll(selectControl), function (selectControl) {
         let option, selected;
 
-        if (selectRandom) {
+        if (typeof selectedValue === 'string' || selectedValue instanceof String) {
+            selected = selectedValue.trim();
+        } else if (selectedValue === true) {
             selected = _.sample(collection);
         }
 
         collection.forEach(function (entity) {
             option = document.createElement("option");
-            if (selectRandom && entity === selected) {
+            if (selectedValue !== false && entity === selected) {
                 option.selected = "selected";
             }
             option.text = entity;
