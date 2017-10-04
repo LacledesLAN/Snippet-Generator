@@ -15,7 +15,8 @@ BareMetal.Servers.Production = {
 };
 
 BareMetal.Servers.Test = {
-    "localhost":            ["0.0.0.0"],
+    "--net=host":           ["0.0.0.0"],
+    "localhost":            ["localhost"],
     "BEAN TEST Fuhr":       ["172.30.10.31", "172.30.10.32", "172.30.10.33", "172.30.10.34", "172.30.10.35", "172.30.10.36", "172.30.10.37", "172.30.10.38"],
     "DUDLEY TEST Ozzie":    ["172.30.10.12", "172.30.10.13"]
 };
@@ -45,7 +46,14 @@ document.addEventListener('DOMContentLoaded', function () {
             Object.keys(BareMetal.Servers[environment]).forEach(function (serverName) {
                 BareMetal.Servers[environment][serverName].forEach(function (ip) {
                     option = document.createElement("option");
-                    option.text = serverName + ' (' + ip + ')';
+                    option.text = serverName 
+                    if (ip === 'localhost') {
+                        option.text += ' (no IP specified)';
+                    } else if (ip === '0.0.0.0') {
+                        option.text += ' (all ports accessible)';
+                    } else {
+                        option.text += ' (' + ip + ')';
+                    }
                     option.value = ip;
                     selectControl.add(option);
                 });

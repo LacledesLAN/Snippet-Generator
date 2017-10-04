@@ -1,29 +1,33 @@
 var Docker = Docker || {};
 
-Docker.NetString_SRCDS = function (ip) {
+Docker.NeString = function (ip, portsTCP, portsUDP) {
     "use strict";
-
-    let netString = "",
-        portsUDP = ["27015", "27020"],
-        portsTCP = ["27015", "27020"];
 
     ip = ip.toString().trim().toLowerCase();
 
-    if (ip && ip !== "0.0.0.0" && ip !== "localhost") {
-        ip += ":";
-    } else {
-        ip = "";
+    if (ip === '0.0.0.0') {
+        return '--net=host';
     }
 
-    portsUDP.forEach(function (portSet) {
-        netString += "-p=" + ip + portSet + ":" + portSet + "/udp ";
-    });
+    ip = (ip && ip !== "localhost") ? ip + ':' : '';
+
+    let netString = '';
 
     portsTCP.forEach(function (portSet) {
         netString += "-p=" + ip + portSet + ":" + portSet + "/tcp ";
     });
 
+    portsUDP.forEach(function (portSet) {
+        netString += "-p=" + ip + portSet + ":" + portSet + "/udp ";
+    });
+
     return netString.trim();
+};
+
+Docker.NetString_SRCDS = function (ip) {
+    "use strict";
+
+    return Docker.NeString(ip, ["27015", "27020"], ["27015", "27020"]);
 };
 
 Docker.GenerateContainerName = function (prefix) {
