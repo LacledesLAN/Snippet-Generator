@@ -40,7 +40,7 @@ Docker.GenerateContainerName = function (prefix) {
         containerName = prefix + '_';
     }
 
-    containerName += ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][currentDate.getDay()];
+    containerName += ["Su", "Mo", "Tu", "Wd", "Th", "Fr", "Sa"][currentDate.getDay()];
     containerName += _.padStart(currentDate.getHours(), 2, "0") + "h";
     containerName += _.padStart(currentDate.getMinutes(), 2, "0") + "m";
     containerName += _.padStart(currentDate.getSeconds(), 2, "0") + "s";

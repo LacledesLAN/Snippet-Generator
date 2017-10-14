@@ -219,18 +219,17 @@ SRCDS.CSGO.LaunchClientTest = function (map, ip) {
 };
 
 
-SRCDS.CSGO.LaunchTourney = function (bracketID, team1, team2, map, ip) {
+SRCDS.CSGO.LaunchTourney = function (bracketID, bracketLetter, team1, team2, map, ip) {
     "use strict";
-
-    let dockerArgs = '',
-    dockerContainerName = Docker.GenerateContainerName("CSGOTourn" + bracketID),
-        hostname = "",
-        pass = password.generateArray(),
-        srcdsArgs = '',
-        tvConnectString = '';
 
     if (stringIsNullOrEmpty(bracketID)) {
         alert('Bracket ID was left empty!');
+        return;
+    }
+    bracketID = _.padStart(bracketID, 2, '0');
+
+    if (stringIsNullOrEmpty(bracketLetter)) {
+        alert('Bracket Letter was left empty!');
         return;
     }
 
@@ -238,6 +237,13 @@ SRCDS.CSGO.LaunchTourney = function (bracketID, team1, team2, map, ip) {
         alert('Bracket ID must be a positive whole number!');
         return;
     }
+
+    let dockerArgs = '',
+    dockerContainerName = Docker.GenerateContainerName("CSGOTourn" + bracketID + bracketLetter),
+        hostname = "",
+        pass = password.generateArray(),
+        srcdsArgs = '',
+        tvConnectString = '';
 
     bracketID = _.padStart(bracketID.toString().trim(), 2, "0");
 

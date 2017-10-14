@@ -93,5 +93,5 @@ function isWholeNumber(n) {
 function stringIsNullOrEmpty(str) {
     "use strict";
 
-    return str === null || str.toString().trim().length < 1;
+    return str === undefined || str === null || str.toString().trim().length < 1;
 }

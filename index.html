@@ -83,10 +83,17 @@
                         <form class="form-inline" autocomplete="off">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <div class="input-group-addon">Bracket #</div>
-                                    <input type="text" class="form-control" name="bracketID" placeholder="##" autocomplete="off">
+                                    <div class="input-group-addon">Bracket</div>
+                                    <input type="text" class="form-control" name="bracketIDNum" placeholder="##" autocomplete="off" />
                                 </div>
-
+                                <div class="input-group">
+                                    <select name="bracketIDLetter" class="form-control">
+                                        <option selected disabled value=""></option>
+                                        <option>A</option>
+                                        <option>B</option>
+                                        <option>C</option>
+                                    </select>
+                                </div>
                                 <div class="input-group">
                                     <div class="input-group-addon">Counter-Terrorists</div>
                                     <input type="text" class="form-control" name="teamCounterTerrorists" placeholder="Team Name" autocomplete="off">
@@ -109,7 +116,8 @@
 
                             </div>
                             <button type="button" class="btn btn-default" onclick="SRCDS.CSGO.LaunchTourney(
-                                            $('#tab-csgo-tourney input[name=bracketID]').val(),
+                                            $('#tab-csgo-tourney input[name=bracketIDNum]').val(),
+                                            $('#tab-csgo-tourney select[name=bracketIDLetter]').val(),
                                             $('#tab-csgo-tourney input[name=teamCounterTerrorists]').val(),
                                             $('#tab-csgo-tourney input[name=teamTerrorists]').val(),
                                             $('#tab-csgo-tourney select[name=csgoTourneyMap]').val(),
