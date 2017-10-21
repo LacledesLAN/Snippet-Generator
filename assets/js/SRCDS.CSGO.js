@@ -232,6 +232,7 @@ SRCDS.CSGO.LaunchTourney = function (bracketID, bracketLetter, team1, team2, map
         alert('Bracket Letter was left empty!');
         return;
     }
+    bracketLetter = bracketLetter.toString().trim();
 
     if (!isWholeNumber(bracketID)) {
         alert('Bracket ID must be a positive whole number!');
@@ -270,7 +271,7 @@ SRCDS.CSGO.LaunchTourney = function (bracketID, bracketLetter, team1, team2, map
     if (team1 !== undefined || team2 !== undefined) {
         team1 = String(team1 || 'Unknown');
         team2 = String(team2 || 'Unknown');
-        hostname = 'CSGO Match ' + bracketID + ' ' + team1 + ' v ' + team2;
+        hostname = 'CSGO Match ' + bracketID + bracketLetter + ' ' + team1 + ' v ' + team2;
     }
 
     hostname = hostname.split(' ').join('_');
