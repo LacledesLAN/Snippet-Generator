@@ -279,8 +279,8 @@ SRCDS.CSGO.LaunchTourney = function (bracketID, bracketLetter, team1, team2, map
     // Docker Args
     dockerArgs += '--name ' + dockerContainerName + ' ';
     dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
-    dockerArgs += '-v /home/sysoper/logs/' + dockerContainerName + ':/app/bin/csgo/logs ';
-    dockerArgs += '-v /home/sysoper/logs/' + dockerContainerName + '/warmod:/app/bin/csgo/addons/sourcemod/logs ';
+    dockerArgs += '-v /home/sysoper/logs/' + dockerContainerName + ':/app/csgo/logs ';
+    dockerArgs += '-v /home/sysoper/logs/' + dockerContainerName + '/warmod:/app/csgo/addons/sourcemod/logs ';
     dockerArgs += 'lacledeslan/gamesvr-csgo-tourney ';
 
     // CS:GO Tournament Server Specific
