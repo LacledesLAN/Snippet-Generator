@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="nojs" lang="en">
+<html lang="en">
 
 <head>
     <!-- Metas -->
@@ -16,8 +16,8 @@
 
     <script src="./assets/js/Global.js"></script>
     <script src="./assets/js/UI.js"></script>
+    <script src="./assets/js/LLNetwork.js"></script>
 
-    <script src="./assets/js/BareMetal.js"></script>
     <script src="./assets/js/Docker.js"></script>
     <script src="./assets/js/SRCDS.BlackMesa.js"></script>
     <script src="./assets/js/SRCDS.CSGO.js"></script>
@@ -113,7 +113,7 @@
 
                                 <div class="input-group">
                                     <div class="input-group-addon">Server</div>
-                                    <select name="serverIP" class="form-control csgo-tournament-serverIP selectBareMetalServer"></select>
+                                    <select name="serverIP" class="form-control csgo-tournament-serverIP selectServerBinding"></select>
                                 </div>
 
                             </div>
@@ -166,7 +166,7 @@
 
                             <div class="input-group col-md-6">
                                 <div class="input-group-addon">Server</div>
-                                <select name="csgoClientTestServerIP" class="form-control csgo-tournament-serverIP selectBareMetalServer"></select>
+                                <select name="csgoClientTestServerIP" class="form-control csgo-tournament-serverIP selectServerBinding"></select>
                             </div>
 
                             <div class="input-group col-md-1">
@@ -192,7 +192,7 @@
 
                             <div class="input-group col-md-6">
                                 <div class="input-group-addon">Server</div>
-                                <select name="csgoArmsraceMapServer" class="form-control selectBareMetalServer"></select>
+                                <select name="csgoArmsraceMapServer" class="form-control selectServerBinding"></select>
                             </div>
 
                             <div class="input-group col-md-1">
@@ -220,7 +220,7 @@
 
                             <div class="input-group col-md-6">
                                 <div class="input-group-addon">Server</div>
-                                <select name="csgoClassicServer" class="form-control selectBareMetalServer"></select>
+                                <select name="csgoClassicServer" class="form-control selectServerBinding"></select>
                             </div>
 
                             <div class="input-group col-md-1">
@@ -247,7 +247,7 @@
                             </div>
                             <div class="input-group col-md-6">
                                 <div class="input-group-addon">Server</div>
-                                <select name="csgoDeathmatchServer" class="form-control selectBareMetalServer"></select>
+                                <select name="csgoDeathmatchServer" class="form-control selectServerBinding"></select>
                             </div>
                             <div class="input-group col-md-1">
                                 <button type="button" class="btn btn-default" onclick="SRCDS.CSGO.LaunchDeathmatch(
@@ -279,7 +279,7 @@
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-addon">Server</div>
-                                    <select name="blackMesaServerIP" class="form-control selectBareMetalServer"></select>
+                                    <select name="blackMesaServerIP" class="form-control selectServerBinding"></select>
                                 </div>
 
                             </div>
@@ -304,7 +304,7 @@
                             </div>
                             <div class="input-group">
                                 <div class="input-group-addon">Server</div>
-                                <select name="dodsServerIP" class="form-control selectBareMetalServer"></select>
+                                <select name="dodsServerIP" class="form-control selectServerBinding"></select>
                             </div>
 
                         </div>
@@ -330,7 +330,7 @@
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-addon">Server</div>
-                                    <select name="gesourceServerIP" class="form-control selectBareMetalServer"></select>
+                                    <select name="gesourceServerIP" class="form-control selectServerBinding"></select>
                                 </div>
 
                             </div>
@@ -354,7 +354,7 @@
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-addon">Server</div>
-                                    <select name="hl2dmServerIP" class="form-control selectBareMetalServer"></select>
+                                    <select name="hl2dmServerIP" class="form-control selectServerBinding"></select>
                                 </div>
 
                             </div>
@@ -378,7 +378,7 @@
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-addon">Server</div>
-                                    <select name="svenCoOpServerIP" class="form-control selectBareMetalServer"></select>
+                                    <select name="svenCoOpServerIP" class="form-control selectServerBinding"></select>
                                 </div>
 
                             </div>
@@ -409,7 +409,7 @@
 
                             <div class="input-group col-md-6">
                                 <div class="input-group-addon">Server</div>
-                                <select name="tf2FreeplayServerIP" class="form-control selectBareMetalServer"></select>
+                                <select name="tf2FreeplayServerIP" class="form-control selectServerBinding"></select>
                             </div>
 
                             <div class="input-group col-md-1">
@@ -439,7 +439,7 @@
 
                             <div class="input-group col-md-6">
                                 <div class="input-group-addon">Server</div>
-                                <select name="tf2BlindFragServerIP" class="form-control selectBareMetalServer"></select>
+                                <select name="tf2BlindFragServerIP" class="form-control selectServerBinding"></select>
                             </div>
 
                             <div class="input-group col-md-1">
@@ -469,7 +469,7 @@
 
                             <div class="input-group col-md-6">
                                 <div class="input-group-addon">Server</div>
-                                <select name="tf2WareServerIP" class="form-control selectBareMetalServer"></select>
+                                <select name="tf2WareServerIP" class="form-control selectServerBinding"></select>
                             </div>
 
                             <div class="input-group col-md-1">
@@ -496,7 +496,7 @@
 
                             <div class="input-group col-md-6">
                                 <div class="input-group-addon">Server</div>
-                                <select name="sevenDaysToDieFreeplayServerIP" class="form-control sevenDaysToDie-freeplay-serverIP selectBareMetalServer"></select>
+                                <select name="sevenDaysToDieFreeplayServerIP" class="form-control sevenDaysToDie-freeplay-serverIP selectServerBinding"></select>
                             </div>
 
                             <div class="input-group col-md-1">

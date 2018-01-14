@@ -1,15 +1,32 @@
 var Docker = Docker || {};
 
+
+
 Docker.NetString = function (ip, portsTCP, portsUDP) {
     "use strict";
 
     ip = ip.toString().trim().toLowerCase();
 
+    // using localhost network stack
     if (ip === '0.0.0.0') {
         return '--net=host';
     }
 
-    ip = (ip && ip !== "localhost") ? ip + ':' : '';
+    // Determine if ip address is part of a Docker-defined network
+    let usingDockerNetwork = null;
+    Object.keys(LLNetwork.DockerNetworks).forEach(function (networkName) {
+        if (_.indexOf(LLNetwork.DockerNetworks[networkName], ip) > -1) {
+            usingDockerNetwork = networkName;
+        }
+    });
+
+    if (usingDockerNetwork !== null) {
+        return '--network=' + usingDockerNetwork + ' --ip ' + ip;
+    }
+
+    ip = (ip && ip !== "localhost")
+        ? ip + ':'
+        : '';
 
     let netString = '';
 
