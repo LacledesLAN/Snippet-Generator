@@ -26,6 +26,7 @@
     <script src="./assets/js/SRCDS.HL2DM.js"></script>
     <script src="./assets/js/SRCDS.SVENCOOP.js"></script>
     <script src="./assets/js/SRCDS.TF2.js"></script>
+    <script src="./assets/js/UNITY.SevenDaysToDie.js"></script>
 
     <!--Stylesheets-->
     <link rel="stylesheet" href="./vendor/stylesheets/bootstrap3.theme.flatly.min.css">
@@ -49,6 +50,7 @@
                 <li role="presentation"><a title="CS:GO Other" href="#tab-csgo-other" role="tab" data-toggle="tab">CS:GO Other</a></li>
                 <li role="presentation"><a title="SRCDS *" href="#tab-srcds" role="tab" data-toggle="tab">SRCDS *</a></li>
                 <li role="presentation"><a title="TF2" href="#tab-tf2" role="tab" data-toggle="tab">TF2</a></li>
+                <li role="presentation"><a title="Unity" href="#tab-unity" role="tab" data-toggle="tab">Unity</a></li>
                 <li role="presentation"><a title="Tools" href="#tab-tools" role="tab" data-toggle="tab">Tools</a></li>
             </ul>
 
@@ -484,6 +486,29 @@
                 </div>
                 <!-- END TF2 PUG-->
 
+                <!-- Unity -->
+                <div role="tabpanel" class="tab-pane" id="tab-unity">
+                    <div class="row">
+                        <h3>7 Days to Die Freeplay</h3>
+                    </div>
+                    <form class="form-inline" autocomplete="off">
+                        <div class="form-group row">
+
+                            <div class="input-group col-md-6">
+                                <div class="input-group-addon">Server</div>
+                                <select name="sevenDaysToDieFreeplayServerIP" class="form-control sevenDaysToDie-freeplay-serverIP selectBareMetalServer"></select>
+                            </div>
+
+                            <div class="input-group col-md-1">
+                                <button type="button" class="btn btn-default" onclick="UNITY.SevenDaysToDie.LaunchFreeplay(
+                                                $('#tab-unity select[name=sevenDaysToDieFreeplayServerIP]').val()
+                                            );"><span class="fa fa-rocket" aria-hidden="true"></span></button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <!-- End Unity -->
 
                 <!-- Tools -->
                 <div role="tabpanel" class="tab-pane" id="tab-tools">
@@ -510,9 +535,9 @@
                         </form>
                     </div>
                 </div>
-            </div>
-            <!-- End Tools -->
+                <!-- End Tools -->
 
+            </div>
         </div>
     </div>
 

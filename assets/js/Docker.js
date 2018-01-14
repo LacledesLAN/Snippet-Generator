@@ -1,6 +1,6 @@
 var Docker = Docker || {};
 
-Docker.NeString = function (ip, portsTCP, portsUDP) {
+Docker.NetString = function (ip, portsTCP, portsUDP) {
     "use strict";
 
     ip = ip.toString().trim().toLowerCase();
@@ -27,7 +27,13 @@ Docker.NeString = function (ip, portsTCP, portsUDP) {
 Docker.NetString_SRCDS = function (ip) {
     "use strict";
 
-    return Docker.NeString(ip, ["27015", "27020"], ["27015", "27020"]);
+    return Docker.NetString(ip, ["27015", "27020"], ["27015", "27020"]);
+};
+
+Docker.NetString_7DaysToDie = function (ip) {
+    "use strict";
+
+    return Docker.NetString(ip, ["8080", "26900"], ["26900"]);
 };
 
 Docker.GenerateContainerName = function (prefix) {
