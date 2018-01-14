@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
             Object.keys(BareMetal.Servers[environment]).forEach(function (serverName) {
                 BareMetal.Servers[environment][serverName].forEach(function (ip) {
                     option = document.createElement("option");
-                    option.text = serverName 
+                    option.text = serverName
                     if (ip === 'localhost') {
                         option.text += ' (no IP specified)';
                     } else if (ip === '0.0.0.0') {
