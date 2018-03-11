@@ -1,0 +1,25 @@
+{
+  "name": "snippet-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LacledesLAN/Snippet-Generator.git"
+  },
+  "author": "Laclede's LAN",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LacledesLAN/Snippet-Generator/issues"
+  },
+  "homepage": "https://github.com/LacledesLAN/Snippet-Generator#readme",
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.3.1"
+  }
+}

@@ -32,9 +32,8 @@ UI.addLogMessage = function(what, details, icon) {
     rowWhat.innerHTML = what;
 
     let rowDetails = row.insertCell();
-    rowDetails.innerHTML = details;
+    rowDetails.innerHTML = details.trim();
 };
-
 
 
 UI.displayModal = function (title, tuples) {
@@ -50,8 +49,13 @@ UI.displayModal = function (title, tuples) {
             UI.addLogMessage(title, tuples[key]);
         }
 
-        modalContents += '<h4>' + key + '</h4>';
-        modalContents += '<div class="well">' + tuples[key] + '</div>';
+        modalContents += '<div class="card">';
+        modalContents += '<div class="card-body">';
+        modalContents += '<h5 class="card-title">' + key + '</h5>';
+        modalContents += tuples[key];
+        modalContents += '</div>';
+        modalContents += '</div>';
+        modalContents += '';
     });
 
     document.getElementById('displayModalTitle').innerHTML = title;
