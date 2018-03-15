@@ -265,6 +265,10 @@ SRCDS.CSGO.LaunchWarMod = function (bracketID, bracketLetter, team1, team2, map,
         return;
     }
 
+    if (!ip) {
+        alert('ERROR - NO SERVER WAS SPECIFIED!');
+        return;
+    }
     ip = ip.trim();
 
     // Generate hostname
