@@ -218,7 +218,6 @@ SRCDS.CSGO.LaunchClientTest = function (map, ip) {
     );
 };
 
-
 SRCDS.CSGO.LaunchWarMod = function (bracketID, bracketLetter, team1, team2, map, ip) {
     "use strict";
 

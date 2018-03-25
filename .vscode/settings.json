@@ -12,5 +12,12 @@
         "multivar": true,
         "predef": ["$", "_", "alert", "window"]
     },
-    "jslint.version": "latest"
+    "jslint.version": "latest",
+    "spellright.language": "en",
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext",
+        "typescript"
+    ]
 }

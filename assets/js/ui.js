@@ -140,7 +140,6 @@ UI.populateSelectFromCollection = function (selectControl, collection, selectedV
     });
 };
 
-
 document.addEventListener('DOMContentLoaded', function () {
     try {
         let tmp1, tmp2;

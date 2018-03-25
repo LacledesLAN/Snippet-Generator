@@ -14,11 +14,9 @@ Docker.NetString = function (ip, portsTCP, portsUDP) {
 
     // Determine if ip address is part of a Docker-defined network
     let usingDockerNetwork = null;
-    Object.keys(LLNetwork.DockerNetworks).forEach(function (networkName) {
-        if (_.indexOf(LLNetwork.DockerNetworks[networkName], ip) > -1) {
-            usingDockerNetwork = networkName;
-        }
-    });
+    if (ip.trim().startsWith('172.30.14')) {
+        usingDockerNetwork = "llnet";
+    }
 
     if (usingDockerNetwork !== null) {
         return '--network=' + usingDockerNetwork + ' --ip ' + ip;

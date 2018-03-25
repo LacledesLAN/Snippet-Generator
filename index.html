@@ -13,7 +13,6 @@
     <script src="./vendor/lodash.js"></script>
     <script src="./assets/js/Global.js"></script>
     <script src="./assets/js/UI.js"></script>
-    <script src="./assets/js/LLNetwork.js"></script>
     <script src="./assets/js/Docker.js"></script>
     <script src="./assets/js/SRCDS.BlackMesa.js"></script>
     <script src="./assets/js/SRCDS.CSGO.js"></script>
@@ -23,6 +22,9 @@
     <script src="./assets/js/SRCDS.SVENCOOP.js"></script>
     <script src="./assets/js/SRCDS.TF2.js"></script>
     <script src="./assets/js/UNITY.SevenDaysToDie.js"></script>
+
+    <script src="./dist/app.js"></script>
+
     <!--Stylesheets-->
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./node_modules/font-awesome/css/font-awesome.min.css">
@@ -163,8 +165,7 @@
 
                                         UI.populateSelectFromCollection(".selectCSGOTourneyMaps", SRCDS.CSGO.MapsTourney);
                                     }
-                                '>
-                                This is server is just for staff testing
+                                '> This is server is just for staff testing
                             </div>
                         </div>
                         <div class="form-group row">
@@ -187,10 +188,9 @@
                             <select id="mapname" class="custom-select col-3 selectCSGOTourneyMaps">
                             </select>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" id="csgoTourneySelectHost">
                             <label class="col-sm-2 col-form-label">Host</label>
-                            <select id="serverBinding" class="custom-select col-4 selectServerBinding">
-                            </select>
+                            <span class="col-sm-8 SelectHost"></span>
                         </div>
                         <div class="form-group row">
                             <div class="col-3"></div>
@@ -200,7 +200,7 @@
                             $('#tabCsgoWarmod #nameCT').val(),
                             $('#tabCsgoWarmod #nameT').val(),
                             $('#tabCsgoWarmod #mapname').val(),
-                            $('#tabCsgoWarmod #serverBinding').val()
+                            $('#tabCsgoWarmod #csgoTourneySelectHost .SelectedBinding').val()
                             );">Generate</button>
                             <div class="col-3"></div>
                         </div>
@@ -233,24 +233,22 @@
                         <h4>Client Test Server</h4>
                     </div>
                     <form class="row" id="csgoClientTestServer">
-                        <div class="input-group mb-3 col-4">
+                        <div class="input-group mb-3 col-sm-3">
                             <div class="input-group-prepend">
                                 <label class="input-group-text">Map</label>
                             </div>
                             <select class="custom-select selectCSGOTestMaps" id="csgoClientTestMap">
                             </select>
                         </div>
-                        <div class="input-group mb-3 col-4">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text">Host</label>
-                            </div>
-                            <select class="custom-select selectServerBinding" id="csgoClientTestHost">
-                            </select>
+
+                        <div id="csgoClientTestHost" class="col-sm-8">
+                            <span class="SelectHost"></span>
                         </div>
+
                         <div>
                             <button type="button" class="btn btn-default" onclick="SRCDS.CSGO.LaunchClientTest(
                            $('#csgoClientTestServer #csgoClientTestMap').val(),
-                           $('#csgoClientTestServer #csgoClientTestHost').val()
+                           $('#csgoClientTestServer #csgoClientTestHost .SelectedBinding').val()
                            );">
                                 <span class="fa fa-rocket" aria-hidden="true"></span>
                             </button>
@@ -260,25 +258,21 @@
                         <h4>Arms Race Server</h4>
                     </div>
                     <form class="row" id="csgoArmsRaceServer">
-                        <div class="input-group mb-3 col-4">
+                        <div class="input-group mb-3 col-sm-3">
                             <div class="input-group-prepend">
                                 <label class="input-group-text">Map</label>
                             </div>
                             <select class="custom-select selectCSGOArmsRaceMaps" id="csgoArmsMap">
                             </select>
                         </div>
-                        <div class="input-group mb-3 col-4">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text">Host</label>
-                            </div>
-                            <select class="custom-select selectServerBinding" id="csgoArmsHost">
-                            </select>
+                        <div id="csgoArmsHost" class="col-sm-8">
+                            <span class="SelectHost"></span>
                         </div>
                         <div>
                             <button type="button" class="btn btn-default" onclick="SRCDS.CSGO.LaunchArmsRace(
                            'Laclede\'s LAN CS:GO Arms Race',
                            $('#csgoArmsRaceServer #csgoArmsMap').val(),
-                           $('#csgoArmsRaceServer #csgoArmsHost').val()
+                           $('#csgoArmsRaceServer #csgoArmsHost .SelectedBinding').val()
                            );">
                                 <span class="fa fa-rocket" aria-hidden="true"></span>
                             </button>
@@ -288,25 +282,23 @@
                         <h4>Classic Server</h4>
                     </div>
                     <form class="row" id="csgoClassicServer">
-                        <div class="input-group mb-3 col-4">
+                        <div class="input-group mb-3 col-sm-3">
                             <div class="input-group-prepend">
                                 <label class="input-group-text">Map</label>
                             </div>
                             <select class="custom-select selectCSGOClassicMaps" id="csgoClassicMap">
                             </select>
                         </div>
-                        <div class="input-group mb-3 col-4">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text">Host</label>
-                            </div>
-                            <select class="custom-select selectServerBinding" id="csgoClassicHost">
-                            </select>
+
+                        <div id="csgoClassicHost" class="col-sm-8">
+                            <span class="SelectHost"></span>
                         </div>
+
                         <div>
                             <button type="button" class="btn btn-default" onclick="SRCDS.CSGO.LaunchClassic(
                            'Laclede\'s LAN CS:GO Classic',
                            $('#csgoClassicServer #csgoClassicMap').val(),
-                           $('#csgoClassicServer #csgoClassicHost').val()
+                           $('#csgoClassicServer #csgoClassicHost .SelectedBinding').val()
                            );">
                                 <span class="fa fa-rocket" aria-hidden="true"></span>
                             </button>
@@ -316,25 +308,21 @@
                         <h4>Deathmatch Server</h4>
                     </div>
                     <form class="row" id="csgoDeathmatchServer">
-                        <div class="input-group mb-3 col-4">
+                        <div class="input-group mb-3 col-sm-3">
                             <div class="input-group-prepend">
                                 <label class="input-group-text">Map</label>
                             </div>
                             <select class="custom-select selectCSGODeathmatchMaps" id="csgoDeathmatchMap">
                             </select>
                         </div>
-                        <div class="input-group mb-3 col-4">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text">Host</label>
-                            </div>
-                            <select class="custom-select selectServerBinding" id="csgoDeathmatchHost">
-                            </select>
+                        <div id="csgoDeathmatchHost" class="col-sm-8">
+                            <span class="SelectHost"></span>
                         </div>
                         <div>
                             <button type="button" class="btn btn-default" onclick="SRCDS.CSGO.LaunchDeathmatch(
                            'Laclede\'s LAN CS:GO Deathmatch',
                            $('#csgoDeathmatchServer #csgoDeathmatchMap').val(),
-                           $('#csgoDeathmatchServer #csgoDeathmatchHost').val()
+                           $('#csgoDeathmatchServer #csgoDeathmatchHost .SelectedBinding').val()
                            );">
                                 <span class="fa fa-rocket" aria-hidden="true"></span>
                             </button>
@@ -348,25 +336,21 @@
                         <h4>Black Mesa Freeplay Server</h4>
                     </div>
                     <form class="row" id="blackMesaFreeplay">
-                        <div class="input-group mb-3 col-4">
+                        <div class="input-group mb-3 col-sm-3">
                             <div class="input-group-prepend">
                                 <label class="input-group-text">Map</label>
                             </div>
                             <select class="custom-select selectBlackMesaMaps" id="blackMesaMap">
                             </select>
                         </div>
-                        <div class="input-group mb-3 col-4">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text">Host</label>
-                            </div>
-                            <select class="custom-select selectServerBinding" id="blackMesaHost">
-                            </select>
+                        <div id="blackMesaHost" class="col-sm-8">
+                            <span class="SelectHost"></span>
                         </div>
                         <div>
                             <button type="button" class="btn btn-default" onclick="SRCDS.BlackMesa.Launch_BlackMesa_Freeplay(
                            'Laclede\'s LAN Black Mesa Freeplay',
                            $('#blackMesaFreeplay #blackMesaMap').val(),
-                           $('#blackMesaFreeplay #blackMesaHost').val()
+                           $('#blackMesaFreeplay #blackMesaHost .SelectedBinding').val()
                            );">
                                 <span class="fa fa-rocket" aria-hidden="true"></span>
                             </button>
@@ -376,25 +360,21 @@
                         <h4>Day of Defeat Source Freeplay Server</h4>
                     </div>
                     <form class="row" id="dodsSourceFreeplay">
-                        <div class="input-group mb-3 col-4">
+                        <div class="input-group mb-3 col-sm-3">
                             <div class="input-group-prepend">
                                 <label class="input-group-text">Map</label>
                             </div>
                             <select class="custom-select selectDodsMap" id="dodsMap">
                             </select>
                         </div>
-                        <div class="input-group mb-3 col-4">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text">Host</label>
-                            </div>
-                            <select class="custom-select selectServerBinding" id="dodsHost">
-                            </select>
+                        <div id="dodsHost" class="col-sm-8">
+                            <span class="SelectHost"></span>
                         </div>
                         <div>
                             <button type="button" class="btn btn-default" onclick="SRCDS.DODS.Launch_Freeplay(
                            'Laclede\'s Day of Defeat Source Freeplay',
                            $('#dodsSourceFreeplay #dodsMap').val(),
-                           $('#dodsSourceFreeplay #dodsHost').val()
+                           $('#dodsSourceFreeplay #dodsHost .SelectedBinding').val()
                            );">
                                 <span class="fa fa-rocket" aria-hidden="true"></span>
                             </button>
@@ -404,25 +384,21 @@
                         <h4>Golden Eye Source Freeplay Server</h4>
                     </div>
                     <form class="row" id="gesourceFreeplay">
-                        <div class="input-group mb-3 col-4">
+                        <div class="input-group mb-3 col-sm-3">
                             <div class="input-group-prepend">
                                 <label class="input-group-text">Map</label>
                             </div>
                             <select class="custom-select selectGESourceMaps" id="gesourceMap">
                             </select>
                         </div>
-                        <div class="input-group mb-3 col-4">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text">Host</label>
-                            </div>
-                            <select class="custom-select selectServerBinding" id="gesourceHost">
-                            </select>
+                        <div id="gesourceHost" class="col-sm-8">
+                            <span class="SelectHost"></span>
                         </div>
                         <div>
                             <button type="button" class="btn btn-default" onclick="SRCDS.GESOURCE.LaunchFreeplay(
                            'Laclede\'s LAN Golden Eye Source Freeplay',
                            $('#gesourceFreeplay #gesourceMap').val(),
-                           $('#gesourceFreeplay #gesourceHost').val()
+                           $('#gesourceFreeplay #gesourceHost .SelectedBinding').val()
                            );">
                                 <span class="fa fa-rocket" aria-hidden="true"></span>
                             </button>
@@ -432,25 +408,21 @@
                         <h4>Half-Life 2 Deathmatch Freeplay Server</h4>
                     </div>
                     <form class="row" id="hl2dmFreeplay">
-                        <div class="input-group mb-3 col-4">
+                        <div class="input-group mb-3 col-sm-3">
                             <div class="input-group-prepend">
                                 <label class="input-group-text">Map</label>
                             </div>
                             <select class="custom-select selectHL2DMMaps" id="hl2dmMap">
                             </select>
                         </div>
-                        <div class="input-group mb-3 col-4">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text">Host</label>
-                            </div>
-                            <select class="custom-select selectServerBinding" id="hl2dmHost">
-                            </select>
+                        <div id="hl2dmHost" class="col-sm-8">
+                            <span class="SelectHost"></span>
                         </div>
                         <div>
                             <button type="button" class="btn btn-default" onclick="SRCDS.HL2DM.Launch_HL2DM_Freeplay(
                            'Laclede\'s LAN HL2DM Freeplay',
                            $('#hl2dmFreeplay #hl2dmMap').val(),
-                           $('#hl2dmFreeplay #hl2dmHost').val()
+                           $('#hl2dmFreeplay #hl2dmHost .SelectedBinding').val()
                            );">
                                 <span class="fa fa-rocket" aria-hidden="true"></span>
                             </button>
@@ -460,25 +432,13 @@
                         <h4>Sven Co-Op Freeplay Server</h4>
                     </div>
                     <form class="row" id="svenFreeplay">
-                        <div class="input-group mb-3 col-4">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text">Map</label>
-                            </div>
-                            <select class="custom-select selectSvenCoOpMaps" id="svenMap">
-                            </select>
-                        </div>
-                        <div class="input-group mb-3 col-4">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text">Host</label>
-                            </div>
-                            <select class="custom-select selectServerBinding" id="svenHost">
-                            </select>
+                        <div id="svenHost" class="col-sm-8">
+                            <span class="SelectHost"></span>
                         </div>
                         <div>
                             <button type="button" class="btn btn-default" onclick="SRCDS.SVENCOOP.LaunchFreeplay(
                            'Laclede\'s LAN Sven Co-Op Freeplay',
-                           $('#svenFreeplay #svenMap').val(),
-                           $('#svenFreeplay #svenHost').val()
+                           $('#svenFreeplay #svenHost .SelectedBinding').val()
                            );">
                                 <span class="fa fa-rocket" aria-hidden="true"></span>
                             </button>
@@ -492,25 +452,21 @@
                         <h4>TF2 Freeplay</h4>
                     </div>
                     <form class="row" id="tf2Freeplay">
-                        <div class="input-group mb-3 col-4">
+                        <div class="input-group mb-3 col-sm-3">
                             <div class="input-group-prepend">
                                 <label class="input-group-text">Map</label>
                             </div>
                             <select class="custom-select selectTF2MapCycles" id="tf2FreeplayMapCycle">
                             </select>
                         </div>
-                        <div class="input-group mb-3 col-4">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text">Host</label>
-                            </div>
-                            <select class="custom-select selectServerBinding" id="tf2FreeplayHost">
-                            </select>
+                        <div id="tf2FreeplayHost" class="col-sm-8">
+                            <span class="SelectHost"></span>
                         </div>
                         <div>
                             <button type="button" class="btn btn-default" onclick="SRCDS.TF2.LaunchFreeplay(
                            'Laclede\'s LAN TF2 Freeplay',
                            $('#tf2Freeplay #tf2FreeplayMapCycle').val(),
-                           $('#tf2Freeplay #tf2FreeplayHost').val()
+                           $('#tf2Freeplay #tf2FreeplayHost .SelectedBinding').val()
                            );">
                                 <span class="fa fa-rocket" aria-hidden="true"></span>
                             </button>
@@ -520,7 +476,7 @@
                         <h4>TF2 Blind Frag</h4>
                     </div>
                     <form class="row" id="tf2BlindFrag">
-                        <div class="input-group mb-3 col-4">
+                        <div class="input-group mb-3 col-sm-3">
                             <div class="input-group-prepend">
                                 <label class="input-group-text">Map</label>
                             </div>
@@ -528,18 +484,14 @@
                                 <option selected value="koth_harvest_final">koth_harvest_final</option>
                             </select>
                         </div>
-                        <div class="input-group mb-3 col-4">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text">Host</label>
-                            </div>
-                            <select class="custom-select selectServerBinding" id="tf2BlindFragHost">
-                            </select>
+                        <div id="tf2BlindFragHost" class="col-sm-8">
+                            <span class="SelectHost"></span>
                         </div>
                         <div>
                             <button type="button" class="btn btn-default" onclick="SRCDS.TF2.LaunchBlindFrag(
                            'Laclede\'s LAN TF2 Blind Frag',
                            $('#tf2BlindFrag #tf2BlindFragMap').val(),
-                           $('#tf2BlindFrag #tf2BlindFragHost').val()
+                           $('#tf2BlindFrag #tf2BlindFragHost .SelectedBinding').val()
                            );">
                                 <span class="fa fa-rocket" aria-hidden="true"></span>
                             </button>
@@ -553,16 +505,12 @@
                         <h4>7 Days to Die</h4>
                     </div>
                     <form class="row" id="SevenDaysToDie">
-                        <div class="input-group mb-3 col-4">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text">Host</label>
-                            </div>
-                            <select class="custom-select selectServerBinding" id="SevenDaysToDieHost">
-                            </select>
+                        <div id="SevenDaysToDieHost" class="col-sm-8">
+                            <span class="SelectHost"></span>
                         </div>
                         <div>
                             <button type="button" class="btn btn-default" onclick="UNITY.SevenDaysToDie.LaunchFreeplay(
-                           $('#SevenDaysToDie #SevenDaysToDieHost').val()
+                           $('#SevenDaysToDie #SevenDaysToDieHost .SelectedBinding').val()
                            );">
                                 <span class="fa fa-rocket" aria-hidden="true"></span>
                             </button>

@@ -1,4 +1,8 @@
 package-lock.json
+node_modules
+!/node_modules/bootstrap
+!/node_modules/font-awesome
+!/node_modules/jquery
 
 # Created by https://www.gitignore.io/api/linux,macos,windows
 
