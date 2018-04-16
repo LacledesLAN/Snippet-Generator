@@ -1,5 +1,5 @@
 var RCON_PASS = password.generateArray(3),
-    TV_PASS = password.fromArray(['brian', 'prefers', 'mustard', '567']),
+    TV_PASS = "",
     UI = UI || {};
 
 UI.addLogMessage = function(what, details, icon) {
@@ -164,6 +164,8 @@ document.addEventListener('DOMContentLoaded', function () {
     } catch (err) {
         UI.addLogMessage('RCon Password', 'Generated password is: ' + RCON_PASS.html(), 'fa fa-key');
     }
+
+    TV_PASS = password.generatePredictable("p3pp3r" + RCON_PASS.toString());
 
     UI.addLogMessage('TV Password', 'Password is: ' + TV_PASS.html(), 'fa fa-television');
 });

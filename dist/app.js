@@ -1,5 +1,5 @@
 "use strict";
-function AddSelectControl(domElement, id) {
+function UI_AddSelectControl(domElement, id) {
     let selectControl = document.createElement("select");
     selectControl.classList.add("custom-select");
     selectControl.classList.add("col-sm-4");
@@ -7,7 +7,7 @@ function AddSelectControl(domElement, id) {
     domElement.appendChild(selectControl);
     return selectControl;
 }
-function AddToSelectControl(category, items, selectControl, placeholderText) {
+function UI_AddToSelectControl(category, items, selectControl, placeholderText) {
     if (items.length < 1) {
         return;
     }
@@ -30,7 +30,7 @@ function AddToSelectControl(category, items, selectControl, placeholderText) {
     selectControl.appendChild(header);
 }
 ;
-function AddHostsToSelectControl(hosts, selectControl, placeholderText) {
+function UI_AddHostsToSelectControl(hosts, selectControl, placeholderText) {
     let productionHosts = [];
     let testHosts = [];
     hosts.forEach((value, key) => {
@@ -43,11 +43,11 @@ function AddHostsToSelectControl(hosts, selectControl, placeholderText) {
     });
     productionHosts.sort();
     testHosts.sort();
-    AddToSelectControl("Production Nodes", productionHosts, selectControl, placeholderText);
-    AddToSelectControl("Test Nodes", testHosts, selectControl, placeholderText);
+    UI_AddToSelectControl("Production Nodes", productionHosts, selectControl, placeholderText);
+    UI_AddToSelectControl("Test Nodes", testHosts, selectControl, placeholderText);
 }
 ;
-function AddIPsToSelectControl(hostName, selectControl) {
+function UI_AddIPsToSelectControl(hostName, selectControl) {
     let host;
     Hosts.forEach((value, key) => {
         if (key == hostName) {
@@ -64,12 +64,12 @@ function AddIPsToSelectControl(hostName, selectControl) {
         return;
     }
     if (!selectControl.classList.contains("noDiscoverable")) {
-        AddToSelectControl("Discoverable", host.publicIps, selectControl, 'Select Binding');
+        UI_AddToSelectControl("Discoverable", host.publicIps, selectControl, 'Select Binding');
     }
-    AddToSelectControl("Hidden", host.privateIps, selectControl, 'Select Binding');
+    UI_AddToSelectControl("Hidden", host.privateIps, selectControl, 'Select Binding');
 }
 ;
-function buildHostSelectControl(divsToAugment) {
+function UI_buildHostSelectControl(divsToAugment) {
     if (divsToAugment.length < 1) {
         return;
     }
@@ -77,15 +77,15 @@ function buildHostSelectControl(divsToAugment) {
         let parentElement = divsToAugment[i];
         parentElement.innerHTML = "";
         parentElement.id = (Math.random() * 1e32).toString(36).toUpperCase();
-        let HostSelectControl = AddSelectControl(parentElement, parentElement.id + "-HostSelect");
-        AddHostsToSelectControl(Hosts, HostSelectControl, "Pick Host");
+        let HostSelectControl = UI_AddSelectControl(parentElement, parentElement.id + "-HostSelect");
+        UI_AddHostsToSelectControl(Hosts, HostSelectControl, "Pick Host");
         let bindingParent = document.createElement("span");
         bindingParent.id = parentElement.id + "-BindingParent";
         HostSelectControl.onchange = function () {
             bindingParent.innerHTML = "";
-            let BindingSelectControl = AddSelectControl(bindingParent, parentElement.id + "-BindingSelect");
+            let BindingSelectControl = UI_AddSelectControl(bindingParent, parentElement.id + "-BindingSelect");
             BindingSelectControl.classList.add("SelectedBinding");
-            AddIPsToSelectControl(HostSelectControl.value, BindingSelectControl);
+            UI_AddIPsToSelectControl(HostSelectControl.value, BindingSelectControl);
         };
         parentElement.appendChild(HostSelectControl);
         parentElement.appendChild(bindingParent);
@@ -93,7 +93,7 @@ function buildHostSelectControl(divsToAugment) {
 }
 document.addEventListener('DOMContentLoaded', function () {
     let elemens = document.getElementsByClassName("SelectHost");
-    buildHostSelectControl(elemens);
+    UI_buildHostSelectControl(elemens);
 });
 var NodeType;
 (function (NodeType) {

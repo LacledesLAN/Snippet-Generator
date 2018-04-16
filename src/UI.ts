@@ -1,5 +1,7 @@
 
-function AddSelectControl(domElement: Element, id: string) : HTMLSelectElement {
+
+
+function UI_AddSelectControl(domElement: Element, id: string) : HTMLSelectElement {
     let selectControl = document.createElement("select");
     selectControl.classList.add("custom-select");
     selectControl.classList.add("col-sm-4");
@@ -10,7 +12,7 @@ function AddSelectControl(domElement: Element, id: string) : HTMLSelectElement {
     return selectControl;
 }
 
-function AddToSelectControl(category: string, items: string[], selectControl: Element, placeholderText? : string) {
+function UI_AddToSelectControl(category: string, items: string[], selectControl: Element, placeholderText? : string) {
     if (items.length < 1) {
         return;
     }
@@ -36,7 +38,7 @@ function AddToSelectControl(category: string, items: string[], selectControl: El
     selectControl.appendChild(header);
 };
 
-function AddHostsToSelectControl(hosts: Map<string, Host>, selectControl: Element, placeholderText? : string) {
+function UI_AddHostsToSelectControl(hosts: Map<string, Host>, selectControl: Element, placeholderText? : string) {
     let productionHosts : string[] = [];
     let testHosts: string[] = [];
 
@@ -52,11 +54,11 @@ function AddHostsToSelectControl(hosts: Map<string, Host>, selectControl: Elemen
     productionHosts.sort();
     testHosts.sort();
 
-    AddToSelectControl("Production Nodes", productionHosts, selectControl, placeholderText);
-    AddToSelectControl("Test Nodes", testHosts, selectControl, placeholderText);
+    UI_AddToSelectControl("Production Nodes", productionHosts, selectControl, placeholderText);
+    UI_AddToSelectControl("Test Nodes", testHosts, selectControl, placeholderText);
 };
 
-function AddIPsToSelectControl(hostName: string, selectControl: Element) {
+function UI_AddIPsToSelectControl(hostName: string, selectControl: Element) {
     let host : Host;
     Hosts.forEach((value: Host, key: string) => {
         if (key == hostName) {
@@ -76,13 +78,13 @@ function AddIPsToSelectControl(hostName: string, selectControl: Element) {
     }
 
     if (!selectControl.classList.contains("noDiscoverable")) {
-        AddToSelectControl("Discoverable", host.publicIps, selectControl, 'Select Binding');
+        UI_AddToSelectControl("Discoverable", host.publicIps, selectControl, 'Select Binding');
     }
 
-    AddToSelectControl("Hidden", host.privateIps, selectControl, 'Select Binding');
+    UI_AddToSelectControl("Hidden", host.privateIps, selectControl, 'Select Binding');
 };
 
-function buildHostSelectControl(divsToAugment: HTMLCollectionOf<Element>) {
+function UI_buildHostSelectControl(divsToAugment: HTMLCollectionOf<Element>) {
     if (divsToAugment.length < 1) {
         return;
     }
@@ -93,18 +95,18 @@ function buildHostSelectControl(divsToAugment: HTMLCollectionOf<Element>) {
         parentElement.innerHTML = "";
         parentElement.id = (Math.random()*1e32).toString(36).toUpperCase();
 
-        let HostSelectControl = AddSelectControl(parentElement, parentElement.id + "-HostSelect");
+        let HostSelectControl = UI_AddSelectControl(parentElement, parentElement.id + "-HostSelect");
 
-        AddHostsToSelectControl(Hosts, HostSelectControl, "Pick Host");
+        UI_AddHostsToSelectControl(Hosts, HostSelectControl, "Pick Host");
 
         let bindingParent = document.createElement("span");
         bindingParent.id = parentElement.id + "-BindingParent";
 
         HostSelectControl.onchange = function() {
             bindingParent.innerHTML = "";
-            let BindingSelectControl = AddSelectControl(bindingParent, parentElement.id + "-BindingSelect")
+            let BindingSelectControl = UI_AddSelectControl(bindingParent, parentElement.id + "-BindingSelect")
             BindingSelectControl.classList.add("SelectedBinding");
-            AddIPsToSelectControl(HostSelectControl.value, BindingSelectControl);
+            UI_AddIPsToSelectControl(HostSelectControl.value, BindingSelectControl);
         };
 
         parentElement.appendChild(HostSelectControl);
@@ -117,7 +119,6 @@ document.addEventListener('DOMContentLoaded', function () {
     //addHostsToSelects(Hosts, elements, "Pick Host");
 
     let elemens: HTMLCollectionOf<Element> = document.getElementsByClassName("SelectHost");
-    buildHostSelectControl(elemens);
-
+    UI_buildHostSelectControl(elemens);
 
 });
