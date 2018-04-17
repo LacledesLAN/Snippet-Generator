@@ -6,8 +6,8 @@ SRCDS.CSGO.MapsArmsRace = ["de_lake", "de_stmarc", "de_safehouse", "ar_shoots", 
 SRCDS.CSGO.MapsClassic = ["de_inferno", "de_train", "de_mirage", "de_nuke", "de_cbble", "de_overpass", "de_cache"];
 
 SRCDS.CSGO.MapsDeathmatch = ["de_dust2", "de_inferno", "de_mirage", "de_cbble", "de_overpass", "de_dust", "de_aztec", "de_nuke",
-                            "de_vertigo", "cs_militia", "cs_assault", "cs_office", "cs_italy", "de_lake", "de_stmarc", "de_sugarcane",
-                            "de_bank", "de_safehouse", "de_shortdust", "ar_shoots", "ar_baggage", "ar_monastery"];
+                            "cs_militia", "cs_assault", "cs_office", "cs_italy", "de_lake", "de_stmarc", "de_sugarcane", "de_bank",
+                            "de_safehouse", "de_shortdust", "ar_shoots", "ar_baggage", "ar_monastery"];
 
 SRCDS.CSGO.MapsTest = ["de_orange", "fy_pool_day", "gg_ctm_csgo", "orangebox_warmup_day"];
 
