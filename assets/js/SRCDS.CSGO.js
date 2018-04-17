@@ -1,19 +1,13 @@
 var SRCDS = SRCDS || {};
 SRCDS.CSGO = SRCDS.CSGO || {};
 
-SRCDS.CSGO.MapsArmsRace = ["ar_baggage", "ar_monastery", "ar_shoots", "de_lake", "de_stmarc"];
+SRCDS.CSGO.MapsArmsRace = ["de_lake", "de_stmarc", "de_safehouse", "ar_shoots", "ar_baggage", "ar_monastery"];
 
-SRCDS.CSGO.MapsClassic = ["cs_agency", "cs_assault", "cs_backalley", "cs_cruise", "cs_downtown", "cs_insertion", "cs_italy", "cs_militia", "cs_motel",
-        "cs_office", "cs_rush", "cs_thunder", "cs_workout", "de_ali", "de_austria", "de_aztec", "de_bank", "de_bazaar", "de_blackgold",
-        "de_cache", "de_canals", "de_castle", "de_cbble", "de_coast", "de_dust", "de_dust2", "de_empire", "de_facade", "de_favela",
-        "de_inferno", "de_lake", "de_lite", "de_log", "de_marquis", "de_mikla", "de_mirage", "de_mist", "de_nuke", "de_nuke_se",
-        "de_overgrown", "de_overpass", "de_rails", "de_resort", "de_royal", "de_safehouse", "de_santorini", "de_seaside", "de_season",
-        "de_shortdust", "de_shorttrain", "de_stmarc", "de_sugarcane", "de_thrill", "de_train", "de_tulip", "de_vertigo", "de_zoo"];
+SRCDS.CSGO.MapsClassic = ["de_inferno", "de_train", "de_mirage", "de_nuke", "de_cbble", "de_overpass", "de_cache"];
 
-SRCDS.CSGO.MapsDeathmatch = ["ar_baggage", "ar_monastery", "ar_shoots", "cs_agency", "cs_assault", "cs_backalley", "cs_cruise", "cs_downtown", "cs_insertion",
-        "cs_italy", "cs_militia", "cs_motel", "cs_office", "cs_rush", "cs_thunder", "cs_workout", "de_austria", "de_aztec", "de_bank",
-        "de_canals", "de_cbble", "de_dust", "de_dust2", "de_inferno", "de_lake", "de_lite", "de_mirage", "de_nuke", "de_nuke_se",
-        "de_overpass", "de_safehouse", "de_shortdust", "de_shorttrain", "de_stmarc", "de_thrill", "de_sugarcane", "de_vertigo"];
+SRCDS.CSGO.MapsDeathmatch = ["de_dust2", "de_inferno", "de_mirage", "de_cbble", "de_overpass", "de_dust", "de_aztec", "de_nuke",
+                            "de_vertigo", "cs_militia", "cs_assault", "cs_office", "cs_italy", "de_lake", "de_stmarc", "de_sugarcane",
+                            "de_bank", "de_safehouse", "de_shortdust", "ar_shoots", "ar_baggage", "ar_monastery"];
 
 SRCDS.CSGO.MapsTest = ["de_orange", "fy_pool_day", "gg_ctm_csgo", "orangebox_warmup_day"];
 
@@ -50,7 +44,7 @@ SRCDS.CSGO.LaunchArmsRace = function (hostname, map, ip) {
     srcdsArgs += '+game_mode 0 ';
     srcdsArgs += '-usercon ';
     srcdsArgs += '-tickrate 128 ';
-    srcdsArgs += '+mapgroup ll_arms ';
+    srcdsArgs += '+mapgroup mg_armsrace ';
     srcdsArgs += '+map ' + map + ' ';
     srcdsArgs += '-maxplayers_override 16 ';
     srcdsArgs += '+hostname "' + hostname + '" ';
@@ -98,7 +92,7 @@ SRCDS.CSGO.LaunchClassic = function (hostname, map, ip) {
     srcdsArgs += '+game_mode 0 ';
     srcdsArgs += '-usercon ';
     srcdsArgs += '-tickrate 128 ';
-    srcdsArgs += '+mapgroup ll_bombhostage ';
+    srcdsArgs += '+mapgroup mg_active ';
     srcdsArgs += '+map ' + map + ' ';
     srcdsArgs += '-maxplayers_override 16 ';
     srcdsArgs += '+hostname "' + hostname + '" ';
