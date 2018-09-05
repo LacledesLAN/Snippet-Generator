@@ -3,7 +3,7 @@ SRCDS.CSGO = SRCDS.CSGO || {};
 
 SRCDS.CSGO.MapsArmsRace = ["de_lake", "de_stmarc", "de_safehouse", "ar_shoots", "ar_baggage", "ar_monastery"];
 
-SRCDS.CSGO.MapsClassic = ["de_inferno", "de_train", "de_mirage", "de_nuke", "de_cbble", "de_overpass", "de_cache"];
+SRCDS.CSGO.MapsClassic = ["de_inferno", "de_train", "de_mirage", "de_nuke", "de_dust2", "de_overpass", "de_cache"];
 
 SRCDS.CSGO.MapsDeathmatch = ["de_dust2", "de_inferno", "de_mirage", "de_cbble", "de_overpass", "de_dust", "de_aztec", "de_nuke",
                             "cs_militia", "cs_assault", "cs_office", "cs_italy", "de_lake", "de_stmarc", "de_sugarcane", "de_bank",
@@ -11,7 +11,7 @@ SRCDS.CSGO.MapsDeathmatch = ["de_dust2", "de_inferno", "de_mirage", "de_cbble", 
 
 SRCDS.CSGO.MapsTest = ["de_orange", "fy_pool_day", "gg_ctm_csgo", "orangebox_warmup_day"];
 
-SRCDS.CSGO.MapsTourney = ["de_cache", "de_cbble", "de_inferno", "de_nuke", "de_mirage", "de_overpass", "de_train"];
+SRCDS.CSGO.MapsTourney = ["de_cache", "de_dust2", "de_inferno", "de_nuke", "de_mirage", "de_overpass", "de_train"];
 
 SRCDS.CSGO.LaunchArmsRace = function (hostname, map, ip) {
     "use strict";
