@@ -227,11 +227,6 @@ SRCDS.CSGO.LaunchWarMod = function (bracketID, bracketLetter, team1, team2, map,
     }
     bracketLetter = bracketLetter.toString().trim();
 
-    if (!isWholeNumber(bracketID)) {
-        alert('Bracket ID must be a positive whole number!');
-        return;
-    }
-
     let dockerArgs = '',
     dockerContainerName = Docker.GenerateContainerName("CSGOTourn" + bracketID + bracketLetter),
         hostname = "",
