@@ -273,7 +273,7 @@ SRCDS.CSGO.LaunchWarMod = function (bracketID, bracketLetter, team1, team2, map,
     // Docker Args
     dockerArgs += '--name ' + dockerContainerName + ' ';
     dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
-    dockerArgs += 'lacledeslan/gamesvr-csgo-tourney ';
+    dockerArgs += 'lacledeslan/gamesvr-csgo-warmod ';
 
     // CS:GO Tournament Server Specific
     srcdsArgs = '-game csgo ';
