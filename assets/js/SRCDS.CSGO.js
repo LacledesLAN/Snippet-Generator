@@ -214,6 +214,98 @@ SRCDS.CSGO.LaunchClientTest = function (map, ip) {
     );
 };
 
+SRCDS.CSGO.LaunchCSGOTourney = function (bracketID, bracketLetter, team1, team2, map1, map2, map3, ip) {
+    "use strict";
+
+    if (stringIsNullOrEmpty(bracketID)) {
+        alert('Bracket ID was left empty!');
+        return;
+    }
+    bracketID = _.padStart(bracketID, 2, '0');
+
+    if (stringIsNullOrEmpty(bracketLetter)) {
+        alert('Bracket Letter was left empty!');
+        return;
+    }
+    bracketLetter = bracketLetter.toString().trim();
+
+    let dockerArgs = '',
+    dockerContainerName = Docker.GenerateContainerName("CSGOTourn" + bracketID + bracketLetter),
+        hostname = "",
+        pass = password.generateArray(),
+        srcdsArgs = '',
+        tvConnectString = '';
+
+    bracketID = _.padStart(bracketID.toString().trim(), 2, "0");
+
+    team1 = team1.trim();
+    if (String(team1).length < 1) {
+        alert('Team 1 was left empty!');
+        return;
+    }
+
+    team2 = team2.trim();
+    if (String(team2).length < 1) {
+        alert('Team 2 was left empty!');
+        return;
+    }
+
+    map1 = map1.trim();
+    if (!map1) {
+        alert('ERROR - NO MAP 1 WAS NOT SPECIFIED!');
+        return;
+    }
+
+
+    map2 = map2.trim();
+    map3 = map3.trim();
+
+    if (map2 || map3) {
+        if (!map2 || !map3) {
+            alert('ERROR - MUST PROVIDE EITHER 1 OR 3 MAPS -- CANNOT SPECIFY JUST TWO!');
+            return;
+        }
+
+        if (map1 == map2 || map2 == map3 || map1 == map3) {
+            alert('ERROR - ALL MAPS MUST BE UNIQUE');
+            return;
+        }
+    }
+
+    if (!ip) {
+        alert('ERROR - NO SERVER WAS SPECIFIED!');
+        return;
+    }
+    ip = ip.trim();
+
+    // Docker Args
+    dockerArgs += '--name ' + dockerContainerName + ' ';
+    dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
+    dockerArgs += 'lacledeslan/gamesvr-csgo-tourney ';
+
+    // CS:GO Tournament Server Specific
+    var lArgs = '-bracket ' + bracketID + ' ';
+    lArgs += '-mp_teamname_1 ' + team1 + ' ';
+    lArgs += '-mp_teamname_2 ' + team2 + ' ';
+    lArgs += '-pass ' + pass.join('')  + ' ';
+    lArgs += '-rcon_pass ' + RCON_PASS.join('')  + ' ';
+    lArgs += '-tv_pass ' + TV_PASS.join('')  + ' ';
+    lArgs +=  map1 + ' ';
+    lArgs +=  map2 + ' ';
+    lArgs +=  map3 + ' ';
+
+    tvConnectString = 'connect ' + ip + ':27020; password ' + TV_PASS.html();
+
+    UI.displayModal(
+        "CSGO Tourney",
+        {
+            "Launch String": UI.formatCommands('docker run -d ', dockerArgs.concat(lArgs)),
+            "Client Connect": 'connect ' + ip + ':27015; ' + 'password ' + pass.html(),
+            "TV Connect": tvConnectString
+        }
+    );
+};
+
 SRCDS.CSGO.LaunchWarMod = function (bracketID, bracketLetter, team1, team2, map, ip) {
     "use strict";
 
@@ -296,7 +388,7 @@ SRCDS.CSGO.LaunchWarMod = function (bracketID, bracketLetter, team1, team2, map,
     tvConnectString = 'connect ' + ip + ':27020; password ' + TV_PASS.html();
 
     UI.displayModal(
-        "CSGO Tourney",
+        "CSGO WarMod",
         {
             "Launch String": UI.formatCommands('docker run -d ', dockerArgs, ['./srcds_run ', srcdsArgs]),
             "Client Connect": 'connect ' + ip + ':27015; ' + 'password ' + pass.html(),

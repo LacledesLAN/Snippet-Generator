@@ -53,7 +53,10 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tabCsgoWarmod" role="tab">CSGO: Tourney</a>
+                <a class="nav-link" data-toggle="tab" href="#tabCSGOTourney" role="tab">CSGO: Tourney</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tabCsgoWarmod" role="tab">CSGO: Warmod</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#tabCsgoOther" role="tab">CSGO: Other</a>
@@ -103,10 +106,79 @@
                         </div>
                     </div>
                 </div>
-                <!-- CSGO Tournament -->
-                <div class="tab-pane" id="tabCsgoWarmod" role="tabpanel">
+
+
+                <!-- CSGO Tourney -->
+                <div class="tab-pane" id="tabCSGOTourney" role="tabpanel">
                     <div class="row mb-2">
                         <h4>CSGO Tournament Server</h4>
+                    </div>
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Bracket</label>
+                            <input type="text" id="bracketNum" placeholder="##" class="form-control col-1">
+                            <select id="bracketLetter" class="custom-select col-1">
+                                <option disabled selected>&nbsp;</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                            </select>
+                            <div class="col-sm-1">
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Team Assignments</label>
+                            <div class="input-group col-sm-4">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">Counter-Terrorists</span>
+                                </div>
+                                <input type="text" id="nameCT" class="form-control" placeholder="CT Team Name">
+                            </div>
+                            <div class="input-group col-sm-4">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">Terrorists</span>
+                                </div>
+                                <input type="text" id="nameT" class="form-control" placeholder="T Name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Map</label>
+                            <select id="map1" class="custom-select col-3 selectCSGOTourneyMaps">
+                            </select>
+                            <select id="map2" class="custom-select col-3 selectCSGOTourneyMaps">
+                                <option value="">NONE</option>
+                            </select>
+                            <select id="map3" class="custom-select col-3 selectCSGOTourneyMaps">
+                                    <option value="">NONE</option>
+                            </select>
+                        </div>
+                        <div class="form-group row" id="csgoTourneySelectHost">
+                            <label class="col-sm-2 col-form-label">Host</label>
+                            <span class="col-sm-8 SelectHost"></span>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-3"></div>
+                            <button type="button" class="btn btn-primary col-6" onclick="SRCDS.CSGO.LaunchCSGOTourney(
+                            $('#tabCSGOTourney #bracketNum').val(),
+                            $('#tabCSGOTourney #bracketLetter').val(),
+                            $('#tabCSGOTourney #nameCT').val(),
+                            $('#tabCSGOTourney #nameT').val(),
+                            $('#tabCSGOTourney #map1').val(),
+                            $('#tabCSGOTourney #map2').val(),
+                            $('#tabCSGOTourney #map3').val(),
+                            $('#tabCSGOTourney #csgoTourneySelectHost .SelectedBinding').val()
+                            );">Generate</button>
+                            <div class="col-3"></div>
+                        </div>
+                    </form>
+                </div>
+                <!-- End CSGO Tourney -->
+
+                <!-- CSGO WarMod -->
+                <div class="tab-pane" id="tabCsgoWarmod" role="tabpanel">
+                    <div class="row mb-2">
+                        <h4>CSGO WarMod Server</h4>
                     </div>
                     <form>
                         <div class="form-group row">
@@ -225,7 +297,7 @@
                         </div>
                     </form>
                 </div>
-                <!-- End CSGO Tournament -->
+                <!-- End CSGO WarMod -->
                 <!-- CSGO Other -->
                 <div class="tab-pane" id="tabCsgoOther" role="tabpanel">
                     <div class="row mb-2">
