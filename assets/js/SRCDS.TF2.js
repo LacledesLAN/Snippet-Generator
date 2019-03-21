@@ -2,10 +2,9 @@ var SRCDS = SRCDS || {};
 SRCDS.TF2 = SRCDS.TF2 || {};
 
 SRCDS.TF2.MapCyclesStock = ["mapcycle.txt", "mapcycle_beta_asteroid.txt", "mapcycle_beta_cactus_canyon.txt", "mapcycle_beta_mannpower.txt", "mapcycle_default.txt",
-        "mapcycle_doomsday_event_247.txt", "mapcycle_featured_maps.txt", "mapcycle_halloween.txt", "mapcycle_halloween_event_247.txt",
-        "mapcycle_hightower_event_247.txt", "mapcycle_invasion_maps.txt", "mapcycle_ladder.txt", "mapcycle_lakeside_event_247.txt",
-        "mapcycle_mannpower.txt", "mapcycle_quickplay_arena.txt", "mapcycle_quickplay_attackdefense.txt", "mapcycle_quickplay_cp.txt",
-        "mapcycle_quickplay_ctf_sd.txt", "mapcycle_quickplay_koth.txt", "mapcycle_quickplay_passtime.txt", "mapcycle_quickplay_payload.txt",
+        "mapcycle_doomsday_event_247.txt", "mapcycle_featured_maps.txt", "mapcycle_halloween.txt", "mapcycle_hightower_event_247.txt", "mapcycle_invasion_maps.txt",
+        "mapcycle_ladder.txt", "mapcycle_lakeside_event_247.txt", "mapcycle_mannpower.txt", "mapcycle_quickplay_arena.txt", "mapcycle_quickplay_attackdefense.txt",
+        "mapcycle_quickplay_cp.txt", "mapcycle_quickplay_ctf_sd.txt", "mapcycle_quickplay_koth.txt", "mapcycle_quickplay_passtime.txt", "mapcycle_quickplay_payload.txt",
         "mapcycle_quickplay_payloadrace.txt"];
 
 SRCDS.TF2.MapCyclesLL = ["mapcycle_LL_all.txt", "mapcycle_LL_arena.txt", "mapcycle_LL_cp.txt", "mapcycle_LL_ctf.txt", "mapcycle_LL_koth.txt",
