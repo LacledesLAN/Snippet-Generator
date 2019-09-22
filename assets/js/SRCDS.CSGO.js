@@ -13,7 +13,7 @@ SRCDS.CSGO.MapsDeathmatch = [ "de_dust2", "de_inferno", "de_mirage", "de_cbble",
 
 SRCDS.CSGO.MapsTest = ["clienttest-pillar", "poolday"];
 
-SRCDS.CSGO.MapsTourney = ["de_cache", "de_dust2", "de_inferno", "de_nuke", "de_mirage", "de_overpass", "de_train"];
+SRCDS.CSGO.MapsTourney = ["de_dust2", "de_inferno", "de_nuke", "de_mirage", "de_overpass", "de_train", "de_vertigo"];
 
 SRCDS.CSGO.LaunchArmsRace = function (hostname, map, ip) {
     "use strict";
