@@ -40,7 +40,7 @@ SRCDS.GESOURCE.LaunchFreeplay = function (hostname, map, ip) {
     UI.displayModal(
         "Golden Eye Source Freeplay",
         {
-            "Launch String": UI.formatCommands('docker run -d ', dockerArgs, ['export MALLOC_CHECK_=0 && ./srcds_run ', srcdsArgs]),
+            "Launch String": UI.formatCommands('docker run -d ', dockerArgs, ['./srcds_run ', srcdsArgs]),
             "Client Connect": 'connect ' + ip + ':27015'
         }
     );
