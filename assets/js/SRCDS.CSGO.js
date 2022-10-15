@@ -214,7 +214,7 @@ SRCDS.CSGO.LaunchClientTest = function (map, ip) {
     );
 };
 
-SRCDS.CSGO.LaunchCSGOGet5 = function (bracketID, team1, team2, map1, map2, map3, ip) {
+SRCDS.CSGO.LaunchCSGOGet5 = function (bracketID, team1, team2, ip) {
     "use strict";
 
     if (stringIsNullOrEmpty(bracketID)) {
@@ -241,27 +241,6 @@ SRCDS.CSGO.LaunchCSGOGet5 = function (bracketID, team1, team2, map1, map2, map3,
         return;
     }
 
-    map1 = map1.trim();
-    if (!map1) {
-        alert('ERROR - NO MAP 1 WAS NOT SPECIFIED!');
-        return;
-    }
-
-    map2 = map2.trim();
-    map3 = map3.trim();
-
-    if (map2 || map3) {
-        if (!map2 || !map3) {
-            alert('ERROR - MUST PROVIDE EITHER 1 OR 3 MAPS -- CANNOT SPECIFY JUST TWO!');
-            return;
-        }
-
-        if (map1 == map2 || map2 == map3 || map1 == map3) {
-            alert('ERROR - ALL MAPS MUST BE UNIQUE');
-            return;
-        }
-    }
-
     if (!ip) {
         alert('ERROR - NO SERVER WAS SPECIFIED!');
         return;
@@ -281,9 +260,13 @@ SRCDS.CSGO.LaunchCSGOGet5 = function (bracketID, team1, team2, map1, map2, map3,
     var get5CliCmd = './get5-cli' +
         ' -1 ' + team1 +
         ' -2 ' + team2 +
-        ' -m ' + map1 +
-        ' -m ' + map2 +
-        ' -m ' + map3 +
+        ' -m  de_ancient' +
+        ' -m  de_dust2' +
+        ' -m  de_inferno' +
+        ' -m  de_mirage' +
+        ' -m  de_nuke' +
+        ' -m  de_overpass' +
+        ' -m  de_vertigo' +
         ' -v hostname:' + [bracketID, team1, "v", team2].join("_")
 
     // SRCDS Command
@@ -293,6 +276,7 @@ SRCDS.CSGO.LaunchCSGOGet5 = function (bracketID, team1, team2, map1, map2, map3,
         ' +game_mode 1' +
         ' -tickrate 128' +
         ' -console' +
+        ' +map de_orange' +
         ' +sv_password "' + pass.join('') +'"' +
         ' +sv_lan 1' +
         ' +rcon_password "' +  RCON_PASS.join('') + '"' +
