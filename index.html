@@ -8,9 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Snippet Generator | Laclede's LAN</title>
     <!--JavaScripts-->
-    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./vendor/lodash.js"></script>
+    <script src="./vendor/jquery-3.6.1.min.js"></script>
+    <script src="./vendor/bootstrap-4.6.2-dist/js/bootstrap.bundle.min.js"></script>
+
+
     <script src="./assets/js/Global.js"></script>
     <script src="./assets/js/UI.js"></script>
     <script src="./assets/js/Docker.js"></script>
@@ -25,7 +27,7 @@
     <script src="./dist/app.js"></script>
 
     <!--Stylesheets-->
-    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./vendor/bootstrap-4.6.2-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./node_modules/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="./assets/stylesheets/nestedCommands.css">
     <link rel="shortcut icon" href="./assets/images/snippetGenerator/favicon.ico">
@@ -53,7 +55,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tabCSGOTourney" role="tab">CSGO: Tourney</a>
+                <a class="nav-link" data-toggle="tab" href="#tabCSGOGet5" role="tab">CSGO: Get5</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#tabCsgoWarmod" role="tab">CSGO: Warmod</a>
@@ -108,8 +110,8 @@
                 </div>
 
 
-                <!-- CSGO Tourney -->
-                <div class="tab-pane" id="tabCSGOTourney" role="tabpanel">
+                <!-- CSGO Get5 -->
+                <div class="tab-pane" id="tabCSGOGet5" role="tabpanel">
                     <div class="row mb-2">
                         <h4>CSGO Tournament Server</h4>
                     </div>
@@ -117,16 +119,6 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Bracket</label>
                             <input type="text" id="bracketNum" placeholder="##" class="form-control col-1">
-                            <select id="bracketLetter" class="custom-select col-1">
-                                <option disabled selected>&nbsp;</option>
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                                <option value="C">C</option>
-                                <option value="D">D</option>
-                                <option value="E">E</option>
-                                <option value="F">F</option>
-                                <option value="G">G</option>
-                            </select>
                             <div class="col-sm-1">
 
                             </div>
@@ -148,36 +140,35 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Map</label>
-                            <select id="map1" class="custom-select col-3 selectCSGOTourneyMaps">
+                            <select id="map1" class="custom-select col-3 selectCSGOGet5Maps">
                             </select>
-                            <select id="map2" class="custom-select col-3 selectCSGOTourneyMaps">
+                            <select id="map2" class="custom-select col-3 selectCSGOGet5Maps">
                                 <option value="">NONE</option>
                             </select>
-                            <select id="map3" class="custom-select col-3 selectCSGOTourneyMaps">
+                            <select id="map3" class="custom-select col-3 selectCSGOGet5Maps">
                                     <option value="">NONE</option>
                             </select>
                         </div>
-                        <div class="form-group row" id="csgoTourneySelectHost">
+                        <div class="form-group row" id="csgoGet5SelectHost">
                             <label class="col-sm-2 col-form-label">Host</label>
                             <span class="col-sm-8 SelectHost"></span>
                         </div>
                         <div class="form-group row">
                             <div class="col-3"></div>
-                            <button type="button" class="btn btn-primary col-6" onclick="SRCDS.CSGO.LaunchCSGOTourney(
-                            $('#tabCSGOTourney #bracketNum').val(),
-                            $('#tabCSGOTourney #bracketLetter').val(),
-                            $('#tabCSGOTourney #nameCT').val(),
-                            $('#tabCSGOTourney #nameT').val(),
-                            $('#tabCSGOTourney #map1').val(),
-                            $('#tabCSGOTourney #map2').val(),
-                            $('#tabCSGOTourney #map3').val(),
-                            $('#tabCSGOTourney #csgoTourneySelectHost .SelectedBinding').val()
+                            <button type="button" class="btn btn-primary col-6" onclick="SRCDS.CSGO.LaunchCSGOGet5(
+                            $('#tabCSGOGet5 #bracketNum').val(),
+                            $('#tabCSGOGet5 #nameCT').val(),
+                            $('#tabCSGOGet5 #nameT').val(),
+                            $('#tabCSGOGet5 #map1').val(),
+                            $('#tabCSGOGet5 #map2').val(),
+                            $('#tabCSGOGet5 #map3').val(),
+                            $('#tabCSGOGet5 #csgoGet5SelectHost .SelectedBinding').val()
                             );">Generate</button>
                             <div class="col-3"></div>
                         </div>
                     </form>
                 </div>
-                <!-- End CSGO Tourney -->
+                <!-- End CSGO Get5 -->
 
                 <!-- CSGO WarMod -->
                 <div class="tab-pane" id="tabCsgoWarmod" role="tabpanel">
@@ -223,7 +214,7 @@
                                             document.getElementById("mapname").remove(0);
                                         }
 
-                                        UI.populateSelectFromCollection(".selectCSGOTourneyMaps", SRCDS.CSGO.MapsTest, "de_orange");
+                                        UI.populateSelectFromCollection(".selectCSGOGet5Maps", SRCDS.CSGO.MapsTest, "de_orange");
                                     } else {
                                         document.getElementById("bracketNum").disabled = false;
                                         document.getElementById("bracketNum").value = "";
@@ -242,7 +233,7 @@
                                             document.getElementById("mapname").remove(0);
                                         }
 
-                                        UI.populateSelectFromCollection(".selectCSGOTourneyMaps", SRCDS.CSGO.MapsTourney);
+                                        UI.populateSelectFromCollection(".selectCSGOGet5Maps", SRCDS.CSGO.MapsGet5);
                                     }
                                 '> This is server is just for staff testing
                             </div>
@@ -264,10 +255,10 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Map</label>
-                            <select id="mapname" class="custom-select col-3 selectCSGOTourneyMaps">
+                            <select id="mapname" class="custom-select col-3 selectCSGOGet5Maps">
                             </select>
                         </div>
-                        <div class="form-group row" id="csgoTourneySelectHost">
+                        <div class="form-group row" id="csgoGet5SelectHost">
                             <label class="col-sm-2 col-form-label">Host</label>
                             <span class="col-sm-8 SelectHost"></span>
                         </div>
@@ -279,7 +270,7 @@
                             $('#tabCsgoWarmod #nameCT').val(),
                             $('#tabCsgoWarmod #nameT').val(),
                             $('#tabCsgoWarmod #mapname').val(),
-                            $('#tabCsgoWarmod #csgoTourneySelectHost .SelectedBinding').val()
+                            $('#tabCsgoWarmod #csgoGet5SelectHost .SelectedBinding').val()
                             );">Generate</button>
                             <div class="col-3"></div>
                         </div>
@@ -296,7 +287,7 @@
                             <select class="custom-select col-2 selectCSGORoundRestore" id="roundToRestore">
                             </select>
                             <div>
-                                <button type="button" class="btn btn-default" onclick="SRCDS.CSGO.TourneyRoundRestore(
+                                <button type="button" class="btn btn-default" onclick="SRCDS.CSGO.Get5RoundRestore(
                               $('#tabCsgoWarmod #roundToRestore').val()
                               );">
                                     <span class="fa fa-rocket" aria-hidden="true"></span>

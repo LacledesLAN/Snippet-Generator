@@ -13,7 +13,7 @@ SRCDS.CSGO.MapsDeathmatch = [ "de_dust2", "de_inferno", "de_mirage", "de_cbble",
 
 SRCDS.CSGO.MapsTest = ["clienttest-pillar", "poolday"];
 
-SRCDS.CSGO.MapsTourney = ["de_dust2", "de_inferno", "de_nuke", "de_mirage", "de_overpass", "de_train", "de_vertigo"];
+SRCDS.CSGO.MapsGet5 = ["de_dust2", "de_inferno", "de_nuke", "de_mirage", "de_overpass", "de_train", "de_vertigo"];
 
 SRCDS.CSGO.LaunchArmsRace = function (hostname, map, ip) {
     "use strict";
@@ -214,7 +214,7 @@ SRCDS.CSGO.LaunchClientTest = function (map, ip) {
     );
 };
 
-SRCDS.CSGO.LaunchCSGOTourney = function (bracketID, bracketLetter, team1, team2, map1, map2, map3, ip) {
+SRCDS.CSGO.LaunchCSGOGet5 = function (bracketID, team1, team2, map1, map2, map3, ip) {
     "use strict";
 
     if (stringIsNullOrEmpty(bracketID)) {
@@ -223,17 +223,8 @@ SRCDS.CSGO.LaunchCSGOTourney = function (bracketID, bracketLetter, team1, team2,
     }
     bracketID = _.padStart(bracketID, 2, '0');
 
-    if (stringIsNullOrEmpty(bracketLetter)) {
-        alert('Bracket Letter was left empty!');
-        return;
-    }
-    bracketLetter = bracketLetter.toString().trim();
-
-    let dockerArgs = '',
-    dockerContainerName = Docker.GenerateContainerName("CSGOTourn" + bracketID + bracketLetter),
-        hostname = "",
+    let dockerContainerName = Docker.GenerateContainerName("CSGOTourn" + bracketID),
         pass = password.generateArray(),
-        srcdsArgs = '',
         tvConnectString = '';
 
     bracketID = _.padStart(bracketID.toString().trim(), 2, "0");
@@ -256,7 +247,6 @@ SRCDS.CSGO.LaunchCSGOTourney = function (bracketID, bracketLetter, team1, team2,
         return;
     }
 
-
     map2 = map2.trim();
     map3 = map3.trim();
 
@@ -278,30 +268,45 @@ SRCDS.CSGO.LaunchCSGOTourney = function (bracketID, bracketLetter, team1, team2,
     }
     ip = ip.trim();
 
-    // Docker Args
-    dockerArgs += '--name ' + dockerContainerName + ' ';
-    dockerArgs += Docker.NetString_SRCDS(ip) + ' ';
-    dockerArgs += 'lacledeslan/gamesvr-csgo-tourney ';
+    // Docker Command
+    var dockerCmd = 'docker ' +
+        'run' +
+        ' -d' +
+        ' --name ' + dockerContainerName +
+        ' ' +  Docker.NetString_SRCDS(ip) +
+        ' ' + 'lacledeslan/gamesvr-csgo-tourney:get5 ' +
+        ' /bin/bash -c';
 
-    // CS:GO Tournament Server Specific
-    var lArgs = '-bracket ' + bracketID + ' ';
-    lArgs += '-mp_teamname_1 ' + team1 + ' ';
-    lArgs += '-mp_teamname_2 ' + team2 + ' ';
-    lArgs += '-pass ' + pass.join('')  + ' ';
-    lArgs += '-rcon_pass ' + RCON_PASS.join('')  + ' ';
-    lArgs += '-tv_pass ' + TV_PASS.join('')  + ' ';
-    lArgs +=  map1 + ' ';
-    lArgs +=  map2 + ' ';
-    lArgs +=  map3 + ' ';
+    // Get5-CLI Command
+    var get5CliCmd = './get5-cli' +
+        ' -1 ' + team1 +
+        ' -2 ' + team2 +
+        ' -m ' + map1 +
+        ' -m ' + map2 +
+        ' -m ' + map3 +
+        ' -v hostname:' + [bracketID, team1, "v", team2].join("_")
 
-    tvConnectString = 'connect ' + ip + ':27020; password ' + TV_PASS.html();
+    // SRCDS Command
+    var srcdsCmd = './srcds_run' +
+        ' -game csgo' +
+        ' +game_type 0' +
+        ' +game_mode 1' +
+        ' -tickrate 128' +
+        ' -console' +
+        ' +sv_password "' + pass.join('') +'"' +
+        ' +sv_lan 1' +
+        ' +rcon_password "' +  RCON_PASS.join('') + '"' +
+        ' +tv_name zLLTV_CSGO_BRACKET_"' + bracketID + '"' +
+        ' +tv_password "' + TV_PASS.join('') + '"' +
+        ' +tv_relaypassword "' + TV_PASS.join('') + '"' +
+        ' -usercon'
 
     UI.displayModal(
-        "CSGO Tourney",
+        "CSGO Get5",
         {
-            "Launch String": UI.formatCommands('docker run -d ', dockerArgs.concat(lArgs)),
+            "Launch String": dockerCmd.concat(" '", get5CliCmd, " && ", srcdsCmd),
             "Client Connect": 'connect ' + ip + ':27015; ' + 'password ' + pass.html(),
-            "TV Connect": tvConnectString
+            "TV Connect": 'connect ' + ip + ':27020; password ' + TV_PASS.html()
         }
     );
 };
@@ -398,7 +403,7 @@ SRCDS.CSGO.LaunchWarMod = function (bracketID, bracketLetter, team1, team2, map,
 };
 
 
-SRCDS.CSGO.TourneyRoundRestore = function (roundNumber) {
+SRCDS.CSGO.Get5RoundRestore = function (roundNumber) {
     "use strict";
 
     let filename = 'LL_round' + _.padStart(roundNumber - 1, 2, '0'),
@@ -409,7 +414,7 @@ SRCDS.CSGO.TourneyRoundRestore = function (roundNumber) {
     restoreCommand += 'wm_block_warm_up_grenades 0;';
 
     UI.displayModal(
-        "CSGO Tourney Restore Round #" + roundNumber,
+        "CSGO Get5 Restore Round #" + roundNumber,
         {
             "Round Restore": restoreCommand,
             "Unpause After Round Restore (all players ready)": "mp_unpause_match"
@@ -426,7 +431,7 @@ document.addEventListener('DOMContentLoaded', function () {
     UI.populateSelectFromCollection(".selectCSGOClassicMaps", SRCDS.CSGO.MapsClassic);
     UI.populateSelectFromCollection(".selectCSGODeathmatchMaps", SRCDS.CSGO.MapsDeathmatch);
     UI.populateSelectFromCollection(".selectCSGOTestMaps", SRCDS.CSGO.MapsTest, true);
-    UI.populateSelectFromCollection(".selectCSGOTourneyMaps", SRCDS.CSGO.MapsTourney);
+    UI.populateSelectFromCollection(".selectCSGOGet5Maps", SRCDS.CSGO.MapsGet5);
 
     Array.prototype.forEach.call(document.querySelectorAll(".selectCSGORoundRestore"), function (selectControl) {
         let option;

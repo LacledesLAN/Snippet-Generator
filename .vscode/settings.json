@@ -19,5 +19,19 @@
         "latex",
         "plaintext",
         "typescript"
+    ],
+    "cSpell.words": [
+        "Deathmatch",
+        "gamesvr",
+        "Laclede's",
+        "lacledeslan",
+        "LLTV",
+        "mapgroup",
+        "maxplayers",
+        "rcon",
+        "relaypassword",
+        "teamname",
+        "tickrate",
+        "usercon"
     ]
 }
