@@ -304,7 +304,7 @@ SRCDS.CSGO.LaunchCSGOGet5 = function (bracketID, team1, team2, map1, map2, map3,
     UI.displayModal(
         "CSGO Get5",
         {
-            "Launch String": dockerCmd.concat(" '", get5CliCmd, " && ", srcdsCmd),
+            "Launch String": dockerCmd.concat(" '", get5CliCmd, " && ", srcdsCmd, "'"),
             "Client Connect": 'connect ' + ip + ':27015; ' + 'password ' + pass.html(),
             "TV Connect": 'connect ' + ip + ':27020; password ' + TV_PASS.html()
         }
