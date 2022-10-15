@@ -214,7 +214,7 @@ SRCDS.CSGO.LaunchClientTest = function (map, ip) {
     );
 };
 
-SRCDS.CSGO.LaunchCSGOGet5 = function (bracketID, team1, team2, ip) {
+SRCDS.CSGO.LaunchCSGOGet5 = function (bracketID, team1, team2, ip, minPlayersToReady, numberOfMaps, playersPerTeam, maplist) {
     "use strict";
 
     if (stringIsNullOrEmpty(bracketID)) {
@@ -260,14 +260,38 @@ SRCDS.CSGO.LaunchCSGOGet5 = function (bracketID, team1, team2, ip) {
     var get5CliCmd = './get5-cli' +
         ' -1 ' + team1 +
         ' -2 ' + team2 +
-        ' -m  de_ancient' +
-        ' -m  de_dust2' +
-        ' -m  de_inferno' +
-        ' -m  de_mirage' +
-        ' -m  de_nuke' +
-        ' -m  de_overpass' +
-        ' -m  de_vertigo' +
-        ' -v hostname:' + [bracketID, team1, "v", team2].join("_")
+        ' -v hostname:' + [bracketID, team1, "v", team2].join("_");
+
+    if (minPlayersToReady) {
+        get5CliCmd = get5CliCmd.concat(' --min-ready ' + minPlayersToReady )
+    }
+
+    if (numberOfMaps) {
+        get5CliCmd = get5CliCmd.concat(' --map-count ' + numberOfMaps )
+    }
+
+    if (playersPerTeam) {
+        get5CliCmd = get5CliCmd.concat(' --team-size ' + playersPerTeam )
+    }
+
+    if (!maplist) {
+        alert("ERROR - NO MAPS PROVIDED");
+        return;
+    } else if (maplist) {
+        var maps = maplist.trim().split(",");
+
+        if (maps.length == 0) {
+            alert("ERROR - NO MAPS PROVIDED");
+            return;
+        }
+
+        if (numberOfMaps && maps.length < numberOfMaps) {
+            alert("ERROR - THE MAPLIST MUST CONTAIN AT LEAST " + numberOfMaps + " MAPS");
+            return;
+        }
+
+        maps.forEach(map => get5CliCmd = get5CliCmd.concat(" -m " + map));
+    }
 
     // SRCDS Command
     var srcdsCmd = './srcds_run' +

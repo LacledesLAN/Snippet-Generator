@@ -119,9 +119,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Bracket</label>
                             <input type="text" id="bracketNum" placeholder="##" class="form-control col-1">
-                            <div class="col-sm-1">
-
-                            </div>
+                            <div class="col-sm-1"></div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Team Assignments</label>
@@ -148,10 +146,50 @@
                             $('#tabCSGOGet5 #bracketNum').val(),
                             $('#tabCSGOGet5 #nameCT').val(),
                             $('#tabCSGOGet5 #nameT').val(),
-                            $('#tabCSGOGet5 #csgoGet5SelectHost .SelectedBinding').val()
+                            $('#tabCSGOGet5 #csgoGet5SelectHost .SelectedBinding').val(),
+                            document.getElementById('csgo-get5-minPlayersToReady').value,
+                            document.getElementById('csgo-get5-numberOfMaps').value,
+                            document.getElementById('csgo-get5-playersPerTeam').value,
+                            document.getElementById('csgo-get5-maplist').value || document.getElementById('csgo-get5-maplist').placeholder
                             );">Generate</button>
                             <div class="col-3"></div>
                         </div>
+
+                        <div class="alert alert-danger">
+                            <div class="row mb-2">
+                                <div class="col-sm-4"><h4>Advanced (Dangerous)</h4></div>
+                                <div class="col-sm-7"></div>
+                                <div class="col-sm-1">
+                                    <button type="button" class="btn btn-secondary"
+                                        onclick='
+                                            document.getElementById("csgo-get5-minPlayersToReady").value = "";
+                                            document.getElementById("csgo-get5-numberOfMaps").value = "";
+                                            document.getElementById("csgo-get5-playersPerTeam").value = "";
+                                            document.getElementById("csgo-get5-maplist").value = "";
+                                            '>Reset</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">MinPlayersToReady</label>
+                                <input type="text" id="csgo-get5-minPlayersToReady" placeholder="0" class="form-control col-1">
+                                <div class="col-sm-1"></div>
+
+                                <label class="col-sm-2 col-form-label">NumberOfMaps</label>
+                                <input type="text" id="csgo-get5-numberOfMaps" placeholder="3" class="form-control col-1">
+                                <div class="col-sm-1"></div>
+
+                                <label class="col-sm-2 col-form-label">PlayersPerTeam</label>
+                                <input type="text" id="csgo-get5-playersPerTeam" placeholder="5" class="form-control col-1">
+                                <div class="col-sm-1"></div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Maplist: </label>
+                                <input type="text" id="csgo-get5-maplist" placeholder="de_ancient,de_dust2,de_inferno,de_mirage,de_nuke,de_overpass,de_vertigo" class="form-control col-9">
+                            </div>
+                        </div>
+
                     </form>
                 </div>
                 <!-- End CSGO Get5 -->
