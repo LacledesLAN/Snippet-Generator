@@ -32,6 +32,7 @@
         "maxplayers",
         "rcon",
         "relaypassword",
+        "Statler",
         "teamname",
         "tickrate",
         "usercon"
