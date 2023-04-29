@@ -15,6 +15,16 @@ SRCDS.CSGO.MapsTest = ["clienttest-pillar", "poolday"];
 
 SRCDS.CSGO.MapsGet5 = ["de_dust2", "de_inferno", "de_nuke", "de_mirage", "de_overpass", "de_train", "de_vertigo"];
 
+
+"de_inferno", "de_nuke", "de_vertigo", "de_mirage", "de_overpass", "de_ancient", "de_anubis"
+
+
+
+
+
+
+
+
 SRCDS.CSGO.LaunchArmsRace = function (hostname, map, ip) {
     "use strict";
 
